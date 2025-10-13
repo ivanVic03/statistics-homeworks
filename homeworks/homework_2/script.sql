@@ -25,3 +25,22 @@ INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
 (18, 1, 'phishing'),
 (19, 4, 'malware'),
 (20, 5, 'ransomware');
+
+SELECT gravita, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
+FROM CyberIncidenti
+GROUP BY gravita
+ORDER BY gravita;
+
+SELECT categoria, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
+FROM CyberIncidenti
+GROUP BY categoria
+ORDER BY categoria;
+
+SELECT categoria, gravita, COUNT(*) AS frequenza, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS percentuale_totale
+FROM CyberIncidenti
+GROUP BY categoria, gravita
+ORDER BY categoria, gravita;
+
+
+
+
