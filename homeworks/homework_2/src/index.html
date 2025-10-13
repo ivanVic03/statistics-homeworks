@@ -188,6 +188,35 @@ INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
 (20, 5, 'ransomware');
 </code></pre>
 
+<h3>Queries to calculate the univariate distributions and their results</h3>
+<pre><code class="language-sql">
+    SELECT gravita, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
+    FROM CyberIncidenti
+    GROUP BY gravita
+    ORDER BY gravita;
+
+    <img src="images/query_gravita.jpg" alt="">
+
+    SELECT categoria, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
+    FROM CyberIncidenti
+    GROUP BY categoria
+    ORDER BY categoria;
+
+    <img src="images/query_categoria.jpg" alt="">
+
+</code></pre>
+
+<h3> Query to calculate the bivariate distribution</h3>
+<pre><code class="language-sql">
+    SELECT categoria, gravita, COUNT(*) AS frequenza, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS percentuale_totale
+    FROM CyberIncidenti
+    GROUP BY categoria, gravita
+    ORDER BY categoria, gravita;
+
+    <img src="images/query_distribuzione_bivariata.jpg" alt="">
+
+</code></pre>
+
 <h2>Caesar Cipher and Letter Distribution</h2>
 
 <section>
