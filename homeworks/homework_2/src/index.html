@@ -137,7 +137,7 @@
         <li><strong>Continuous Distribution:</strong> used when the data can take any value within a range, including fractions and decimals.</li>
     </ul>
 
-    <h3>⚖️ Properties of a Distribution</h3>
+    <h3> Properties of a Distribution</h3>
     <ul>
         <li><strong>Mean:</strong> the average value of all data points; indicates the central tendency of the dataset.</li>
         <li><strong>Variance and Standard Deviation:</strong> measure how spread out the data points are around the mean. Variance calculates the average of the squared differences from the mean, while the standard deviation is its square root.</li>
@@ -194,17 +194,20 @@ INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
     FROM CyberIncidenti
     GROUP BY gravita
     ORDER BY gravita;
+</code></pre>
 
-    <img src="images/query_gravita.jpg" alt="">
+<img src="images/query_gravita.jpg" alt="">
 
+<pre><code>
     SELECT categoria, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
     FROM CyberIncidenti
     GROUP BY categoria
     ORDER BY categoria;
 
-    <img src="images/query_categoria.jpg" alt="">
-
 </code></pre>
+
+
+<img src="images/query_categoria.jpg" alt="">
 
 <h3> Query to calculate the bivariate distribution</h3>
 <pre><code class="language-sql">
