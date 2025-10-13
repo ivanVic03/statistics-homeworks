@@ -1,0 +1,4 @@
+“Homework for next week: As your first assignment, each of you should create a free blog (or use your own website or domain if you already have one) to publish the research projects and homework we’ll assign throughout the course.
+
+For your first trial post, please publish the following short research:
+“What is statistics, and why can it be useful for cybersecurity?”

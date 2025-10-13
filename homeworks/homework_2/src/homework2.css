@@ -1,0 +1,32 @@
+textarea {
+    width: 100%;
+    max-width: 600px;
+    font-family: monospace;
+    margin-bottom: 0.5em;
+    border-radius: 6px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+button {
+    background-color: lightgray;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
+pre {
+    background-color: lightgray;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+}

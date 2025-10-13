@@ -1,0 +1,12 @@
+First part
+Explain the concept of dataset and distribution.
+Using a DBMS create a simple dataset and compute the k univariate distribution (k <= 3)
+
+For champions: compute a bivariate (choosing 2 variables)
+
+Second part
+Take a text and compute 
+	- the distribution of the letters
+	- apply a Caesar Cipher
+	- Decode the encrypted text (assuming now that you don't know the start)
+	- Decode using the "language distribution" 
