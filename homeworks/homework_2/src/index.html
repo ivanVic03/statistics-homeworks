@@ -159,13 +159,13 @@
 <h3>Example of a Dataset: Cybercrimes</h3>
 
 <pre><code class="language-sql">
-CREATE TABLE CyberIncidenti (
+CREATE TABLE Cybercrimes (
   id INT PRIMARY KEY,
-  gravita INT,
-  categoria TEXT
+  gravity INT,
+  category TEXT
 );
 
-INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
+INSERT INTO Cybercrimes (id, gravity, category) VALUES
 (1, 2, 'phishing'),
 (2, 3, 'malware'),
 (3, 1, 'brute-force'),
@@ -189,31 +189,45 @@ INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
 </code></pre>
 
 <h3>Queries to calculate the univariate distributions and their results</h3>
+
+<p>
+    To compute the univariate distributions, you have to consider the number of events that
+    follow a specific features, normalized on the total of the events to calculate the relative percentage. The total of the events has been calculated
+    executing a subquery. The <strong>GROUP BY</strong> clause ensures that the final result has no duplicates.
+</p>
+
 <pre><code class="language-sql">
-    SELECT gravita, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
-    FROM CyberIncidenti
-    GROUP BY gravita
-    ORDER BY gravita;
+    SELECT gravity, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS pct
+    FROM Cybercrimes
+    GROUP BY gravity
+    ORDER BY gravity;
 </code></pre>
 
 <img src="images/query_gravita.jpg" alt="">
 
 <pre><code>
-    SELECT categoria, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
-    FROM CyberIncidenti
-    GROUP BY categoria
-    ORDER BY categoria;
+    SELECT category, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS pct
+    FROM Cybercrimes
+    GROUP BY category
+    ORDER BY category;
 
 </code></pre>
 
 <img src="images/query_categoria.jpg" alt="">
 
 <h3> Query to calculate the bivariate distribution</h3>
+<p>
+    To compute the bivariate distributions, you have to consider the number of events that follow a specific couple of features.
+    The relative percentage is calculated normalizing this on the total of the cybercrimes.
+    The <strong>GROUP BY</strong> clause ensures that the final result has no duplicates.
+</p>
+
+
 <pre><code class="language-sql">
-    SELECT categoria, gravita, COUNT(*) AS frequenza, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS percentuale_totale
-    FROM CyberIncidenti
-    GROUP BY categoria, gravita
-    ORDER BY categoria, gravita;
+    SELECT category, gravity, COUNT(*) AS frequenza, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS bivariate_percentage
+    FROM Cybercrimes
+    GROUP BY category, gravity
+    ORDER BY category, gravity;
 
 </code></pre>
 
@@ -245,8 +259,6 @@ INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
         <pre id="freqEncrypted"></pre>
     </div>
 </section>
-
-
 
 </body>
 </html>

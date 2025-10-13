@@ -1,10 +1,10 @@
-CREATE TABLE CyberIncidenti (
+CREATE TABLE Cybercrimes (
     id INT PRIMARY KEY,
-    gravita INT,
-    categoria varchar(20)
+    gravity INT,
+    category TEXT
 );
 
-INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
+INSERT INTO Cybercrimes (id, gravity, category) VALUES
 (1, 2, 'phishing'),
 (2, 3, 'malware'),
 (3, 1, 'brute-force'),
@@ -26,20 +26,20 @@ INSERT INTO CyberIncidenti (id, gravita, categoria) VALUES
 (19, 4, 'malware'),
 (20, 5, 'ransomware');
 
-SELECT gravita, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
-FROM CyberIncidenti
-GROUP BY gravita
-ORDER BY gravita;
+SELECT gravity, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS pct
+FROM Cybercrimes
+GROUP BY gravity
+ORDER BY gravity;
 
-SELECT categoria, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS pct
-FROM CyberIncidenti
-GROUP BY categoria
-ORDER BY categoria;
+SELECT category, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS pct
+FROM Cybercrimes
+GROUP BY category
+ORDER BY category;
 
-SELECT categoria, gravita, COUNT(*) AS frequenza, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM CyberIncidenti), 2) AS percentuale_totale
-FROM CyberIncidenti
-GROUP BY categoria, gravita
-ORDER BY categoria, gravita;
+SELECT category, gravity, COUNT(*) AS frequenza, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS bivariate_percentage
+FROM Cybercrimes
+GROUP BY category, gravity
+ORDER BY category, gravity;
 
 
 
