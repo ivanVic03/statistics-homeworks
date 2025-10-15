@@ -11,7 +11,9 @@ function letterFrequency(text) {
     if (total === 0) {
         return "no letters found";
     }
-    return Object.entries(freq).sort().map(([ch,count]) => `${ch}: ${(100 * count / total).toFixed(2)}%`).join('\n');
+    const labels = Object.keys(freq).sort();
+    const values = labels.map(l => (100*freq[l]/total).toFixed(2));
+    return {labels, values};
 }
 
 function CaesarCipher(str, shift){
@@ -24,7 +26,7 @@ function CaesarCipher(str, shift){
 function drawChart(canvasId, data, label, existingChart) {
     const ctx = document.getElementById(canvasId).getContext('2d');
 
-    if (existingChart) {
+    if (existingChart instanceof Chart) {
         existingChart.destroy()
         existingChart = null;
     }
@@ -53,13 +55,13 @@ function drawChart(canvasId, data, label, existingChart) {
 
 function encrypt() {
     const text = document.getElementById("originalText").value;
-    const shift = document.getElementById("shift").value;
+    const shift = parseInt(document.getElementById("shift").value);
     const encrypted = CaesarCipher(text, shift);
     const freqEncrypted = letterFrequency(encrypted);
     const freqOriginal = letterFrequency(text);
-    document.getElementById("outpuText").value = encrypted;
-    drawChart(document.getElementById("originalChart"), freqOriginal, "[Encryption] Original", originalChart);
-    drawChart(document.getElementById("encryptedChart"), freqEncrypted, "[Encryption] Encrypted", encryptedChart);
+    document.getElementById("outputText").value = encrypted;
+    originalChart = drawChart("originalChart", freqOriginal, "[Encryption] Original", originalChart);
+    encryptedChart = drawChart("encryptedChart", freqEncrypted, "[Encryption] Encrypted", encryptedChart);
 }
 
 function decrypt() {
@@ -69,7 +71,7 @@ function decrypt() {
     const freqOriginal = letterFrequency(text);
     const freqDecrypted = letterFrequency(decrypted);
     document.getElementById("originalText").value = decrypted;
-    drawChart(document.getElementById("encryptedChart"), freqOriginal, "[Decryption] Original", encryptedChart);
-    drawChart(document.getElementById("originalChart"), freqDecrypted, "[Decryption] Decrypted", originalChart);
+    encryptedChart = drawChart("encryptedChart", freqOriginal, "[Decryption] Original", encryptedChart);
+    originalChart = drawChart("originalChart", freqDecrypted, "[Decryption] Decrypted", originalChart);
 }
 

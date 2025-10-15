@@ -246,11 +246,10 @@ INSERT INTO Cybercrimes (id, gravity, category) VALUES
         <label for="shift">Shift:</label>
         <button onclick="decrypt()">Decrypt</button>
     </div>
-    <div>
-       <h4> Original Text</h4>
-       <canvas id="originalChart"></canvas>
-    </div>
-    <div>
+    <div class="graph-container">
+        <h4> Original Text</h4>
+        <canvas id="originalChart"></canvas>
+
         <h4> Encrypted Text</h4>
         <canvas id="encryptedChart"></canvas>
     </div>
