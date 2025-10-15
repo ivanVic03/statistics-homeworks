@@ -205,7 +205,7 @@ INSERT INTO Cybercrimes (id, gravity, category) VALUES
 
 <img src="images/query_gravity.jpg" alt="">
 
-<pre><code>
+<pre><code class="language-sql">
     SELECT category, COUNT(*) AS tot, ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM Cybercrimes), 2) AS pct
     FROM Cybercrimes
     GROUP BY category

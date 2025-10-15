@@ -23,20 +23,19 @@ function CaesarCipher(str, shift){
     })
 }
 
-function drawChart(canvasId, data, label, existingChart) {
+function drawChart(canvasId, freqData, label, existingChart) {
     const ctx = document.getElementById(canvasId).getContext('2d');
 
     if (existingChart instanceof Chart) {
-        existingChart.destroy()
-        existingChart = null;
+        existingChart.destroy();
     }
     return new Chart (ctx, {
         type: 'bar',
         data: {
-            labels: [... 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'],
+            labels: freqData.labels,
             datasets: [{
                 label: label,
-                data: data,
+                data: freqData.values,
                 borderWidth: 1,
             }]
         },
@@ -46,7 +45,7 @@ function drawChart(canvasId, data, label, existingChart) {
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {display: true, text: 'Frequency'}
+                    title: {display: true, text: 'Frequency (%)'}
                 }
             }
         }
