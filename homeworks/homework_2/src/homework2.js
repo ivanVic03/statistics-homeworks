@@ -54,8 +54,8 @@ function drawChart(canvasId, freqData, label, existingChart) {
 
 function encrypt() {
     const text = document.getElementById("originalText").value;
-    const shift = parseInt(document.getElementById("shift").value);
-    if (!text || isNan(shift)) {
+    const shift = parseInt(document.getElementById("shift").value) || 0;
+    if (!text || shift === 0) {
         alert("Please enter text and a valid shift (1-25).");
         return;
     }
