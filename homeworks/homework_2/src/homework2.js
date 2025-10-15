@@ -53,7 +53,7 @@ function drawChart(canvasId, freqData, label, existingChart) {
 }
 
 function encrypt() {
-    const text = document.getElementById("originalText").value;
+    const text = document.getElementById("originalText").value.trim();
     const shift = parseInt(document.getElementById("shift").value) || 0;
     if (!text || shift === 0) {
         alert("Please enter text and a valid shift (1-25).");
@@ -68,7 +68,7 @@ function encrypt() {
 }
 
 function decrypt() {
-    const text = document.getElementById("outputText").value;
+    const text = document.getElementById("outputText").value.trim();
     const shift = document.getElementById("shift").value;
     const decrypted = CaesarCipher(text, -shift);
     const freqOriginal = letterFrequency(text);

@@ -42,7 +42,8 @@ img {
 
 canvas {
     display: block;
-    width: 90%;
+    width: 80%;
+    max-width: 800px;
     height: 450px;
     background-color: white;
     margin: 30px auto;
@@ -54,5 +55,5 @@ canvas {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px
+    gap: 30px;
 }
