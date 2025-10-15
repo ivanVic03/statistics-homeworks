@@ -69,7 +69,7 @@ function decrypt() {
     const freqOriginal = letterFrequency(text);
     const freqDecrypted = letterFrequency(decrypted);
     document.getElementById("originalText").value = decrypted;
-    drawChart(document.getElementById("encryptedChart"), freqOriginal, "[Decryption] Original", originalChart);
-    drawChart(document.getElementById("originalChart"), freqDecrypted, "[Decryption] Decrypted", encryptedChart);
+    drawChart(document.getElementById("encryptedChart"), freqOriginal, "[Decryption] Original", encryptedChart);
+    drawChart(document.getElementById("originalChart"), freqDecrypted, "[Decryption] Decrypted", originalChart);
 }
 
