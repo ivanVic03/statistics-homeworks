@@ -36,14 +36,16 @@ function drawChart(ctx, data, label) {
         }
     });
 }
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("analyzeBtn").addEventListener("click", () => {
+        const text = document.getElementById("originalText").value;
+        const shift = document.getElementById("shift").value;
+        const encrypted = CaesarCipher(text, shift);
+        const freqOriginal = letterFrequency(text);
+        const freqEncrypted = letterFrequency(encrypted);
 
-document.getElementById("analyzeBtn").addEventListener("click", () => {
-    const text = document.getElementById("originalText").value;
-    const shift = document.getElementById("shift").value;
-    const encrypted = CaesarCipher(text, shift);
-    const freqOriginal = letterFrequency(text);
-    const freqEncrypted = letterFrequency(encrypted);
-
-    drawChart(document.getElementById("originalChart"), freqOriginal, "Original")
-    drawChart(document.getElementById("encryptedChart"), freqEncrypted, "Encrypted")
+        drawChart(document.getElementById("originalChart"), freqOriginal, "Original")
+        drawChart(document.getElementById("encryptedChart"), freqEncrypted, "Encrypted")
+    })
 });
+
