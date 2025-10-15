@@ -55,6 +55,10 @@ function drawChart(canvasId, freqData, label, existingChart) {
 function encrypt() {
     const text = document.getElementById("originalText").value;
     const shift = parseInt(document.getElementById("shift").value);
+    if (!text || isNan(shift)) {
+        alert("Please enter text and a valid shift (1-25).");
+        return;
+    }
     const encrypted = CaesarCipher(text, shift);
     const freqEncrypted = letterFrequency(encrypted);
     const freqOriginal = letterFrequency(text);
