@@ -18,16 +18,32 @@ function CaesarCipher(str, shift){
     })
 }
 
-function encryptText() {
-    const input = document.getElementById('originalText').value;
-    const shift = parseInt(document.getElementById('shift').value);
-
-    const encrypted = CaesarCipher(input, shift);
-    document.getElementById('encryptedText').value = encrypted;
-
-    const freqIn = letterFrequency(input);
-    const freqOut = letterFrequency(encrypted);
-
-    document.getElementById('freqOriginal').textContent = freqIn;
-    document.getElementById('freqEncrypted').textContent = freqOut;
+function drawChart(ctx, data, label) {
+    new Chart (ctx, {
+        type: 'bar',
+        data: {
+            labels: [... 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'],
+            datasets: [{
+                label: label,
+                data: data,
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            scales: {
+                y: {beginAtZero: true},
+            }
+        }
+    });
 }
+
+document.getElementById("analyzeBtn").addEventListener("click", () => {
+    const text = document.getElementById("originalText").value;
+    const shift = document.getElementById("shift").value;
+    const encrypted = CaesarCipher(text, shift);
+    const freqOriginal = letterFrequency(text);
+    const freqEncrypted = letterFrequency(encrypted);
+
+    drawChart(document.getElementById("originalChart"), freqOriginal, "Original")
+    drawChart(document.getElementById("encryptedChart"), freqEncrypted, "Encrypted")
+});

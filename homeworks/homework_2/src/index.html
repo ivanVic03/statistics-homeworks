@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
 <section>
@@ -233,32 +235,26 @@ INSERT INTO Cybercrimes (id, gravity, category) VALUES
 
 <img src="images/query_bivariate_distribution.jpg" alt="">
 
-<h2>Caesar Cipher and Letter Distribution</h2>
-
 <section>
-    <h3> Original Text</h3>
-    <textarea id="originalText" rows="10" cols="50" placeholder="Enter your text here..."></textarea>
+    <h2>Caesar Cipher and Letter Distribution</h2>
+    <textarea id="originalText" rows="6" cols="60" placeholder="Enter text here..."></textarea>
     <label for="shift">Shift:</label>
     <input type="number" id="shift" min="1" max="25">
-    <button onclick="encryptText()">Encrypt</button>
+    <button id="analyzeBtn">Encrypt and Analyze</button>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+        <div>
+            <h4> Original Text</h4>
+            <canvas id="originalChart"></canvas>
+        </div>
+        <div>
+            <h4> Encrypted Text</h4>
+            <canvas id="encryptedChart"></canvas>
+        </div>
+    </div>
+
 </section>
 
-<section>
-    <h3> Encrypted Text</h3>
-    <textarea id="encryptedText" rows="10" cols="50" placeholder="Encrypted result will appear here..."></textarea>
-</section>
-
-<section>
-    <h3> Letter Frequency Analysis</h3>
-    <div style="flex: 1; min-width: 300px;">
-        <h4>Original Text Frequency</h4>
-        <pre id="freqOriginal"></pre>
-    </div>
-    <div style="flex: 1; min-width: 300px;">
-        <h4>Encrypted Text Frequency</h4>
-        <pre id="freqEncrypted"></pre>
-    </div>
-</section>
 
 </body>
 </html>
