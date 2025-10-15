@@ -1,3 +1,6 @@
+let originalChart = null
+let encryptedChart = null
+
 function letterFrequency(text) {
     const freq = {}
     const cleanText = text.toLowerCase().replace(/[^a-z]/g, '');
@@ -18,8 +21,14 @@ function CaesarCipher(str, shift){
     })
 }
 
-function drawChart(ctx, data, label) {
-    new Chart (ctx, {
+function drawChart(canvasId, data, label, existingChart) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+
+    if (existingChart) {
+        existingChart.destroy()
+        existingChart = null;
+    }
+    return new Chart (ctx, {
         type: 'bar',
         data: {
             labels: [... 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'],
@@ -30,22 +39,37 @@ function drawChart(ctx, data, label) {
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-                y: {beginAtZero: true},
+                y: {
+                    beginAtZero: true,
+                    title: {display: true, text: 'Frequency'}
+                }
             }
         }
     });
 }
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("analyzeBtn").addEventListener("click", () => {
-        const text = document.getElementById("originalText").value;
-        const shift = document.getElementById("shift").value;
-        const encrypted = CaesarCipher(text, shift);
-        const freqOriginal = letterFrequency(text);
-        const freqEncrypted = letterFrequency(encrypted);
 
-        drawChart(document.getElementById("originalChart"), freqOriginal, "Original")
-        drawChart(document.getElementById("encryptedChart"), freqEncrypted, "Encrypted")
-    })
-});
+function encrypt() {
+    const text = document.getElementById("originalText").value;
+    const shift = document.getElementById("shift").value;
+    const encrypted = CaesarCipher(text, shift);
+    const freqEncrypted = letterFrequency(encrypted);
+    const freqOriginal = letterFrequency(text);
+    document.getElementById("outpuText").value = encrypted;
+    drawChart(document.getElementById("originalChart"), freqOriginal, "[Encryption] Original", originalChart);
+    drawChart(document.getElementById("encryptedChart"), freqEncrypted, "[Encryption] Encrypted", encryptedChart);
+}
+
+function decrypt() {
+    const text = document.getElementById("outputText").value;
+    const shift = document.getElementById("shift").value;
+    const decrypted = CaesarCipher(text, -shift);
+    const freqOriginal = letterFrequency(text);
+    const freqDecrypted = letterFrequency(decrypted);
+    document.getElementById("originalText").value = decrypted;
+    drawChart(document.getElementById("encryptedChart"), freqOriginal, "[Decryption] Original", originalChart);
+    drawChart(document.getElementById("originalChart"), freqDecrypted, "[Decryption] Decrypted", encryptedChart);
+}
 

@@ -235,20 +235,24 @@ INSERT INTO Cybercrimes (id, gravity, category) VALUES
 
 <section>
     <h2>Caesar Cipher and Letter Distribution</h2>
-    <textarea id="originalText" rows="6" cols="60" placeholder="Enter text here..."></textarea>
-    <label for="shift">Shift:</label>
-    <input type="number" id="shift" min="1" max="25">
-    <button id="analyzeBtn">Encrypt and Analyze</button>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
-        <div>
-            <h4> Original Text</h4>
-            <canvas id="originalChart"></canvas>
-        </div>
-        <div>
-            <h4> Encrypted Text</h4>
-            <canvas id="encryptedChart"></canvas>
-        </div>
+    <div>
+        <textarea id="originalText" rows="6" cols="60" placeholder="Enter text here..."></textarea>
+        <label for="shift">Shift:</label>
+        <input type="number" id="shift" min="1" max="25">
+        <button onclick="encrypt()">Encrypt</button>
+    </div>
+    <div>
+        <textarea id="outpuText" rows="6" cols="60" placeholder="Results will appear here!"></textarea>
+        <label for="shift">Shift:</label>
+        <button onclick="decrypt()">Decrypt</button>
+    </div>
+    <div>
+       <h4> Original Text</h4>
+       <canvas id="originalChart"></canvas>
+    </div>
+    <div>
+        <h4> Encrypted Text</h4>
+        <canvas id="encryptedChart"></canvas>
     </div>
 
 </section>
