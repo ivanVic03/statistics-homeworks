@@ -2,3 +2,6 @@
 
 For your first trial post, please publish the following short research:
 “What is statistics, and why can it be useful for cybersecurity?”
+
+https://www.edx.org/resources/how-is-math-used-in-cybersecurity
+https://cybersecurityguide.org/resources/math-in-cybersecurity/

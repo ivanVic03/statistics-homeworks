@@ -2,19 +2,29 @@ let originalChart = null
 let encryptedChart = null
 
 function letterFrequency(text) {
-    const freq = {}
+    const freq = {};
     const cleanText = text.toLowerCase().replace(/[^a-z]/g, '');
-    for (let c of cleanText) {
-        freq[c] = (freq[c] || 0) + 1;
-    }
     const total = cleanText.length;
-    if (total === 0) {
-        return "no letters found";
+
+    // inizializza tutte le lettere con 0
+    for (let i = 97; i <= 122; i++) {
+        freq[String.fromCharCode(i)] = 0;
     }
-    const labels = Object.keys(freq).sort();
-    const values = labels.map(l => (100*freq[l]/total).toFixed(2));
-    return {labels, values};
+
+    for (let c of cleanText) {
+        freq[c]++;
+    }
+
+    if (total === 0) {
+        return { labels: [], values: [] };
+    }
+
+    const labels = Object.keys(freq);
+    const values = labels.map(l => (100 * freq[l] / total).toFixed(2));
+
+    return { labels, values };
 }
+
 
 function CaesarCipher(str, shift){
     return str.replace(/[a-z]/gi, c => {
@@ -77,4 +87,6 @@ function decrypt() {
     encryptedChart = drawChart("encryptedChart", freqOriginal, "[Decryption] Original", encryptedChart);
     originalChart = drawChart("originalChart", freqDecrypted, "[Decryption] Decrypted", originalChart);
 }
+
+
 
