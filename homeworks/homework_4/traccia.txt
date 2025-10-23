@@ -1,0 +1,3 @@
+Simulate the Law of Large Numbers (LLN) by plotting multiple (m) trajectories of (n) trials for the relative frequency f(n).
+Show with a histogram (possibly, a vertically oriented histogram placed on the right side of the main chart) how, as soon a n becomes large,
+the empirical distribution of f(n) (over all m trajectories) tends to the underlying probability p of success used in each trial.
