@@ -34,6 +34,9 @@ function rsaEncrypt(text) {
     if (p === 0 || q === 0) {
         alert("Please enter valid numbers for p and/or q")
     }
+    if (isPrime(p) || isPrime(q)) {
+        alert("p and q must be prime numbers!")
+    }
     const {n, e} = calculateRSAKeys(p, q);
 
     if (text.length % 2 === 1) {
@@ -54,6 +57,9 @@ function rsaDecrypt(encryptedArray) {
     const q = parseInt(document.getElementById("q").value) || 0;
     if (p === 0 || q === 0) {
         alert("Please enter valid numbers for p and/or q")
+    }
+    if (isPrime(p) || isPrime(q)) {
+        alert("p and q must be prime numbers!")
     }
     const {n, d} = calculateRSAKeys(p, q);
 
