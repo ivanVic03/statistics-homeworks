@@ -67,27 +67,27 @@ function drawChart(canvasId, freqData, label, existingChart) {
                 legend: {
                     display: true,
                     labels: {
-                        color: 'red',
+                        color: 'black',
                         font: {size: 14}
                     }
                 },
                 title: {
                     display: true,
                     text: label,
-                    color: 'red',
+                    color: 'black',
                     font: {size: 16, weight: 'bold'}
                 }
             },
             scales: {
                 x: {
                     ticks: {color: 'red'},
-                    grid: {color: 'green'},
+                    grid: {color: 'black'},
                     title: {display: true, text: 'Letters', color: 'red'}
                 },
                 y: {
                     beginAtZero: true,
                     ticks: {color: 'red'},
-                    grid: {color: 'green'},
+                    grid: {color: 'black'},
                     title: {display: true, text: 'Frequency (%)', color: 'red'}
                 }
             }
@@ -150,7 +150,7 @@ function decrypt() {
     const encryptedText = document.getElementById("outputText").value;
     const result = guessShift(encryptedText, freqOriginal);
     const guessedShift = result.shift;
-    const decrypted = CaesarCipher(encryptedText, guessedShift);
+    const decrypted = CaesarCipher(encryptedText, -guessedShift);
     document.getElementById("originalText").value = decrypted;
     const guessedFrequency = result.frequency;
     drawChart("originalChart", freqOriginal, "Result of the decryption", originalChart);
