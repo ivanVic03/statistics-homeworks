@@ -120,6 +120,7 @@ function modInverse(e, phi) {
 
 function calculateRSAKeys(p, q) {
     if (!Number.isInteger(p) || !Number.isInteger(q) || q <= 1 || p <= 1) {
+        alert("Please set p and q greater than 1.")
         throw new RangeError("Please set p and q greater than 1." );
     }
     const n = p*q;
