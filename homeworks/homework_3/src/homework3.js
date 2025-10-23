@@ -75,7 +75,7 @@ function isPrime(number) {
     if (number < 2) {
         return false;
     }
-    for (let i = 0; i < Math.sqrt(number); i++) {
+    for (let i = 2; i < Math.sqrt(number); i++) {
         if (number % i === 0) {
             return false;
         }
@@ -84,13 +84,18 @@ function isPrime(number) {
 }
 
 function findE(phi) {
+    if (!Number.isInteger(phi) || phi <= 1) {
+        throw new RangeError("Invalid number" + phi);
+    }
+
     let e = 2;
-    while(true) {
+    while(e < phi) {
         if (isPrime(e) && gcd(e,phi) === 1) {
             return e;
         }
         e++;
     }
+    throw new Error("No valid e found for phi: "+ phi );
 }
 
 function modInverse(e, phi) {
@@ -108,6 +113,9 @@ function modInverse(e, phi) {
 }
 
 function calculateRSAKeys(p, q) {
+    if (!Number.isInteger(p) || !Number.isInteger(q) || q <= 1 || p <= 1) {
+        throw new RangeError("Please set p and q greater than 1." );
+    }
     const n = p*q;
     const phi = (p-1)*(q-1)
     const e = findE(phi);
