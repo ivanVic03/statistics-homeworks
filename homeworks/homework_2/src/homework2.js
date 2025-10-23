@@ -148,6 +148,7 @@ function guessShift(encryptedText, freqOriginal) {
 
 function decrypt() {
     const encryptedText = document.getElementById("outputText").value;
+    console.log(encryptedText);
     const result = guessShift(encryptedText, freqOriginal);
     const guessedShift = result.shift;
     const decrypted = CaesarCipher(encryptedText, -guessedShift);
