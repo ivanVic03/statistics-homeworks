@@ -56,3 +56,8 @@ canvas {
 div {
     margin-bottom: 30px;
 }
+
+h2 {
+    width: 100%;
+    text-align: center;
+}
