@@ -120,7 +120,7 @@ function guessShift(encryptedText, freqOriginal) {
     let minDiff = Infinity;
     let relatedFrequency = null;
 
-    for (let shift = 0; shift < 26; shift++) {
+    for (let shift = 1; shift < 26; shift++) {
         const candidate = CaesarCipher(encryptedText, -shift);
         const testFreq = letterFrequency(candidate);
 
@@ -136,7 +136,7 @@ function guessShift(encryptedText, freqOriginal) {
         }
 
         diff = diff / 26;
-        if (minDiff < minDiff) {
+        if (diff < minDiff) {
             minDiff = diff;
             bestShift = shift;
             relatedFrequency = testFreq
@@ -148,10 +148,11 @@ function guessShift(encryptedText, freqOriginal) {
 
 function decrypt() {
     const encryptedText = document.getElementById("outputText").value;
-    console.log(encryptedText);
     const result = guessShift(encryptedText, freqOriginal);
     const guessedShift = result.shift;
     const decrypted = CaesarCipher(encryptedText, -guessedShift);
+    console.log("guessed shift", guessedShift);
+    console.log(decrypted);
     document.getElementById("originalText").value = decrypted;
     const guessedFrequency = result.frequency;
     drawChart("originalChart", freqOriginal, "Result of the decryption", originalChart);
