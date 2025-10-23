@@ -29,8 +29,11 @@ function numberToLetters(number) {
 }
 
 function rsaEncrypt(text) {
-    const p = parseInt(document.getElementById("p").value);
-    const q = parseInt(document.getElementById("q").value);
+    const p = parseInt(document.getElementById("p").value) || 0;
+    const q = parseInt(document.getElementById("q").value) || 0;
+    if (p === 0 || q === 0) {
+        alert("Please enter valid numbers for p and/or q")
+    }
     const {n, e} = calculateRSAKeys(p, q);
 
     if (text.length % 2 === 1) {
@@ -49,6 +52,9 @@ function rsaEncrypt(text) {
 function rsaDecrypt(encryptedArray) {
     const p = parseInt(document.getElementById("p").value);
     const q = parseInt(document.getElementById("q").value);
+    if (p === 0 || q === 0) {
+        alert("Please enter valid numbers for p and/or q")
+    }
     const {n, d} = calculateRSAKeys(p, q);
 
     let decrypted = '';
