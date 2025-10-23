@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>RSA Encryption Homework</title>
 </head>
 <body>
+
+<h2>RSA Encryption/Decryption</h2>
+
+<div>
+    <label for="p">p:</label>
+    <input type="number" id="p" min="1" max="100000">
+
+    <label for="q">q:</label>
+    <input type="number" id="q" min="1" max="100000">
+</div>
+
+<label>Original text:</label>
+<div>
+    <textarea id="originalText" rows="6" cols="60" placeholder="Enter text here..."></textarea>
+    <button onclick="RSAencrypt()">RSA Encrypt</button>
+</div>
+
+<div>
+    <textarea id="outputText" rows="6" cols="60" placeholder="Results will appear here!" readonly></textarea>
+    <button onclick="RSAdecrypt()">RSA Decrypt</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="homework3.js"></script>
 
 </body>
 </html>
