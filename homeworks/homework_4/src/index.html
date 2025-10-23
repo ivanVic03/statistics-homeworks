@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law Large Numbers Homework</title>
+    <link rel="stylesheet" href="homework4.css">
 </head>
 <body>
+<h1>Law Large Numbers Simulation</h1>
+
+<div id="inputs">
+    <label for="p">Success probability (p)</label>
+    <input type="number" id="p" min="0" max="1" step="0.01">
+
+    <label for="m">Number of trajectories (m)</label>
+    <input type="number" id="m" min="1" max="1">
+
+    <label for="n">Number of trials (n)</label>
+    <input type="number" id="n" min="1">
+
+    <button id="start" onclick="startSimulation()">Start simulation</button>
+</div>
+
+<div id="container">
+    <canvas id="mainChart" width="600" height="400"></canvas>
+    <div id="controls">
+        <button id="prev" onclick="prevTrajectory()"><---</button>
+        <button id="next" onclick="nextTrajectory()">--></button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="homework4.js"></script>
 
 </body>
 </html>
