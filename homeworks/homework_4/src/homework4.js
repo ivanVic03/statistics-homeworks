@@ -1,4 +1,6 @@
-let p, m, n;
+let p = 0;
+let m = 0;
+let n = 0;
 let trajectories = [];
 let currentIndex = 0;
 
@@ -44,8 +46,48 @@ function startSimulation() {
         data: {
             labels: Array.from({ length: n }, (_, i) => i+1),
             datasets: [{
-                label:
+                label: `Traiettoria ${currentIndex + 1}`,
+                data: trajectories[currentIndex],
+                borderColor: 'blue',
+                fill: false,
             }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Law of large numbers simulation',
+            },
+            scales: {
+                x: {title: {display: true, text: 'Number of trials (n)'}},
+                y: {title: {display: true, text: 'Frequency'}}, min: 0
+            }
         }
-    })
+    });
+}
+
+function updateChart() {
+    window.mainChart.data.datasets[0].data = trajectories[currentIndex];
+    window.mainChart.data.datasets[0].label = `Traiettoria ${currentIndex + 1}`
+    window.mainChart.update()
+}
+
+function nextTrajectory() {
+    if (currentIndex < m-1) {
+        currentIndex += 1;
+    }
+    else {
+        currentIndex = 0;
+    }
+    updateChart()
+}
+
+function prevTrajectory() {
+    if (currentIndex > 0) {
+        currentIndex -= 1;
+    }
+    else {
+        currentIndex = m - 1;
+    }
+    updateChart()
 }
