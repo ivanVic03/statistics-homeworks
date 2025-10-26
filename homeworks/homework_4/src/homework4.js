@@ -9,7 +9,7 @@ let trajectoryChart = null;
 let histogramChart = null;
 
 let autoscroll = false;
-autoscrollInterval = null;
+let autoscrollInterval = null;
 
 function simulateTrial(p) {
     if (Math.random() < p) {
