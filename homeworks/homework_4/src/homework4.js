@@ -1,8 +1,15 @@
 let p = 0;
 let m = 0;
 let n = 0;
+let bins = 0;
 let trajectories = [];
+let finalFreqs = [];
 let currentIndex = 0;
+let trajectoryChart = null;
+let histogramChart = null;
+
+let autoscroll = false;
+autoscrollInterval = null;
 
 function simulateTrial(p) {
     if (Math.random() < p) {
@@ -22,48 +29,11 @@ function simulateTrajectory(p, n) {
 }
 
 function generateTrajectories(p,n,m) {
-    let trajectories = [];
+    const trajectories = [];
     for (let i = 0; i < n; i++) {
         trajectories.push(simulateTrajectory(p,n));
     }
     return trajectories;
-}
-
-function startSimulation() {
-    p = parseFloat(document.getElementById("p").value);
-    m = parseFloat(document.getElementById("m").value);
-    n = parseFloat(document.getElementById("n").value);
-
-    trajectories = generateTrajectories(p, n, m);
-    currentIndex = 0;
-
-    const ctxMain = document.getElementById("mainChart").getContext("2d");
-    if (window.mainChart) {
-        window.mainChart.destroy()
-    }
-    window.mainChart = new Chart(ctxMain, {
-        type: 'line',
-        data: {
-            labels: Array.from({ length: n }, (_, i) => i+1),
-            datasets: [{
-                label: `Traiettoria ${currentIndex + 1}`,
-                data: trajectories[currentIndex],
-                borderColor: 'blue',
-                fill: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: 'Law of large numbers simulation',
-            },
-            scales: {
-                x: {title: {display: true, text: 'Number of trials (n)'}},
-                y: {title: {display: true, text: 'Frequency'}}, min: 0
-            }
-        }
-    });
 }
 
 function updateChart() {
@@ -73,21 +43,119 @@ function updateChart() {
 }
 
 function nextTrajectory() {
-    if (currentIndex < m-1) {
-        currentIndex += 1;
-    }
-    else {
-        currentIndex = 0;
-    }
+    currentIndex = (currentIndex + 1) % trajectories.length;
+    drawTrajectory(currentIndex);
     updateChart()
 }
 
 function prevTrajectory() {
-    if (currentIndex > 0) {
-        currentIndex -= 1;
+    currentIndex = (currentIndex - 1  + trajectories.length) % trajectories.length;
+    drawTrajectory(currentIndex);
+    updateChart()
+}
+
+function computeHistogram(dataArray, bins) {
+    const counts = new Array(bins).fill(0);
+    const minVal = 0;
+    const maxVal = 1;
+    const width = (maxVal - minVal) / (bins);
+    dataArray.forEach(val => {
+        let idx = Math.floor((val - minVal) / width);
+        if (idx >= bins) idx = bins - 1;
+        counts[idx]++;
+    });
+    const labels = counts.map((_, i) => {
+        const start = (minVal + i*width).toFixed(2);
+        const end = (minVal + (i+1)*width).toFixed(2);
+        return `${start}–${end}`
+    });
+    return {counts, labels};
+}
+
+function drawHistogram(finalFreqs, bins) {
+    const histogram = computeHistogram(finalFreqs, bins);
+    const ctx = document.getElementById('histogram').getContext('2d');
+    if (histogramChart) {
+        histogramChart.destroy();
+    }
+    histogramChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: histogram.labels,
+            datasets: [{
+                label: 'Final distribution f(n)',
+                data: histogram.counts,
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {title: {display: true, text: 'f(n) ranges'}},
+                y: {title: {display: true, text: 'Number of trajectories'}, beginAtZero: true}
+            }
+        }
+    });
+}
+
+function drawTrajectory(index) {
+    const data = trajectories[index];
+    const ctx = document.getElementById('trajectoryChart').getContext('2d');
+
+    if (trajectoryChart) {
+        trajectoryChart.destroy()
+    }
+
+    trajectoryChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array.from({length: data.length}, (_, i) => i+1),
+            datasets: [{
+                data: data,
+                fill: false,
+                borderColor: 'black',
+                borderWidth: 1,
+                tension: 0.2,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {title: {display: true, text: 'Number of trials (n)'}},
+                y: {title: {display: true, text: 'Frequency f(n)'}, min: 0},
+            }
+        }
+    });
+}
+
+function startSimulation() {
+    p = parseFloat(document.getElementById("p").value);
+    m = parseFloat(document.getElementById("m").value);
+    n = parseFloat(document.getElementById("n").value);
+
+    bins = parseFloat(document.getElementById("bin").value);
+    trajectories = generateTrajectories(p, n, m);
+    finalFreqs = trajectories.map(t => t[t.length - 1]);
+    currentIndex = 0;
+
+    drawTrajectory(currentIndex);
+    drawHistogram(finalFreqs, bins);
+}
+
+function toggleAutoscroll() {
+    const btn = document.getElementById('autoScrollBtn');
+    if (!autoscroll) {
+        autoscroll = true;
+        btn.textContent = "Stop scrolling";
+        autoscrollInterval = setInterval(() => {
+            nextTrajectory();
+        }, 1500)
     }
     else {
-        currentIndex = m - 1;
+        autoscroll = false;
+        btn.textContent = "Automatic scroll";
+        clearInterval(autoscrollInterval);
     }
-    updateChart()
 }
