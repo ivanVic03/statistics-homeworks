@@ -11,6 +11,20 @@ let histogramChart = null;
 let autoscroll = false;
 let autoscrollInterval = null;
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("p").value = '';
+    document.getElementById("m").value = '';
+    document.getElementById("bins").value = '';
+    document.getElementById("n").value = '';
+    trajectories = [];
+    finalFreqs = [];
+    currentIndex = 0;
+    trajectoryChart = null;
+    histogramChart = null;
+    autoscroll = false;
+    autoscrollInterval = null
+})
+
 function simulateTrial(p) {
     if (Math.random() < p) {
         return 1;
@@ -19,20 +33,15 @@ function simulateTrial(p) {
 }
 
 function simulateTrajectory(p, n) {
-    let x = 0;
-    let y = 0;
+    let successes = 0;
     const points = [];
 
-    for (let i = 0; i < n; i++) {
+    for (let i = 1; i <= n; i++) {
         const result = simulateTrial(p);
-        if (result === 1) {
-            x += 1;
-            y += 1;
-        } else {
-            y += 1;
-        }
-        points.push({x, y});
+        successes += result;
+        points.push({ x: i, y: successes });
     }
+
     return points;
 }
 
@@ -47,6 +56,10 @@ function generateTrajectories(p, n, m) {
 
 
 function nextTrajectory() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
     currentIndex = (currentIndex + 1) % trajectories.length;
     drawTrajectory(currentIndex);
     document.getElementById('trajectoryInfo').textContent =
@@ -54,6 +67,10 @@ function nextTrajectory() {
 }
 
 function prevTrajectory() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
     currentIndex = (currentIndex - 1 + trajectories.length) % trajectories.length;
     drawTrajectory(currentIndex);
     document.getElementById('trajectoryInfo').textContent =
@@ -92,12 +109,13 @@ function drawHistogram(finalFreqs, bins) {
             datasets: [{
                 label: 'Final distribution f(n)',
                 data: histogram.counts,
-                backgroundColor: 'white',
+                backgroundColor: 'steelblue',
                 borderColor: 'black',
                 borderWidth: 1,
             }]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
             scales: {
                 x: {title: {display: true, text: 'f(n) ranges'}},
@@ -117,19 +135,23 @@ function drawTrajectory(index) {
         type: 'line',
         data: {
             labels: data.map(p => p.x),
-            datasets: [{
-                data: data.map(p => p.y),
-                fill: false,
-                borderColor: 'black',
-                borderWidth: 1,
-                tension: 0.2
-            }]
+            datasets: [
+                {
+                    label: 'Trial result',
+                    data: data.map(p => p.y),
+                    fill: false,
+                    borderColor: 'steelblue',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    stepped: false,
+                    tension: 0.2
+                }]
         },
         options: {
             responsive: true,
             scales: {
-                x: { title: { display: true, text: 'X position' } },
-                y: { title: { display: true, text: 'Y position' }, beginAtZero: true }
+                x: { title: { display: true, text: 'Number of trials (n)' } },
+                y: { title: { display: true, text: 'Cumulative successes' }, beginAtZero: true }
             }
         }
     });
@@ -141,18 +163,18 @@ function startSimulation() {
     m = parseFloat(document.getElementById("m").value);
     n = parseFloat(document.getElementById("n").value);
 
-    bins = parseFloat(document.getElementById("bins").value);
     trajectories = generateTrajectories(p, n, m);
-    finalFreqs = trajectories.map(t => t[t.length - 1].x / t[t.length - 1].y);
     currentIndex = 0;
 
     drawTrajectory(currentIndex);
     document.getElementById('trajectoryInfo').textContent = `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
-    drawHistogram(finalFreqs, bins);
-
 }
 
 function toggleAutoScroll() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
     const btn = document.getElementById('autoScrollBtn');
     if (!autoscroll) {
         autoscroll = true;
@@ -166,4 +188,21 @@ function toggleAutoScroll() {
         btn.textContent = "Automatic scroll";
         clearInterval(autoscrollInterval);
     }
+}
+
+function startHistogram() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
+
+    bins = parseFloat(document.getElementById("bins").value);
+
+    if (!bins || bins < 1) {
+        alert('Please enter a valid number of bins, greater than 1');
+    }
+
+    finalFreqs = trajectories.map(t => t[t.length - 1].y / n);
+    drawHistogram(finalFreqs, bins);
+
 }

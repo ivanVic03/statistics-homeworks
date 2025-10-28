@@ -22,21 +22,48 @@
     <button id="start" onclick="startSimulation()">Start simulation</button>
 </div>
 
-<div id="container">
-    <canvas id="mainChart" width="600" height="400"></canvas>
-    <p id="trajectoryInfo"></p>
-    <div id="controls">
-        <button id="prev" onclick="prevTrajectory()"><---</button>
-        <button id="next" onclick="nextTrajectory()">--></button>
-        <button id="autoScrollBtn" onclick="toggleAutoScroll()">Automatic scroll</button>
+<div id="chartsRow">
+    <div id="trajectoryContainer">
+        <div id="trajectoryCaption" class="chartCaption">Trajectories</div>
+        <canvas id="mainChart"></canvas>
+        <div id="controls">
+            <button id="prevTrajectory" onclick="prevTrajectory()">Previous</button>
+            <button id="nextTrajectory" onclick="nextTrajectory()">Next</button>
+            <button id="autoScrollBtn" onclick="toggleAutoScroll()">Automatic scroll</button>
+
+        </div>
+        <span id="trajectoryInfo"></span>
+        <div class="chartExplanation">
+            This chart shows the cumulative number of successes for each trial in one trajectory.
+            Start at zero and see how the number grows with each success.
+            Each trajectory shows a possible outcome of the same number of trials.
+            Notice how the lines fluctuate differently, even though the overall pattern is similar.
+            Use the “Automatic scroll” button to watch all trajectories in sequence automatically.
+            The line moves up whenever a trial succeeds and stays flat when it fails.
+            Over many trials, you can observe how the results fluctuate around the expected probability.
+        </div>
+    </div>
+
+    <div id="histogramContainer">
+        <div class="chartCaption">Histogram of Final Successes</div>
+        <div id="histogramControls">
+            <label for="bins">Bins:</label>
+            <input type="number" id="bins" min="1" max="100">
+            <button id="drawHistogram" onclick="startHistogram()">Draw histogram</button>
+        </div>
+        <canvas id="histogram"></canvas>
+        <div class="chartExplanation">
+            This histogram summarizes the final frequency of successes across all trajectories.
+            Each bar represents how many trajectories ended within a certain success range.
+            Taller bars indicate that more trajectories ended with a final success frequency in that range.
+            This demonstrates the Law of Large Numbers in action.
+            As the number of trajectories and trials increases, the histogram starts resembling a bell-shaped curve,
+            showing a normal-like pattern.
+            This visualization helps you understand how repeated random trials tend to stabilize around the expected probability.
+        </div>
     </div>
 </div>
 
-<div id="histogramContainer">
-    <label for="bins">Number of ranges (bin)</label>
-    <input type="number" id="bins" min="1">
-    <canvas id="histogram" width="600" height="400"></canvas>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="homework4.js"></script>
