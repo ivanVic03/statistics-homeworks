@@ -1,5 +1,14 @@
 let originalChart = null;
 let encryptedChart = null;
+let freqOriginal = null;
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("p").value = "";
+    document.getElementById("q").value = "";
+    document.getElementById("originalText").value = "";
+    document.getElementById("outputText").value = "";
+    document.getElementById("decryptedText").value = "";
+})
 
 //Encryption function
 
@@ -16,26 +25,16 @@ function modPow(base, exponent, modulus) {
     return result;
 }
 
-function lettersToNumber(pair) {
-    const a = pair.charCodeAt(0) - 97;
-    const b = pair.charCodeAt(1) - 97;
-    return a*26 + b;
-}
-
-function numberToLetters(number) {
-    const a = Math.floor(number / 26);
-    const b = number % 26;
-    return String.fromCharCode(a+97) + String.fromCharCode(b+97);
-}
-
 function rsaEncrypt(text) {
     const p = parseInt(document.getElementById("p").value) || 0;
     const q = parseInt(document.getElementById("q").value) || 0;
     if (p === 0 || q === 0) {
-        alert("Please enter valid numbers for p and/or q")
+        alert("Please enter valid numbers for p and/or q");
+        return [];
     }
-    if (isPrime(p) || isPrime(q)) {
+    if (!isPrime(p) || !isPrime(q)) {
         alert("p and q must be prime numbers!")
+        return [];
     }
     const {n, e} = calculateRSAKeys(p, q);
 
@@ -43,11 +42,12 @@ function rsaEncrypt(text) {
         text += 'x'
     }
     let encrypted = [];
-    for (let i = 0; i < text.length; i += 2) {
-        const pair = text.slice(i, i + 2);
-        const m = lettersToNumber(pair);
-        const c = modPow(m, e, n)
-        encrypted.push(c);
+    for (let c of text) {
+        if (!(c < 'a' || c > 'z')) {
+            const m = c.charCodeAt(0) - 97;
+            const cipher = modPow(m, e, n);
+            encrypted.push(cipher);
+        }
     }
     return encrypted;
 }
@@ -58,15 +58,16 @@ function rsaDecrypt(encryptedArray) {
     if (p === 0 || q === 0) {
         alert("Please enter valid numbers for p and/or q")
     }
-    if (isPrime(p) || isPrime(q)) {
+    if (!isPrime(p) || !isPrime(q)) {
         alert("p and q must be prime numbers!")
     }
     const {n, d} = calculateRSAKeys(p, q);
 
     let decrypted = '';
-    for (let c of encryptedArray) {
-        const m = modPow(c, d, n);
-        decrypted += numberToLetters(m);
+    for (let cipher of encryptedArray) {
+        const m = modPow(cipher, d, n);
+        const letter = String.fromCharCode(m+97);
+        decrypted = decrypted + letter;
     }
     return decrypted;
 }
@@ -87,7 +88,7 @@ function isPrime(number) {
     if (number < 2) {
         return false;
     }
-    for (let i = 2; i < Math.sqrt(number); i++) {
+    for (let i = 2; i <= Math.sqrt(number); i++) {
         if (number % i === 0) {
             return false;
         }
@@ -193,7 +194,8 @@ function encryptRSA() {
     }
     const encryptedArray = rsaEncrypt(text);
     document.getElementById("outputText").value = encryptedArray.join(",");
-    const freqOriginal = letterFrequency(text);
+    document.getElementById("graphContainer").style.display = "flex";
+    freqOriginal = letterFrequency(text);
     originalChart = drawChart("originalChart", freqOriginal, "[RSA Encryption] Original", originalChart);
     encryptedChart = drawChart("encryptedChart", freqOriginal, "[RSA Encryption] Encrypted", encryptedChart);
 }
@@ -205,8 +207,15 @@ function decryptRSA() {
     }
     const encryptedArray = encryptedText.split(",").map(Number);
     const decrypted = rsaDecrypt(encryptedArray);
-    document.getElementById("originalText").value = decrypted;
+    document.getElementById("decryptedText").value = decrypted;
+    document.getElementById("graphContainer").style.display = "flex";
     const freqDecrypted = letterFrequency(decrypted);
-    originalChart = drawChart("originalChart", freqDecrypted, "[RSA Decryption] Decrypted text", originalChart);
+    if (freqOriginal) {
+        originalChart = drawChart("originalChart", freqOriginal, "[RSA] Original (saved)", originalChart);
+    }
+    else {
+        const origText = document.getElementById('originalText').value.trim().toLowerCase();
+        originalChart = drawChart("originalChart", letterFrequency(origText), "[RSA] Original (recomputed)", originalChart);
+    }
     encryptedChart = drawChart("encryptedChart", freqDecrypted, "[RSA Decryption] Encrypted text", encryptedChart);
 }

@@ -21,18 +21,35 @@
     <input type="number" id="q" min="1" max="100000">
 </div>
 
-<label>Original text:</label>
-<div>
-    <textarea id="originalText" rows="6" cols="60" placeholder="Enter text here..."></textarea>
+<div id="original-div" class="text-areas">
+    <label>Original Text:</label>
+    <textarea id="originalText" placeholder="Enter text here..."></textarea>
     <button onclick="encryptRSA()">RSA Encrypt</button>
 </div>
 
-<div>
-    <textarea id="outputText" rows="6" cols="60" placeholder="Results will appear here!" readonly></textarea>
+<div id="encrypt-div" class="text-areas">
+    <label>Encrypted Text (numeric output):</label>
+    <textarea id="outputText" placeholder="Results will appear here!" readonly></textarea>
     <button onclick="decryptRSA()">RSA Decrypt</button>
 </div>
 
-<div class="graph-container">
+<div id="decrypted-div" class="text-areas">
+    <label>Decrypted Text:</label>
+    <textarea id="decryptedText" placeholder="Decrypted text will appear here!" readonly></textarea>
+</div>
+
+<div class="explanations">
+    <h3>Step-by-step explanations</h3>
+    <ul>
+        <li><strong>Step 1:</strong> Input two prime numbers p and q, which generate n = p * q.</li>
+        <li><strong>Step 2:</strong> Calculate φ(n) = (p-1)*(q-1), select e coprime with φ(n), and compute d = e⁻¹ mod φ(n).</li>
+        <li><strong>Step 3:</strong> Convert each letter to a number and encrypt using c = m^e mod n.</li>
+        <li><strong>Step 4:</strong> Decrypt numeric ciphertext using m = c^d mod n, then convert numbers back to letters.</li>
+        <li><strong>Step 5:</strong> Analyze letter frequency distributions before and after encryption to understand RSA effects.</li>
+    </ul>
+</div>
+
+<div class="graph-container" id="graphContainer" style="display: none">
     <div class="chart-wrapper">
         <h4>Original Text</h4>
         <canvas id="originalChart"></canvas>

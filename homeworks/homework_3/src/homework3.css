@@ -1,63 +1,154 @@
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, white 0%, lightblue 50%, skyblue 100%);
+    color: black;
+    margin: 0;
+    padding: 40px 0;
 }
 
-textarea {
-    width: 100%;
-    height: 80px;
-    margin-bottom: 10px;
-    border: 1px solid gray;
-    padding: 10px;
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    color: navy;
+}
+
+
+div {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: darkslategray;
 }
 
 input[type=number] {
-    width: 80px;
-    margin-right: 10px;
+    width: 100px;
+    padding: 6px;
+    margin-right: 15px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    text-align: center;
+    background-color: white;
+    color: black;
 }
 
+
 button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    border-color: black;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
     cursor: pointer;
-    text-align: center;
+    transition: all 0.2s ease;
+    margin-top: 5px;
 }
 
 button:hover {
-    background-color: red;
+    background-color: midnightblue;
+    transform: scale(1.05);
 }
 
 
-canvas {
-    width: 100% !important;
-    height: 200px;
-    margin: 10px 0;
+.text-areas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px gray;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    transition: 0.3s;
+}
+
+.text-areas:hover {
+    box-shadow: 0 6px 16px darkgray;
+}
+
+
+textarea {
+    width: 100%;
+    height: 90px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 1rem;
+    resize: none;
+    background-color: whitesmoke;
+    margin-top: 10px;
+    color: black;
+}
+
+#original-div {
+    background: linear-gradient(135deg, white 0%, lightcyan 100%);
+}
+
+#encrypt-div {
+    background: linear-gradient(135deg, white 0%, lightsteelblue 100%);
+}
+
+#decrypted-div {
+    background: linear-gradient(135deg, white 0%, honeydew 100%);
+}
+
+.explanations {
+    width: 80%;
+    max-width: 800px;
+    background: linear-gradient(135deg, white 0%, lightgray 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px gray;
+    padding: 20px;
+    margin: 40px auto;
+}
+
+.explanations h3 {
+    color: navy;
+    margin-bottom: 10px;
+    border-bottom: 2px solid royalblue;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.explanations ul {
+    text-align: left;
+    padding-left: 25px;
+}
+
+.explanations li {
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
 .graph-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 10px;
-    width: 100%;
+    gap: 25px;
+    padding: 20px 0;
 }
 
 .chart-wrapper {
     width: 80%;
     max-width: 800px;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    padding: 10px;
-}
-
-div {
-    margin-bottom: 30px;
-}
-
-h2 {
-    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px gray;
+    padding: 20px;
     text-align: center;
+}
+
+.chart-wrapper h4 {
+    margin-bottom: 10px;
+    color: darkblue;
 }
