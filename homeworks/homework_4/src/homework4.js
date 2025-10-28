@@ -19,40 +19,47 @@ function simulateTrial(p) {
 }
 
 function simulateTrajectory(p, n) {
-    let successes = 0;
-    let frequencies = [];
+    let x = 0;
+    let y = 0;
+    const points = [];
+
     for (let i = 0; i < n; i++) {
-        successes += simulateTrial(p);
-        frequencies.push(successes / i);
+        const result = simulateTrial(p);
+        if (result === 1) {
+            x += 1;
+            y += 1;
+        } else {
+            y += 1;
+        }
+        points.push({x, y});
     }
-    return frequencies;
+    return points;
 }
 
-function generateTrajectories(p,n,m) {
+
+function generateTrajectories(p, n, m) {
     const trajectories = [];
-    for (let i = 0; i < n; i++) {
-        trajectories.push(simulateTrajectory(p,n));
+    for (let i = 0; i < m; i++) {
+        trajectories.push(simulateTrajectory(p, n));
     }
     return trajectories;
 }
 
-function updateChart() {
-    window.mainChart.data.datasets[0].data = trajectories[currentIndex];
-    window.mainChart.data.datasets[0].label = `Traiettoria ${currentIndex + 1}`
-    window.mainChart.update()
-}
 
 function nextTrajectory() {
     currentIndex = (currentIndex + 1) % trajectories.length;
     drawTrajectory(currentIndex);
-    updateChart()
+    document.getElementById('trajectoryInfo').textContent =
+        `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
 }
 
 function prevTrajectory() {
-    currentIndex = (currentIndex - 1  + trajectories.length) % trajectories.length;
+    currentIndex = (currentIndex - 1 + trajectories.length) % trajectories.length;
     drawTrajectory(currentIndex);
-    updateChart()
+    document.getElementById('trajectoryInfo').textContent =
+        `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
 }
+
 
 function computeHistogram(dataArray, bins) {
     const counts = new Array(bins).fill(0);
@@ -102,49 +109,50 @@ function drawHistogram(finalFreqs, bins) {
 
 function drawTrajectory(index) {
     const data = trajectories[index];
-    const ctx = document.getElementById('trajectoryChart').getContext('2d');
+    const ctx = document.getElementById('mainChart').getContext('2d');
 
-    if (trajectoryChart) {
-        trajectoryChart.destroy()
-    }
+    if (trajectoryChart) trajectoryChart.destroy();
 
     trajectoryChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Array.from({length: data.length}, (_, i) => i+1),
+            labels: data.map(p => p.x),
             datasets: [{
-                data: data,
+                data: data.map(p => p.y),
                 fill: false,
                 borderColor: 'black',
                 borderWidth: 1,
-                tension: 0.2,
+                tension: 0.2
             }]
         },
         options: {
             responsive: true,
             scales: {
-                x: {title: {display: true, text: 'Number of trials (n)'}},
-                y: {title: {display: true, text: 'Frequency f(n)'}, min: 0},
+                x: { title: { display: true, text: 'X position' } },
+                y: { title: { display: true, text: 'Y position' }, beginAtZero: true }
             }
         }
     });
 }
+
 
 function startSimulation() {
     p = parseFloat(document.getElementById("p").value);
     m = parseFloat(document.getElementById("m").value);
     n = parseFloat(document.getElementById("n").value);
 
-    bins = parseFloat(document.getElementById("bin").value);
+    bins = parseFloat(document.getElementById("bins").value);
     trajectories = generateTrajectories(p, n, m);
-    finalFreqs = trajectories.map(t => t[t.length - 1]);
+    finalFreqs = trajectories.map(t => t[t.length - 1].x / t[t.length - 1].y);
     currentIndex = 0;
 
     drawTrajectory(currentIndex);
+    document.getElementById('trajectoryInfo').textContent = `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
     drawHistogram(finalFreqs, bins);
+
 }
 
-function toggleAutoscroll() {
+function toggleAutoScroll() {
     const btn = document.getElementById('autoScrollBtn');
     if (!autoscroll) {
         autoscroll = true;

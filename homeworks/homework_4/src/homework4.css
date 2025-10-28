@@ -1,6 +1,7 @@
 h1 {
     width: 100%;
     text-align: center;
+    color: navy;
 }
 
 body {
@@ -9,12 +10,17 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px;
+    margin: 0;
+    background: linear-gradient(to bottom, white, lightgray);
+    min-height: 100vh;
+    padding: 20px;
 }
 
-#inputs {
-    margin-bottom: 20px;
+#inputs, #histogramContainer {
+    margin-bottom: 30px;
     text-align: center;
+    background-color: white;
+    box-shadow: 0 3px 8px gray;
 }
 
 label, input {
@@ -28,17 +34,19 @@ input[type=number] {
 
 button {
     font-size: 16px;
-    padding: 10px;
-    margin: 0 10px;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
-    background-color: lightgray;
+    background-color: steelblue;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
     background-color: red;
+    transform: scale(1.05);
 }
 
 #container {
@@ -46,6 +54,18 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80vw;
+    max-width: 1000px;
+}
+
+#mainChart {
+    width: 100% !important;
+    height: 500px !important;
+    border: 2px solid gray;
+    border-radius: 10px;
+    box-shadow: 0 3px 3px 8px gray;
+    background-color: white;
+    margin-bottom: 20px;
 }
 
 canvas {
@@ -56,4 +76,22 @@ canvas {
 #controls {
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#histogram {
+    width: 100% !important;
+    height: 400px !important;
+    border: 2px solid darkred;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px gray;
+    background-color: white;
+}
+
+#trajectoryInfo {
+    font-size: 14pt;
+    font-weight: bold;
+    color: darkgreen;
+    margin-top: 10px;
 }
