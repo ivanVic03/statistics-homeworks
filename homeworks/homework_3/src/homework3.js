@@ -16,11 +16,11 @@ function modPow(base, exponent, modulus) {
     let result = 1;
     base = base % modulus;
     while (exponent > 0) {
-        if (exponent % 2 === 1) {
-            result = (result*base) % modulus
-            exponent = Math.floor(exponent/2);
-            base = (base*base) % modulus;
+        if (exponent % 2 !== 0) {
+            result = (result*base) % modulus;
         }
+        exponent = Math.floor(exponent/2);
+        base = (base*base) % modulus;
     }
     return result;
 }
@@ -211,11 +211,11 @@ function decryptRSA() {
     document.getElementById("graphContainer").style.display = "flex";
     const freqDecrypted = letterFrequency(decrypted);
     if (freqOriginal) {
-        originalChart = drawChart("originalChart", freqOriginal, "[RSA] Original (saved)", originalChart);
+        originalChart = drawChart("originalChart", freqOriginal, "[RSA Decryption] Original", originalChart);
     }
     else {
         const origText = document.getElementById('originalText').value.trim().toLowerCase();
-        originalChart = drawChart("originalChart", letterFrequency(origText), "[RSA] Original (recomputed)", originalChart);
+        originalChart = drawChart("originalChart", letterFrequency(origText), "[RSA Decryption] Original", originalChart);
     }
     encryptedChart = drawChart("encryptedChart", freqDecrypted, "[RSA Decryption] Encrypted text", encryptedChart);
 }
