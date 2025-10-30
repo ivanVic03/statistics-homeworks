@@ -36,7 +36,7 @@ function rsaEncrypt(text) {
         alert("p and q must be prime numbers!")
         return [];
     }
-    const {n, e} = calculateRSAKeys(p, q);
+    const {n, phi, e, d} = calculateRSAKeys(p, q);
 
     if (text.length % 2 === 1) {
         text += 'x'
@@ -61,7 +61,7 @@ function rsaDecrypt(encryptedArray) {
     if (!isPrime(p) || !isPrime(q)) {
         alert("p and q must be prime numbers!")
     }
-    const {n, d} = calculateRSAKeys(p, q);
+    const {n, phi, e, d} = calculateRSAKeys(p, q);
 
     let decrypted = '';
     for (let cipher of encryptedArray) {
