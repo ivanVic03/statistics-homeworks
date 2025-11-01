@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>What means are and what are their usages?</title>
+    <meta name="description" content="Theoretical module: an in-depth blog-style exposition on arithmetic, geometric, and weighted means.">
+    <link rel="stylesheet" href="homework5.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<main>
+    <header>
+        <h1>What means are and what are their usages?</h1>
+    </header>
+
+    <article class="card">
+        <section>
+            <h2>Introduction: Understanding the "Average"</h2>
+            <p>In the world of data analysis, the "average" or arithmetic mean, is often the first tool we reach for. It serves as an intuitive starting point in descriptive statistics, providing a quick measure of a dataset's central tendency. This initial step is an essential part of interpreting data in any field, from finance to healthcare.</p>
+
+            <p>However, choosing a mean is a strategic decision that shapes the entire narrative of your data. While the arithmetic mean is a powerful starting point, understanding its nuances — and knowing when to use alternatives like the geometric or weighted mean — can reveal powerful insights into more complex trends and patterns. A one-size-fits-all approach can lead to misleading conclusions; this module explores the unique strengths and ideal applications of these three fundamental statistical tools to help you tell a more accurate story.</p>
+
+            <p>We begin with the arithmetic mean to understand its properties and limitations before moving to the more specialized counterparts.</p>
+        </section>
+
+        <section>
+            <h2>The Foundational Tool: The Arithmetic Mean</h2>
+            <p>The arithmetic mean is the most common and intuitive measure of central tendency. It's the quantity most people mean when they say "average." Understanding its core properties and ideal applications is a critical skill for anyone working with data, as it forms the bedrock for more complex analyses.</p>
+
+            <h3>What is the Arithmetic Mean?</h3>
+            <p>The arithmetic mean is defined as the sum of all numbers in a dataset divided by the count of those numbers. Formally, for values \(x_1,\dots,x_n\),</p>
+            <p>\[ \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i \]</p>
+
+            <h3>Evaluating Its Key Properties</h3>
+            <p>A critical property of the arithmetic mean is its sensitivity to outliers. Extreme values in a dataset can significantly pull the mean, potentially leading to misleading interpretations in skewed distributions.</p>
+
+            <p class="note">Example: consider annual salaries \{30,000; 35,000; 40,000; 45,000; 1,000,000\}. The arithmetic mean is 230,000 — a value that does not reflect the typical employee's salary but signals the presence of an extreme outlier that merits further investigation.</p>
+
+            <h3>When to Use It</h3>
+            <p>Use the arithmetic mean for additive processes and datasets without extreme skew. Typical domains include finance (average expenses), economics (household consumption), and healthcare (average recovery times).</p>
+        </section>
+
+        <section>
+            <h2>Accounting for Compounding and Growth: The Geometric Mean</h2>
+            <p>For multiplicative processes — such as investment returns or growth rates — the geometric mean is the appropriate central measure. It captures the effect of compounding that the arithmetic mean misses.</p>
+
+            <h3>Geometric vs. Arithmetic</h3>
+            <p>Consider returns of +50% and −50%. The arithmetic mean suggests 0% (no change), but the geometric mean, computed via multipliers, correctly indicates a negative average growth rate.</p>
+
+            <p>The geometric mean is \[ G = \sqrt[n]{x_1 x_2 \dots x_n} \]</p>
+        </section>
+
+        <section>
+            <h2>Assigning Importance: The Weighted Mean</h2>
+            <p>The weighted mean allows differing importance per observation. Compute it by multiplying each observation by its weight, summing, and dividing by the sum of weights:</p>
+            <p>For weighted data, use \[ \bar{x}_w = \frac{\sum w_i x_i}{\sum w_i} \]</p>
+
+            <h3>Example: Valuing a Portfolio</h3>
+            <p>An investor buying 100 shares at $10 and 50 shares at $40 has a weighted average price of $20 (total cost $3,000 / 150 shares), which better represents cost basis than the simple average of $25.</p>
+
+            <h3>Using Frequency as Weights</h3>
+            <p>Weights correct for sampling bias: if a subgroup is underrepresented among respondents, increase its weight proportional to its population share.</p>
+        </section>
+
+        <section>
+            <p>Moving beyond a one-size-fits-all average is essential. The arithmetic, geometric, and weighted means each serve distinct analytical goals. Choose thoughtfully, and your chosen mean will illuminate — rather than obscure — the story your data can tell.</p>
+        </section>
+
+    </article>
+
+</main>
+</body>
+</html>

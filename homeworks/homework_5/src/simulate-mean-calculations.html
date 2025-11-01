@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulate means calculations!</title>
+    <link rel="stylesheet" href="homework5.css">
+    <script src="homework5.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>Simulate means calculations!</h1>
+    <nav>
+        <a href="#arith">Arithmetic</a>
+        <a href="#geom">Geometric</a>
+        <a href="#weighted">Weighted</a>
+        <a href="#compare">Compare</a>
+    </nav>
+</header>
+
+<main>
+    <section id="arith" class="card">
+        <h2>Arithmetic Mean</h2>
+        <p>The arithmetic mean is the sum of all values divided by their count. Ideal for additive processes, but sensitive to outliers.</p>
+        <div class="example">Example: {5, 10, 15} → (5 + 10 + 15) / 3 = 10</div>
+
+        <label>Enter values (comma separated):</label>
+        <input id="arith-input" type="text" placeholder="5,10,15">
+        <button onclick="calcArithmetic()">Compute</button>
+        <button class="ghost" onclick="clearField('arith-input', 'arith-output')">Clear</button>
+        <textarea id="arith-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="geom" class="card">
+        <h2>Geometric Mean</h2>
+        <p>The nth root of the product of positive values. Essential for growth and compounding.</p>
+        <div class="example">Example: 1.5, 0.5 → √(1.5 × 0.5) − 1 ≈ −0.134</div>
+
+        <label>Enter positive values (comma separated):</label>
+        <input id="geom-input" type="text" placeholder="1.1,0.9,1.05">
+        <button onclick="calcGeometric()">Compute</button>
+        <button class="ghost" onclick="clearField('geom-input', 'geom-output')">Clear</button>
+        <textarea id="geom-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="weighted" class="card">
+        <h2>Weighted Mean</h2>
+        <p>Each value is multiplied by its weight and divided by the total of the weights.</p>
+        <div class="example">Example: 10:100, 40:50 → (1000 + 2000) / 150 = 20</div>
+
+        <label>Enter value:weight pairs:</label>
+        <input id="weighted-input" type="text" placeholder="10:100,40:50">
+        <button onclick="calcWeighted()">Compute</button>
+        <button class="ghost" onclick="clearField('weighted-input', 'weighted-output')">Clear</button>
+        <textarea id="weighted-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="compare" class="card">
+        <h2>Choosing the Right Mean</h2>
+        <table>
+            <thead>
+            <tr><th>Type</th><th>Application</th><th>Considerations</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>Arithmetic</td><td>Additive data (e.g. salaries)</td><td>Sensitive to outliers</td></tr>
+            <tr><td>Geometric</td><td>Multiplicative data (e.g. growth rates)</td><td>Positive values only</td></tr>
+            <tr><td>Weighted</td><td>Unequal importance</td><td>Weights must be justified</td></tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
