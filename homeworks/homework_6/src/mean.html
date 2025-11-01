@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Mean</title>
+    <link rel="stylesheet" href="homework6.css">
+    <script src="homework6.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Online Mean</h1>
+        <nav><a href="index.html">Home</a></nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Derivation</h2>
+            <p>The online formula for updating the mean when a new value $x_n$ arrives:</p>
+            <p><strong>$$\mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n}$$</strong></p>
+            <p>This formula is derived by rewriting the standard mean as a cumulative sum and updating it incrementally.</p>
+        </section>
+
+        <section>
+            <h2>Example</h2>
+            <label>Enter a number: <input type="number" id="meanInput"></label>
+            <button onclick="addNumber('mean')">Add Number</button>
+            <button onclick="resetData('mean')">Reset</button>
+            <canvas id="meanChart" width="400" height="200"></canvas>
+            <p>Current Mean: <span id="meanOutput">0</span></p>
+        </section>
+    </main>
+</body>
+</html>
