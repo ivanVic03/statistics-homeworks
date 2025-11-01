@@ -1,10 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Beyond the Simple Average — Arithmetic, Geometric & Weighted Means</title>
+    <script src="homework5.js"></script>
+    <link rel="stylesheet" href="homework5.css">
 </head>
 <body>
+<header>
+    <div class="container hero">
+        <h1>Beyond the Simple Average</h1>
+        <p class="lead">A guide to understanding the <em>arithmetic</em>, <em>geometric</em>, and <em>weighted</em> means.</p>
+        <nav class="toc">
+            <a href="#arith">Arithmetic Mean</a> · <a href="#geom">Geometric Mean</a> · <a href="#weighted">Weighted Mean</a> · <a href="#compare">Compare</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <main>
+        <section>
+            <article id="arith" class="card">
+                <h2>1. Arithmetic Mean</h2>
+                <p class="muted">The sum of all values divided by the number of items. Ideal for additive processes, but sensitive to outliers.</p>
+                <div class="example"><strong>Example:</strong> {5, 10, 15} → <code>(5+10+15)/3 = 10</code></div>
+                <div class="calc" style="margin-top:12px">
+                    <label class="small">Enter values separated by commas (e.g. 5,10,15)</label>
+                    <input id="arith-input" type="text" placeholder="5,10,15" aria-label="values for arithmetic mean">
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <button class="btn" onclick="calcArithmetic()">Compute Arithmetic Mean</button>
+                        <button class="ghost" onclick="document.getElementById('arith-input').value=''">Clear</button>
+                    </div>
+                    <div id="arith-output" class="steps" aria-live="polite"></div>
+                </div>
+            </article>
+
+            <article id="geom" class="card" style="margin-top:18px">
+                <h2>2. Geometric Mean</h2>
+                <p class="muted">The nth root of the product of all positive values. Essential for growth rates and compounding effects.</p>
+                <div class="example"><strong>Example:</strong> returns +50%, -50% → multipliers: 1.5, 0.5 → <code>√(1.5*0.5)-1 ≈ -0.134</code></div>
+                <div class="calc" style="margin-top:12px">
+                    <label class="small">Enter positive values separated by commas. For percentages, use multipliers (e.g. 1.1,0.9).</label>
+                    <input id="geom-input" type="text" placeholder="1.1,0.9,1.05">
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <button class="btn" onclick="calcGeometric()">Compute Geometric Mean</button>
+                        <button class="ghost" onclick="document.getElementById('geom-input').value=''">Clear</button>
+                    </div>
+                    <div id="geom-output" class="steps" aria-live="polite"></div>
+                </div>
+            </article>
+
+            <article id="weighted" class="card" style="margin-top:18px">
+                <h2>3. Weighted Mean</h2>
+                <p class="muted">Each value is multiplied by a weight, summed, and divided by the sum of the weights. Used when some observations matter more than others.</p>
+                <div class="example"><strong>Example:</strong> 100 shares at $10, 50 shares at $40 → weighted mean = (1000+2000)/150 = 20</div>
+                <div class="calc" style="margin-top:12px">
+                    <label class="small">Enter value:weight pairs separated by commas (e.g. 10:100,40:50)</label>
+                    <input id="weighted-input" type="text" placeholder="10:100,40:50">
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <button class="btn" onclick="calcWeighted()">Compute Weighted Mean</button>
+                        <button class="ghost" onclick="document.getElementById('weighted-input').value=''">Clear</button>
+                    </div>
+                    <div id="weighted-output" class="steps" aria-live="polite"></div>
+                </div>
+            </article>
+
+            <article id="compare" class="card" style="margin-top:18px">
+                <h2>4. Choosing the Right Mean</h2>
+                <table class="compare" aria-describedby="compare-desc">
+                    <thead><tr><th>Type</th><th>Main Application</th><th>Considerations</th></tr></thead>
+                    <tbody>
+                    <tr><td>Arithmetic</td><td>Additive data (e.g. salaries, test scores)</td><td>Highly sensitive to outliers</td></tr>
+                    <tr><td>Geometric</td><td>Multiplicative processes (e.g. growth rates)</td><td>Requires positive values; captures compounding</td></tr>
+                    <tr><td>Weighted</td><td>Different importance or frequency (e.g. portfolios, surveys)</td><td>Weights must be justified and transparent</td></tr>
+                    </tbody>
+                </table>
+                <p id="compare-desc" class="muted" style="margin-top:10px">Rule of thumb: additive → arithmetic; multiplicative → geometric; variable importance → weighted.</p>
+            </article>
+        </section>
+
+        <aside>
+            <div class="card">
+                <h3>Quick Reference</h3>
+                <ul>
+                    <li><strong>Arithmetic:</strong> \(\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i\)</li>
+                    <li><strong>Geometric:</strong> \(G = (\prod_{i=1}^n x_i)^{1/n}\)</li>
+                    <li><strong>Weighted:</strong> \(\bar{x}_w = \frac{\sum w_i x_i}{\sum w_i}\)</li>
+                </ul>
+                <hr>
+                <h4>Presentation Tips</h4>
+                <ol>
+                    <li>Show both formula and numerical example.</li>
+                    <li>Compare results on the same dataset.</li>
+                    <li>Always justify weighting schemes.</li>
+                </ol>
+            </div>
+            <div class="card" style="margin-top:18px">
+                <h4>Extra Resources</h4>
+                <p class="muted">Would you like to add a comparison chart or GitHub-ready structure?</p>
+                <button class="btn" onclick="downloadExample()">Download Sample CSV</button>
+            </div>
+        </aside>
+    </main>
+</div>
+
 
 </body>
 </html>

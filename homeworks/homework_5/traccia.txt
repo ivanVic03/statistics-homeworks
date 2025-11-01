@@ -1,2 +1,6 @@
 Find out the various average (measure of location) that have been proposed and in what circumstances they are useful
 
+Arithmetic average: https://www.datacamp.com/tutorial/arithmetic-mean
+Weighted average: https://www.investopedia.com/terms/w/weightedaverage.asp
+
+Geometric average: https://corporatefinanceinstitute.com/resources/data-science/what-is-geometric-mean/
