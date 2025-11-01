@@ -34,13 +34,12 @@
         </div>
         <span id="trajectoryInfo"></span>
         <div class="chartExplanation">
-            This chart shows the cumulative number of successes for each trial in one trajectory.
-            Start at zero and see how the number grows with each success.
-            Each trajectory shows a possible outcome of the same number of trials.
-            Notice how the lines fluctuate differently, even though the overall pattern is similar.
-            Use the “Automatic scroll” button to watch all trajectories in sequence automatically.
-            The line moves up whenever a trial succeeds and stays flat when it fails.
-            Over many trials, you can observe how the results fluctuate around the expected probability.
+            This chart shows how the relative frequency of successes evolves during each trajectory. <br>
+            Each line starts at zero and fluctuates as trials accumulate. <br>
+            The line goes up after a success and may stabilize around the true probability <i>p</i> as more trials are run. <br>
+            Use the “Automatic scroll” button to explore all trajectories one by one. <br>
+            Notice how individual paths differ at first but tend to cluster near <i>p</i> over time —
+            this illustrates convergence in probability.
         </div>
     </div>
 
@@ -53,14 +52,13 @@
         </div>
         <canvas id="histogram"></canvas>
         <div class="chartExplanation">
-            This histogram summarizes the final frequency of successes across all trajectories.
-            Each bar represents how many trajectories ended within a certain success range.
-            Taller bars indicate that more trajectories ended with a final success frequency in that range.
-            This demonstrates the Law of Large Numbers in action.
-            As the number of trajectories and trials increases, the histogram starts resembling a bell-shaped curve,
-            showing a normal-like pattern.
-            This visualization helps you understand how repeated random trials tend to stabilize around the expected probability.
+            This histogram shows the final relative frequencies of success across all simulated trajectories. <br>
+            Each bar represents how many trajectories ended within a specific range of frequencies. <br>
+            Most trajectories cluster around the true probability <i>p</i>, forming a bell-like shape. <br>
+            As the number of trials increases, the distribution becomes tighter around <i>p</i> —
+            a clear sign of the Law of Large Numbers in action.
         </div>
+
     </div>
 </div>
 

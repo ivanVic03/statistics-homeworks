@@ -39,7 +39,7 @@ function simulateTrajectory(p, n) {
     for (let i = 1; i <= n; i++) {
         const result = simulateTrial(p);
         successes += result;
-        points.push({ x: i, y: successes });
+        points.push({ x: i, y: successes/i });
     }
 
     return points;
@@ -145,13 +145,21 @@ function drawTrajectory(index) {
                     pointRadius: 0,
                     stepped: false,
                     tension: 0.2
+                },
+                {
+                    label: 'Theoretical probability p',
+                    data: Array(data.length).fill(p),
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    borderDash: [5,5],
                 }]
         },
         options: {
             responsive: true,
             scales: {
                 x: { title: { display: true, text: 'Number of trials (n)' } },
-                y: { title: { display: true, text: 'Cumulative successes' }, beginAtZero: true }
+                y: { title: { display: true, text: 'Relative frequency' }, beginAtZero: true, max: 1 }
             }
         }
     });
@@ -202,7 +210,7 @@ function startHistogram() {
         alert('Please enter a valid number of bins, greater than 1');
     }
 
-    finalFreqs = trajectories.map(t => t[t.length - 1].y / n);
+    finalFreqs = trajectories.map(t => t[t.length - 1].y);
     drawHistogram(finalFreqs, bins);
 
 }
