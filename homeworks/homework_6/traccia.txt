@@ -1,0 +1,3 @@
+Derive the recurrence formulas for mean and variance and write the corresponding example code in the simpliest way possible.
+
+In the end, discuss the advantages of the online algorithms in computational terms.
