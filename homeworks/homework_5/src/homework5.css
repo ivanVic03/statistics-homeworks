@@ -21,11 +21,6 @@ header {
 }
 
 
-header h1 {
-    margin-bottom: 0.3rem;
-    color: var(--accent);
-}
-
 header {
     color: var(--muted);
     font-style: italic;
@@ -222,4 +217,42 @@ mjx-container[display="true"] {
     display: block;
     text-align: center;
     margin: 1rem 0;
+}
+
+h1 {
+    color: teal;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+#main-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 320px;
+}
+
+#theory-button {
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#theory-button:hover {
+    background-color: #006d6d;
+}
+
+#practice-button {
+    background-color: white;
+    color: teal;
+    border: 2px solid teal;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#practice-button:hover {
+    background-color: teal;
+    color: red;
 }
