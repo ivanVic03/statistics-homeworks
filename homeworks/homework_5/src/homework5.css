@@ -6,6 +6,43 @@
     --muted: gray;
 }
 
+#intro-title {
+    text-align: center;
+}
+
+#intro {
+    width: 70%;
+    margin: 2rem auto;
+    text-align: justify;
+    padding: 2rem;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 1.8rem;
+}
+
+.button-container button {
+    display: inline-block;
+    margin: 0 0.8rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px lightgray;
+}
+
+.button-container button:hover {
+    background-color: lightseagreen;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px gray;
+}
+
+
 body {
     background: var(--paper);
     margin: 0;
@@ -212,34 +249,3 @@ h1 {
     margin-bottom: 2rem;
 }
 
-#main-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 320px;
-}
-
-#theory-button {
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#theory-button:hover {
-    background-color: #006d6d;
-}
-
-#practice-button {
-    background-color: white;
-    color: teal;
-    border: 2px solid teal;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#practice-button:hover {
-    background-color: teal;
-    color: red;
-}
