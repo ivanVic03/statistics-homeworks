@@ -1,7 +1,6 @@
 let meanData = {count: 0, mean: 0};
 let varData = {count: 0, mean: 0, M2: 0};
 
-// Chart.js setup
 let meanChartCtx = document.getElementById('meanChart')?.getContext('2d');
 let varChartCtx = document.getElementById('varChart')?.getContext('2d');
 
@@ -70,3 +69,14 @@ function resetData(type) {
     }
 }
 
+function showMean() {
+    window.location.href="mean.html"
+}
+
+function showVariance() {
+    window.location.href="variance.html"
+}
+
+function showLastDiscussion() {
+    window.location.href="last-discussion.html"
+}

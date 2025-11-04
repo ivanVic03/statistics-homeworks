@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <title>Online Mean</title>
     <link rel="stylesheet" href="homework6.css">
-    <script src="homework6.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header>
@@ -16,8 +26,8 @@
     <main>
         <section>
             <h2>Derivation</h2>
-            <p>The online formula for updating the mean when a new value $x_n$ arrives:</p>
-            <p><strong>$$\mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n}$$</strong></p>
+            <p>The online formula for updating the mean when a new value \( x_n \) arrives:</p>
+            <p><strong>\[ \mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n} \]</strong></p>
             <p>This formula is derived by rewriting the standard mean as a cumulative sum and updating it incrementally.</p>
         </section>
 
@@ -30,5 +40,9 @@
             <p>Current Mean: <span id="meanOutput">0</span></p>
         </section>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="homework6.js"></script>
+
 </body>
 </html>

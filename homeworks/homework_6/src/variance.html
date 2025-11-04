@@ -4,33 +4,46 @@
     <meta charset="UTF-8">
     <title>Online Variance</title>
     <link rel="stylesheet" href="homework6.css">
-    <script src="homework6.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-<header>
-    <h1>Online Variance</h1>
-    <nav><a href="index.html">Home</a></nav>
-</header>
+    <header>
+        <h1>Online Variance</h1>
+        <nav><a href="index.html">Home</a></nav>
+    </header>
 
-<main>
-    <section>
-        <h2>Derivation</h2>
-        <p>Using Welford's algorithm, the variance is updated as:</p>
-        <p><strong>$$M_2 = M_2 + (x_n - \mu_{n-1}) \cdot (x_n - \mu_n)$$</strong></p>
-        <p>$$\text{Variance } \sigma^2 = \frac{M_2}{n}$$</p>
-        <p>This approach avoids storing all past data and reduces numerical errors.</p>
-    </section>
+    <main>
+        <section>
+            <h2>Derivation</h2>
+            <p>Using Welford's algorithm, the variance is updated as:</p>
+            <p><strong>\[ M_2 = M_2 + (x_n - \mu_{n-1}) \cdot (x_n - \mu_n) \]</strong></p>
+            <p>$$\text{Variance} \sigma^2 = \frac{M_2}{n}$$</p>
+            <p>This approach avoids storing all past data and reduces numerical errors.</p>
+        </section>
 
-    <section>
-        <h2>Example</h2>
-        <label>Enter a number: <input type="number" id="varInput"></label>
-        <button onclick="addNumber('variance')">Add Number</button>
-        <button onclick="resetData('variance')">Reset</button>
-        <canvas id="varChart" width="400" height="200"></canvas>
-        <p>Current Variance: <span id="varOutput">0</span></p>
-    </section>
-</main>
+        <section>
+            <h2>Example</h2>
+            <label>Enter a number: <input type="number" id="varInput"></label>
+            <button onclick="addNumber('variance')">Add Number</button>
+            <button onclick="resetData('variance')">Reset</button>
+            <canvas id="varChart" width="400" height="200"></canvas>
+            <p>Current Variance: <span id="varOutput">0</span></p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="homework6.js"></script>
 
 </body>
 </html>

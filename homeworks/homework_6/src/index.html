@@ -8,25 +8,28 @@
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
+    <script src="homework6.js"></script>
 </head>
 <body>
-<header>
-    <h1>Online Algorithms: Mean & Variance</h1>
-</header>
 
 <main>
+    <header>
+        <h1 id="intro-title">Online Algorithms: Mean & Variance</h1>
+    </header>
+
     <section>
-        <h2>Introduction</h2>
         <p>In this project, we explore online algorithms for calculating the mean and variance of a dataset.
-            Unlike traditional formulas, these algorithms update the values incrementally as new data arrives.</p>
+            Unlike traditional formulas, these algorithms update the values incrementally as new data arrives.
+        </p>
     </section>
 
     <section>
         <h2>Pages</h2>
-        <ul>
-            <li><a href="mean.html">Mean (Online Formula & Example)</a></li>
-            <li><a href="variance.html">Variance (Online Formula & Example)</a></li>
-        </ul>
+        <div class="pages-buttons">
+            <button id="mean-button" onclick="showMean()">Mean</button>
+            <button id="variance-button" onclick="showVariance()">Variance</button>
+            <button id="last-discussion-button" onclick="showLastDiscussion()">Discuss</button>
+        </div>
     </section>
 
     <section>
