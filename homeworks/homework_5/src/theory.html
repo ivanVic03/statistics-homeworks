@@ -76,8 +76,58 @@
         </section>
 
         <section>
-            <p>Moving beyond a one-size-fits-all average is essential. The arithmetic, geometric, and weighted means each serve distinct analytical goals. Choose thoughtfully, and your chosen mean will illuminate — rather than obscure — the story your data can tell.</p>
+            <h2>Harmonic Mean</h2>
+            <p>
+                The <strong>harmonic mean</strong> is defined as the reciprocal of the arithmetic mean
+                of the reciprocals of the data values. It is particularly useful when dealing with
+                rates or ratios, such as speeds or densities, where the quantities being averaged
+                are defined over a fixed unit (e.g., distance or mass).
+            </p>
+
+            <p>
+                \( H = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}} \)
+            </p>
+
+            <p>
+                Compared to the arithmetic and geometric means, the harmonic mean gives
+                greater weight to smaller values, making it appropriate when smaller numbers
+                have more significance. For example, it accurately describes the average speed
+                for a round trip over equal distances.
+            </p>
         </section>
+
+        <section>
+            <h2>Quadratic Mean</h2>
+            <p>
+                The <strong>quadratic mean</strong>, also known as the <em>root mean square (RMS)</em>,
+                measures the magnitude of a set of values regardless of their sign. It is computed
+                as the square root of the arithmetic mean of the squared data values.
+            </p>
+
+            <p>
+                \( Q = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} x_i^2 } \)
+            </p>
+
+            <p>
+                The RMS is widely used in physics and engineering, especially in electrical
+                applications to represent the effective value of an alternating current or voltage.
+                Unlike the arithmetic mean, it emphasizes larger magnitudes since squaring
+                amplifies deviations from zero.
+            </p>
+        </section>
+
+        <section>
+            <p>
+                Moving beyond a one-size-fits-all average is essential. Each mean—arithmetic, geometric, harmonic, quadratic, and weighted—serves a distinct analytical purpose. Far from being mere mathematical curiosities, they are precision instruments that reveal different aspects of the data’s structure.
+            </p>
+            <p>
+                The <strong>Harmonic Mean</strong> excels in averaging rates and ratios, ensuring fairness where smaller values dominate influence, while the <strong>Quadratic Mean (RMS)</strong> captures the true magnitude of varying quantities, indispensable in physics, engineering, and performance evaluation.
+            </p>
+            <p>
+                Mastering when and why to apply each mean distinguishes technical competence from analytical insight. Choosing the right mean does not simply yield a number—it determines whether our conclusions are mathematically sound and faithfully represent the reality our data describes.
+            </p>
+        </section>
+
 
     </article>
 

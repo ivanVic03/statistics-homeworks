@@ -68,6 +68,31 @@
             </tbody>
         </table>
     </section>
+
+    <section id="harm" class="card">
+        <h2>Harmonic Mean</h2>
+        <p>The harmonic mean is ideal for averaging rates or ratios—such as speeds or financial ratios—where smaller values have a stronger influence.</p>
+        <div class="example">Example: {2, 4, 8} → 3 / (1/2 + 1/4 + 1/8) ≈ 3.429</div>
+
+        <label>Enter positive values (comma separated):</label>
+        <input id="harm-input" type="text" placeholder="2,4,8">
+        <button onclick="calcHarmonic()">Compute</button>
+        <button class="ghost" onclick="clearField('harm-input','harm-output')">Clear</button>
+        <textarea id="harm-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="quad" class="card">
+        <h2>Quadratic Mean (RMS)</h2>
+        <p>The quadratic mean, or root mean square, measures the magnitude of a set—ideal for values related to energy, power, or signal strength.</p>
+        <div class="example">Example: {2, 4, 9, 10, 12} → √[(Σx²)/n] ≈ 8.31</div>
+
+        <label>Enter numeric values (comma separated):</label>
+        <input id="quad-input" type="text" placeholder="2,4,9,10,12">
+        <button onclick="calcQuadratic()">Compute</button>
+        <button class="ghost" onclick="clearField('quad-input','quad-output')">Clear</button>
+        <textarea id="quad-output" class="output" readonly></textarea>
+    </section>
+
 </main>
 </body>
 </html>

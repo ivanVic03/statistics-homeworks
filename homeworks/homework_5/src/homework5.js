@@ -87,6 +87,47 @@ function calcWeighted() {
         `Weighted Mean = ${wm}`;
 }
 
+function calcHarmonic() {
+    const raw = document.getElementById('harm-input').value;
+    const vals = raw.split(/[,\\s]+/).map(s => Number(s.trim())).filter(x => x > 0);
+    const out = document.getElementById('harm-output');
+
+    if (vals.length === 0) {
+        out.value = "Please enter positive numbers (no zeros allowed).";
+        return;
+    }
+
+    const denom = vals.reduce((s, v) => s + 1/v, 0);
+    const hm = (vals.length / denom).toFixed(3);
+
+    out.value =
+        `Values: ${vals.join(', ')}\n` +
+        `n = ${vals.length}\n` +
+        `Sum of reciprocals = ${denom.toFixed(3)}\n` +
+        `Harmonic Mean = ${hm}`;
+}
+
+function calcQuadratic() {
+    const raw = document.getElementById('quad-input').value;
+    const vals = raw.split(/[,\\s]+/).map(s => Number(s.trim())).filter(x => Number.isFinite(x));
+    const out = document.getElementById('quad-output');
+
+    if (vals.length === 0) {
+        out.value = "Please enter valid numeric values.";
+        return;
+    }
+
+    const sqSum = vals.reduce((s, v) => s + v * v, 0);
+    const rms = Math.sqrt(sqSum / vals.length).toFixed(3);
+
+    out.value =
+        `Values: ${vals.join(', ')}\n` +
+        `Sum of squares = ${sqSum.toFixed(3)}\n` +
+        `n = ${vals.length}\n` +
+        `Quadratic Mean (RMS) = ${rms}`;
+}
+
+
 window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input, textarea').forEach(el => {
         el.value='';
