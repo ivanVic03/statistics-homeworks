@@ -100,7 +100,7 @@ input[type="text"], input[type="number"], textarea {
     resize: none;
 }
 
-#arith-output, #weighted-output {
+#arith-output, #weighted-output, #harm-output, #quad-output {
     min-height: 4rem;
 }
 
@@ -204,19 +204,6 @@ pre {
 p {
     text-align: justify;
     text-justify: inter-word;
-}
-
-mjx-container {
-    font-size: 1.05em;
-    color: var(--ink);
-    text-align: center;
-    margin: 0.6rem 0;
-}
-
-mjx-container[display="true"] {
-    display: block;
-    text-align: center;
-    margin: 1rem 0;
 }
 
 h1 {

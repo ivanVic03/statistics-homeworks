@@ -6,6 +6,18 @@
     <title>Simulate means calculations!</title>
     <link rel="stylesheet" href="homework5.css">
     <script src="homework5.js" defer></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <header>
@@ -14,6 +26,8 @@
         <a href="#arith">Arithmetic</a>
         <a href="#geom">Geometric</a>
         <a href="#weighted">Weighted</a>
+        <a href="#harm">Harmonic</a>
+        <a href="#quad">Quadratic</a>
         <a href="#compare">Compare</a>
     </nav>
 </header>
@@ -22,8 +36,9 @@
     <section id="arith" class="card">
         <h2>Arithmetic Mean</h2>
         <p>The arithmetic mean is the sum of all values divided by their count. Ideal for additive processes, but sensitive to outliers.</p>
-        <div class="example">Example: {5, 10, 15} → (5 + 10 + 15) / 3 = 10</div>
-
+        <div class="example">
+            Example: \( \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i \) &nbsp;&nbsp; e.g. {2, 4, 6} → \( \frac{2 + 4 + 6}{3} = 4 \)
+        </div>
         <label>Enter values (comma separated):</label>
         <input id="arith-input" type="text" placeholder="5,10,15">
         <button onclick="calcArithmetic()">Compute</button>
@@ -34,8 +49,9 @@
     <section id="geom" class="card">
         <h2>Geometric Mean</h2>
         <p>The nth root of the product of positive values. Essential for growth and compounding.</p>
-        <div class="example">Example: 1.5, 0.5 → √(1.5 × 0.5) − 1 ≈ −0.134</div>
-
+        <div class="example">
+            Example: \( G = \sqrt[n]{x_1 \cdot x_2 \cdots x_n} \) &nbsp;&nbsp; e.g. {2, 4, 8} → \( (2 \times 4 \times 8)^{1/3} = 4 \)
+        </div>
         <label>Enter positive values (comma separated):</label>
         <input id="geom-input" type="text" placeholder="1.1,0.9,1.05">
         <button onclick="calcGeometric()">Compute</button>
@@ -46,8 +62,9 @@
     <section id="weighted" class="card">
         <h2>Weighted Mean</h2>
         <p>Each value is multiplied by its weight and divided by the total of the weights.</p>
-        <div class="example">Example: 10:100, 40:50 → (1000 + 2000) / 150 = 20</div>
-
+        <div class="example">
+            Example: \( \bar{x}_w = \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i} \) &nbsp;&nbsp; e.g. (10:100, 40:50) → \( \frac{10(100) + 40(50)}{100 + 50} = 20 \)
+        </div>
         <label>Enter value:weight pairs:</label>
         <input id="weighted-input" type="text" placeholder="10:100,40:50">
         <button onclick="calcWeighted()">Compute</button>
@@ -55,24 +72,12 @@
         <textarea id="weighted-output" class="output" readonly></textarea>
     </section>
 
-    <section id="compare" class="card">
-        <h2>Choosing the Right Mean</h2>
-        <table>
-            <thead>
-            <tr><th>Type</th><th>Application</th><th>Considerations</th></tr>
-            </thead>
-            <tbody>
-            <tr><td>Arithmetic</td><td>Additive data (e.g. salaries)</td><td>Sensitive to outliers</td></tr>
-            <tr><td>Geometric</td><td>Multiplicative data (e.g. growth rates)</td><td>Positive values only</td></tr>
-            <tr><td>Weighted</td><td>Unequal importance</td><td>Weights must be justified</td></tr>
-            </tbody>
-        </table>
-    </section>
-
     <section id="harm" class="card">
         <h2>Harmonic Mean</h2>
         <p>The harmonic mean is ideal for averaging rates or ratios—such as speeds or financial ratios—where smaller values have a stronger influence.</p>
-        <div class="example">Example: {2, 4, 8} → 3 / (1/2 + 1/4 + 1/8) ≈ 3.429</div>
+        <div class="example">
+            Example: \( H = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}} \) &nbsp;&nbsp; e.g. {2, 4, 8} → \( \frac{3}{1/2 + 1/4 + 1/8} \approx 3.429 \)
+        </div>
 
         <label>Enter positive values (comma separated):</label>
         <input id="harm-input" type="text" placeholder="2,4,8">
@@ -84,13 +89,55 @@
     <section id="quad" class="card">
         <h2>Quadratic Mean (RMS)</h2>
         <p>The quadratic mean, or root mean square, measures the magnitude of a set—ideal for values related to energy, power, or signal strength.</p>
-        <div class="example">Example: {2, 4, 9, 10, 12} → √[(Σx²)/n] ≈ 8.31</div>
+        <div class="example">
+            Example: \( Q = \sqrt{\frac{1}{n}\sum_{i=1}^{n} x_i^2} \) &nbsp;&nbsp; e.g. {2, 4, 9, 10, 12} → \( \sqrt{\frac{2^2 + 4^2 + 9^2 + 10^2 + 12^2}{5}} \approx 8.31 \)
+        </div>
 
         <label>Enter numeric values (comma separated):</label>
         <input id="quad-input" type="text" placeholder="2,4,9,10,12">
         <button onclick="calcQuadratic()">Compute</button>
         <button class="ghost" onclick="clearField('quad-input','quad-output')">Clear</button>
         <textarea id="quad-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="compare" class="card">
+        <h2>Choosing the Right Mean</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Application</th>
+                <th>Considerations</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Arithmetic</td>
+                <td>Additive data (e.g. salaries, scores)</td>
+                <td>Sensitive to outliers; most intuitive average</td>
+            </tr>
+            <tr>
+                <td>Geometric</td>
+                <td>Multiplicative data (e.g. growth rates, indices)</td>
+                <td>Only valid for positive values; dampens large variations</td>
+            </tr>
+            <tr>
+                <td>Weighted</td>
+                <td>Data with unequal importance or reliability</td>
+                <td>Weights must be meaningful and justified</td>
+            </tr>
+            <tr>
+                <td>Harmonic</td>
+                <td>Rates and ratios (e.g. speed, precision, financial returns)</td>
+                <td>Gives more weight to smaller values; inappropriate for zero or negative data</td>
+            </tr>
+            <tr>
+                <td>Quadratic</td>
+                <td>Physical magnitudes and signal processing (e.g. voltage, error size)</td>
+                <td>Emphasizes larger deviations; always ≥ arithmetic mean</td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 
 </main>
