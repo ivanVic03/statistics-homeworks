@@ -31,6 +31,7 @@ function addNumber(type) {
             meanChart.data.datasets[0].data.push(meanData.mean.toFixed(3));
             meanChart.update();
         }
+        document.getElementById('meanInput').value = '';
     }
     else if(type === 'variance') {
         const input = parseFloat(document.getElementById('varInput').value);
@@ -47,9 +48,8 @@ function addNumber(type) {
             varChart.data.datasets[0].data.push(variance.toFixed(3));
             varChart.update();
         }
+        document.getElementById('varInput').value = '';
     }
-    document.getElementById('meanInput').value = '';
-    document.getElementById('varInput').value = '';
 }
 
 function resetData(type) {
