@@ -17,19 +17,22 @@ let varChart = varChartCtx ? new Chart(varChartCtx, {
 }) : null;
 
 function addNumber(type) {
+    if (type === 'mean' && !meanChart) return;
+    if (type === 'variance' && !varChart) return;
     if(type === 'mean') {
         const input = parseFloat(document.getElementById('meanInput').value);
         if(isNaN(input)) return;
         meanData.count += 1;
         meanData.mean += (input - meanData.mean) / meanData.count;
-        document.getElementById('meanOutput').textContent = meanData.mean.toFixed(3);
+        document.getElementById('meanOutput').textContent = meanData.mean.toFixed(2);
 
         if(meanChart) {
             meanChart.data.labels.push(meanData.count);
             meanChart.data.datasets[0].data.push(meanData.mean.toFixed(3));
             meanChart.update();
         }
-    } else if(type === 'variance') {
+    }
+    else if(type === 'variance') {
         const input = parseFloat(document.getElementById('varInput').value);
         if(isNaN(input)) return;
         varData.count += 1;
@@ -37,7 +40,7 @@ function addNumber(type) {
         varData.mean += delta / varData.count;
         varData.M2 += delta * (input - varData.mean);
         let variance = varData.M2 / varData.count;
-        document.getElementById('varOutput').textContent = variance.toFixed(3);
+        document.getElementById('varOutput').textContent = variance.toFixed(2);
 
         if(varChart) {
             varChart.data.labels.push(varData.count);
@@ -45,6 +48,8 @@ function addNumber(type) {
             varChart.update();
         }
     }
+    document.getElementById('meanInput').value = '';
+    document.getElementById('varInput').value = '';
 }
 
 function resetData(type) {
