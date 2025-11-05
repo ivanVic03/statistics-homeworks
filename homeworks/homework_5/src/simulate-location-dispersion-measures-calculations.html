@@ -140,7 +140,7 @@
         <textarea id="mode-output" class="output" readonly></textarea>
     </section>
 
-    <section id="var-rec" class="card">
+    <section id="var" class="card">
         <h2>Variance Recurrence Formula</h2>
         <p>This module lets you explore how variance can be updated efficiently when new data are introduced.</p>
         <div class="example">
@@ -150,10 +150,10 @@
             \( s_6^2 = \frac{4(4)}{5} + \frac{(14 - 10)^2}{6} = 6.13 \)
         </div>
         <label>Enter variance, mean, sample size, and new value:</label>
-        <input id="varrec-input" type="text" placeholder="4,10,5,14">
+        <input id="var-input" type="text" placeholder="4,10,5,14">
         <button onclick="calcVariance()">Compute</button>
-        <button class="ghost" onclick="clearField('varrec-input', 'varrec-output')">Clear</button>
-        <textarea id="varrec-output" class="output" readonly></textarea>
+        <button class="ghost" onclick="clearField('var-input', 'var-output')">Clear</button>
+        <textarea id="var-output" class="output" readonly></textarea>
     </section>
 
     <section id="stddev" class="card">
