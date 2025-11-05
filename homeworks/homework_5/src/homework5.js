@@ -127,6 +127,62 @@ function calcQuadratic() {
         `Quadratic Mean (RMS) = ${rms}`;
 }
 
+function calcMedian() {
+    let input = document.getElementById("median-input").value.trim();
+    if (!input) return;
+    let values = input.split(",").map(Number).sort((a, b) => a - b);
+    let n = values.length;
+    let median = (n % 2 === 0)
+        ? (values[n / 2 - 1] + values[n / 2]) / 2
+        : values[(n - 1) / 2];
+    document.getElementById("median-output").value = `Median = ${median.toFixed(3)}`;
+}
+
+function calcMode() {
+    let input = document.getElementById("mode-input").value.trim();
+    if (!input) return;
+    let values = input.split(",").map(Number);
+    let freq = {};
+    values.forEach(v => freq[v] = (freq[v] || 0) + 1);
+    let maxFreq = Math.max(...Object.values(freq));
+    let modes = Object.keys(freq).filter(k => freq[k] === maxFreq);
+    document.getElementById("mode-output").value =
+        (modes.length > 1)
+            ? `Multimodal: ${modes.join(", ")}`
+            : `Mode = ${modes[0]}`;
+}
+
+function calcStdDev() {
+    let input = document.getElementById("stddev-input").value.trim();
+    if (!input) return;
+    let values = input.split(",").map(Number);
+    let n = values.length;
+    let mean = values.reduce((a, b) => a + b, 0) / n;
+    let variance = values.reduce((sum, x) => sum + (x - mean) ** 2, 0) / n;
+    let stddev = Math.sqrt(variance);
+    document.getElementById("stddev-output").value = `s = ${stddev.toFixed(3)}`;
+}
+
+function calcIQR() {
+    let input = document.getElementById("iqr-input").value.trim();
+    if (!input) return;
+    let values = input.split(",").map(Number).sort((a, b) => a - b);
+    let n = values.length;
+    let q1 = medianOf(values.slice(0, Math.floor(n / 2)));
+    let q3 = medianOf(values.slice(Math.ceil(n / 2)));
+    let iqr = q3 - q1;
+    document.getElementById("iqr-output").value =
+        `Q1 = ${q1.toFixed(3)}, Q3 = ${q3.toFixed(3)}, IQR = ${iqr.toFixed(3)}`;
+}
+
+function medianOf(arr) {
+    let n = arr.length;
+    return (n % 2 === 0)
+        ? (arr[n / 2 - 1] + arr[n / 2]) / 2
+        : arr[(n - 1) / 2];
+}
+
+
 
 window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input, textarea').forEach(el => {

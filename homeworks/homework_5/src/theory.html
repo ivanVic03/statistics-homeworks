@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>What means are and what are their usages?</title>
+    <title>The measures of location and dispersion</title>
     <meta name="description" content="Theoretical module: an in-depth blog-style exposition on arithmetic, geometric, and weighted means.">
     <link rel="stylesheet" href="homework5.css">
     <script>
@@ -22,11 +22,8 @@
 </head>
 <body>
 <main>
-    <header>
-        <h1>What means are and what are their usages?</h1>
-    </header>
-
     <article class="card">
+        <h1>Measures of location and central tendency</h1>
         <section>
             <h2>Introduction: Understanding the "Average"</h2>
             <p>In the world of data analysis, the "average" or arithmetic mean, is often the first tool we reach for. It serves as an intuitive starting point in descriptive statistics, providing a quick measure of a dataset's central tendency. This initial step is an essential part of interpreting data in any field, from finance to healthcare.</p>
@@ -117,20 +114,95 @@
         </section>
 
         <section>
-            <h2>Conclusion</h2>
+            <h2>The Median</h2>
+            <p>The <strong>median</strong> represents the middle value in an ordered dataset. It divides the data into two equal halves: half the values are below and half are above the median.</p>
+            <p>Steps to find it:</p>
+            <ul>
+                <li>Order the data from smallest to largest.</li>
+                <li>If \( n \) is odd, the median is the central value.</li>
+                <li>If \( n \) is even, the median is the mean of the two central values.</li>
+            </ul>
+            <div class="example">
+                Example: For {1, 2, 4, 5, 8}, the median is 4.
+                If we replace 8 with 800 → {1, 2, 4, 5, 800}, the median stays 4 — showing its robustness to outliers.
+            </div>
+            <p>The median is particularly effective for skewed datasets or when extreme values may distort the mean.</p>
+        </section>
+
+        <section>
+            <h2>The Mode</h2>
+            <p>The <strong>mode</strong> is the most frequently occurring value in a dataset. It is especially useful for categorical data, identifying the most common item or category.</p>
+            <p>A dataset may be:</p>
+            <ul>
+                <li><strong>Unimodal</strong> — one mode.</li>
+                <li><strong>Bimodal</strong> or <strong>multimodal</strong> — multiple modes.</li>
+                <li><strong>No mode</strong> — if all values occur only once.</li>
+            </ul>
+            <div class="example">
+                Example: {0, 1, 1, 1, 2, 2, 2, 3} → both 1 and 2 appear most frequently, so the dataset is bimodal.
+            </div>
+        </section>
+    </article>
+    <article class="card">
+        <h1>The Measure of dispersion</h1>
+        <section>
+            <h2>Variance</h2>
+            <p><strong>Variance</strong> measures how much the data points differ from the mean, quantifying total spread.</p>
+            <p>It is calculated as the average of squared deviations from the mean:</p>
+            <p>\[ \sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} \quad \text{(Population)} \]</p>
+            <p>\[ s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1} \quad \text{(Sample, with Bessel's correction)} \]</p>
+            <div class="example">
+                Example: For [5, 7, 9, 10, 14, 15], the mean is 10,
+                so variance \( = \frac{(5-10)^2 + \dots + (15-10)^2}{6} = 12.67 \).
+            </div>
+            <p>Variance is sensitive to outliers but mathematically fundamental in statistical modeling and probability theory.</p>
+        </section>
+
+        <section>
+            <h2>Standard Deviation</h2>
+            <p>The <strong>standard deviation</strong> is the square root of the variance, providing a measure of spread in the same units as the data.</p>
+            <p>\[ \sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{n}} \quad \text{(Population)} \]</p>
+            <p>\[ s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}} \quad \text{(Sample)} \]</p>
+            <p>A small standard deviation means the data are clustered around the mean; a large one means they are more dispersed.</p>
+            <div class="example">
+                Example: For exam scores with low standard deviation, most students performed similarly;
+                a high one indicates great variation in performance.
+            </div>
+        </section>
+
+        <section>
+            <h2>Interquartile Range (IQR)</h2>
+            <p>The <strong>Interquartile Range (IQR)</strong> measures the spread of the middle 50% of a dataset, making it resistant to extreme outliers.</p>
+            <p>It is defined as:</p>
+            <p>\[ \text{IQR} = Q_3 - Q_1 \]</p>
+            <p>where \( Q_1 \) is the 25th percentile and \( Q_3 \) is the 75th percentile.</p>
+            <div class="example">
+                Example: For heights {1, 4, 8, 11, 13, 17, 19, 19, 20, 23, 24, 25, 28, 29, 31, 32},
+                \( Q_1 = 12, \, Q_3 = 26.5 \Rightarrow \text{IQR} = 14.5 \).
+            </div>
+            <p>The IQR remains nearly unchanged even if extreme outliers are added, making it an excellent measure of robust spread.</p>
+        </section>
+    </article>
+
+    <article class="card">
+        <h1>Conclusion</h1>
+        <section>
             <p>
-                Moving beyond a one-size-fits-all average is essential. Each mean—arithmetic, geometric, harmonic, quadratic, and weighted—serves a distinct analytical purpose. Far from being mere mathematical curiosities, they are precision instruments that reveal different aspects of the data’s structure.
+                Moving beyond a one-size-fits-all average is essential. Each mean—arithmetic, geometric, harmonic, quadratic, and weighted—serves a distinct analytical purpose. Far from being mere mathematical curiosities, they are precision instruments that reveal different aspects of a dataset’s structure and behavior.
             </p>
             <p>
                 The <strong>Harmonic Mean</strong> excels in averaging rates and ratios, ensuring fairness where smaller values dominate influence, while the <strong>Quadratic Mean (RMS)</strong> captures the true magnitude of varying quantities, indispensable in physics, engineering, and performance evaluation.
             </p>
             <p>
-                Mastering when and why to apply each mean distinguishes technical competence from analytical insight. Choosing the right mean does not simply yield a number—it determines whether our conclusions are mathematically sound and faithfully represent the reality our data describes.
+                Beyond means, measures of <strong>central tendency</strong> and <strong>dispersion</strong>—such as the <strong>Median</strong>, <strong>Mode</strong>, <strong>Standard Deviation</strong>, and <strong>Interquartile Range (IQR)</strong>—complete the picture.
+                The Median offers robustness against outliers, the Mode highlights recurring patterns, the Standard Deviation quantifies variability, and the IQR isolates the stable core of a distribution.
+            </p>
+            <p>
+                Mastering when and why to apply each measure distinguishes technical competence from analytical insight. Selecting the appropriate statistic does not simply yield a number—it determines whether our conclusions are mathematically sound and truly reflect the phenomena our data represents.
             </p>
         </section>
-
-
     </article>
+
 
 </main>
 </body>

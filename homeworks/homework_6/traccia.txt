@@ -1,3 +1,10 @@
-Derive the recurrence formulas for mean and variance and write the corresponding example code in the simpliest way possible.
+Analytical Task
+Derive the simplest proofs for the recurrence relationships of the arithmetic mean and variance.
+Implement and test the corresponding online algorithms, which update statistics incrementally as new data becomes available.
+Traditional "batch" algorithms should not be used, as they are computationally less efficient, more memory-intensive, and prone
+to numerical instability (e.g., error propagation, catastrophic cancellation, and overflow).
 
-In the end, discuss the advantages of the online algorithms in computational terms.
+Optional Discussion
+From a numerical analysis and computational perspective, discuss the advantages of online algorithms in terms of numerical stability,
+error propagation, catastrophic cancellation, and overflow management. You may also comment on their computational efficiency, robustness,
+and scalability, comparing them with traditional batch algorithms.

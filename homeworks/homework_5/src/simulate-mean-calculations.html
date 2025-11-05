@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simulate means calculations!</title>
+    <title>Simulate measures of location and dispersion calculations!</title>
     <link rel="stylesheet" href="homework5.css">
     <script src="homework5.js" defer></script>
     <script>
@@ -21,13 +21,18 @@
 </head>
 <body>
 <header>
-    <h1>Simulate means calculations!</h1>
+    <h1>Simulate measures of location and dispersion calculations!</h1>
     <nav>
         <a href="#arith">Arithmetic</a>
         <a href="#geom">Geometric</a>
         <a href="#weighted">Weighted</a>
         <a href="#harm">Harmonic</a>
         <a href="#quad">Quadratic</a>
+        <a href="#median">Median</a>
+        <a href="#mode">Mode</a>
+        <a href="#var-rec">Variance</a>
+        <a href="#stddev">Standard Deviation</a>
+        <a href="#iqr">Interquantile Ranges</a>
         <a href="#compare">Compare</a>
     </nav>
 </header>
@@ -99,6 +104,88 @@
         <button class="ghost" onclick="clearField('quad-input','quad-output')">Clear</button>
         <textarea id="quad-output" class="output" readonly></textarea>
     </section>
+
+    <section id="median" class="card">
+        <h2>Median</h2>
+        <p>The median represents the middle value of ordered data, dividing the dataset into two equal halves.</p>
+        <div class="example">
+            Formula (conceptually): sort values \( x_1, x_2, \ldots, x_n \), then
+            \[
+            \text{Median} =
+            \begin{cases}
+            x_{\frac{n+1}{2}}, & n \text{ odd} \\
+            \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2}, & n \text{ even}
+            \end{cases}
+            \]
+            <br>
+            Example: {3, 7, 2, 9, 5} → {2, 3, 5, 7, 9} → median = 5
+        </div>
+        <label>Enter numeric values (comma separated):</label>
+        <input id="median-input" type="text" placeholder="3,7,2,9,5">
+        <button onclick="calcMedian()">Compute</button>
+        <button class="ghost" onclick="clearField('median-input', 'median-output')">Clear</button>
+        <textarea id="median-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="mode" class="card">
+        <h2>Mode</h2>
+        <p>The mode is the most frequent value in a dataset. Some distributions may be bimodal or multimodal.</p>
+        <div class="example">
+            Example: {4, 2, 4, 3, 4, 2} → mode = 4
+        </div>
+        <label>Enter numeric values (comma separated):</label>
+        <input id="mode-input" type="text" placeholder="4,2,4,3,4,2">
+        <button onclick="calcMode()">Compute</button>
+        <button class="ghost" onclick="clearField('mode-input', 'mode-output')">Clear</button>
+        <textarea id="mode-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="var-rec" class="card">
+        <h2>Variance Recurrence Formula</h2>
+        <p>This module lets you explore how variance can be updated efficiently when new data are introduced.</p>
+        <div class="example">
+            Formula: \( s_{n+1}^2 = \frac{n-1}{n} s_n^2 + \frac{(x_{n+1} - \bar{x}_n)^2}{n+1} \)
+            <br>
+            Example: if \( s_5^2 = 4 \), \( \bar{x}_5 = 10 \), and \( x_6 = 14 \), then
+            \( s_6^2 = \frac{4(4)}{5} + \frac{(14 - 10)^2}{6} = 6.13 \)
+        </div>
+        <label>Enter variance, mean, sample size, and new value:</label>
+        <input id="varrec-input" type="text" placeholder="4,10,5,14">
+        <button onclick="calcVarianceRecurrence()">Compute</button>
+        <button class="ghost" onclick="clearField('varrec-input', 'varrec-output')">Clear</button>
+        <textarea id="varrec-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="stddev" class="card">
+        <h2>Standard Deviation</h2>
+        <p>The standard deviation measures how spread out values are around the mean.</p>
+        <div class="example">
+            Formula: \( s = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2} \)
+            <br>
+            Example: {2, 4, 4, 4, 5, 5, 7, 9} → \( s = 2 \)
+        </div>
+        <label>Enter numeric values (comma separated):</label>
+        <input id="stddev-input" type="text" placeholder="2,4,4,4,5,5,7,9">
+        <button onclick="calcStdDev()">Compute</button>
+        <button class="ghost" onclick="clearField('stddev-input', 'stddev-output')">Clear</button>
+        <textarea id="stddev-output" class="output" readonly></textarea>
+    </section>
+
+    <section id="iqr" class="card">
+        <h2>Interquartile Range (IQR)</h2>
+        <p>The IQR measures the spread of the middle 50% of the data, resistant to outliers.</p>
+        <div class="example">
+            Formula: \( IQR = Q_3 - Q_1 \)
+            <br>
+            Example: {1, 3, 5, 7, 9, 11, 13} → \( Q_1 = 3.5, Q_3 = 10 \Rightarrow IQR = 6.5 \)
+        </div>
+        <label>Enter numeric values (comma separated):</label>
+        <input id="iqr-input" type="text" placeholder="1,3,5,7,9,11,13">
+        <button onclick="calcIQR()">Compute</button>
+        <button class="ghost" onclick="clearField('iqr-input', 'iqr-output')">Clear</button>
+        <textarea id="iqr-output" class="output" readonly></textarea>
+    </section>
+
 
     <section id="compare" class="card">
         <h2>Choosing the Right Mean</h2>

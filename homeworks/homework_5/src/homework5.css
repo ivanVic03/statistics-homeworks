@@ -137,12 +137,16 @@ input[type="text"], input[type="number"], textarea {
     resize: none;
 }
 
-#arith-output, #weighted-output, #harm-output, #quad-output {
+#arith-output, #weighted-output, #harm-output, #quad-output, #varrec-output, #median-output  {
     min-height: 4rem;
 }
 
 #geom-output {
     min-height: 2.5rem;
+}
+
+#iqr-output, #stddev-output, #mode-output {
+    min-height: 1rem;
 }
 
 button {
@@ -247,5 +251,7 @@ h1 {
     color: teal;
     font-size: 2rem;
     margin-bottom: 2rem;
+    align-content: center;
+    text-align: center;
 }
 

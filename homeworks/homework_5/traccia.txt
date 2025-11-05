@@ -1,6 +1,9 @@
-Find out the various average (measure of location) that have been proposed and in what circumstances they are useful
+Research Task
+Conduct research on the concepts of location and dispersion measures. Identify the most common types of measures of location and central tendency
+(e.g., arithmetic mean, median, mode) and measures of dispersion (e.g., variance, standard deviation, interquartile range).
+Discuss their different uses, advantages, and limitations in various practical and statistical applications.
 
-Arithmetic average: https://www.datacamp.com/tutorial/arithmetic-mean
-Weighted average: https://www.investopedia.com/terms/w/weightedaverage.asp
-
-Geometric average: https://corporatefinanceinstitute.com/resources/data-science/what-is-geometric-mean/
+Median, mode: https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean-median-basics/a/mean-median-and-mode-review
+Variance: https://www.geeksforgeeks.org/maths/variance/
+Standard derivation: https://statistics.laerd.com/statistical-guides/measures-of-spread-standard-deviation.php
+Interquantile ranges: https://www.statology.org/how-to-interpret-interquartile-range/
