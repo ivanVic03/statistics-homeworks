@@ -137,31 +137,29 @@
         </section>
     </article>
     <article class="card">
-        <h1>The Measure of dispersion</h1>
+        <h1>The Measure of Dispersion</h1>
+
         <section>
             <h2>Variance</h2>
-            <p><strong>Variance</strong> measures how much the data points differ from the mean, quantifying total spread.</p>
-            <p>It is calculated as the average of squared deviations from the mean:</p>
+            <p><strong>Variance</strong> measures how much the data points differ from the mean, quantifying total spread. It is calculated as the average of squared deviations from the mean:</p>
             <p>\[ \sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} \quad \text{(Population)} \]</p>
             <p>\[ s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1} \quad \text{(Sample, with Bessel's correction)} \]</p>
-            <p>Variance is sensitive to outliers but mathematically fundamental in statistical modeling and probability theory.</p>
+            <p>Variance is sensitive to outliers but mathematically fundamental in statistical modeling and probability theory. Its practical applications include measuring volatility of stock returns, monitoring process consistency in quality control, and assessing model error spread in machine learning. Advantages of variance include the use of all data points, mathematical tractability, and its role as the basis for standard deviation and other analyses. However, variance has limitations: it is sensitive to extreme values and outliers, and its units are squared, which can be unintuitive.</p>
         </section>
 
         <section>
             <h2>Standard Deviation</h2>
-            <p>The <strong>standard deviation</strong> is the square root of the variance, providing a measure of spread in the same units as the data.</p>
+            <p>The <strong>standard deviation</strong> is the square root of the variance, providing a measure of spread in the same units as the data:</p>
             <p>\[ \sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{n}} \quad \text{(Population)} \]</p>
             <p>\[ s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}} \quad \text{(Sample)} \]</p>
-            <p>A small standard deviation means the data are clustered around the mean; a large one means they are more dispersed.</p>
+            <p>A small standard deviation means the data are clustered around the mean; a large one means they are more dispersed. Standard deviation is widely used to evaluate risk in investments, measure consistency in test scores, and determine reliability of experimental data. Its advantages are intuitive interpretation in the same units as the data and direct relation to variance. Its limitations include sensitivity to outliers and the need for relatively symmetric distributions to make the measure meaningful.</p>
         </section>
 
         <section>
             <h2>Interquartile Range (IQR)</h2>
-            <p>The <strong>Interquartile Range (IQR)</strong> measures the spread of the middle 50% of a dataset, making it resistant to extreme outliers.</p>
-            <p>It is defined as:</p>
+            <p>The <strong>Interquartile Range (IQR)</strong> measures the spread of the middle 50% of a dataset, making it resistant to extreme outliers. It is defined as:</p>
             <p>\[ \text{IQR} = Q_3 - Q_1 \]</p>
-            <p>where \( Q_1 \) is the 25th percentile and \( Q_3 \) is the 75th percentile.</p>
-            <p>The IQR remains nearly unchanged even if extreme outliers are added, making it an excellent measure of robust spread.</p>
+            <p>where \( Q_1 \) is the 25th percentile and \( Q_3 \) is the 75th percentile. The IQR remains nearly unchanged even if extreme outliers are added, making it an excellent measure of robust spread. Applications include detecting outliers, summarizing income distributions, and comparing variability across groups where extreme values could distort other measures. Advantages include robustness to outliers, easy calculation, and intuitive interpretation. Limitations are that it ignores extreme values, does not use all data points, and is less sensitive to overall variability.</p>
         </section>
     </article>
 
