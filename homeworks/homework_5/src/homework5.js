@@ -138,6 +138,34 @@ function calcMedian() {
     document.getElementById("median-output").value = `Median = ${median.toFixed(3)}`;
 }
 
+function calcVariance() {
+    const raw = document.getElementById('var-input').value;
+    const vals = raw.split(/[,\\s]+/)
+        .map(s => Number(s.trim()))
+        .filter(x => Number.isFinite(x));
+    const out = document.getElementById('var-output');
+
+    if (vals.length === 0) {
+        out.value = "Please enter valid numeric values.";
+        return;
+    }
+
+    const n = vals.length;
+    const mean = vals.reduce((s, v) => s + v, 0) / n;
+    const sqDiff = vals.map(v => (v - mean) ** 2);
+    const variance = (sqDiff.reduce((s, v) => s + v, 0) / n).toFixed(3);
+    const stdDev = Math.sqrt(variance).toFixed(3);
+
+    out.value =
+        `Values: ${vals.join(', ')}\n` +
+        `n = ${n}\n` +
+        `Mean = ${mean.toFixed(3)}\n` +
+        `Sum of squared deviations = ${(sqDiff.reduce((s,v)=>s+v,0)).toFixed(3)}\n` +
+        `Variance = ${variance}\n` +
+        `Standard Deviation = ${stdDev}`;
+}
+
+
 function calcMode() {
     let input = document.getElementById("mode-input").value.trim();
     if (!input) return;
@@ -195,5 +223,5 @@ function showTheory() {
 }
 
 function showPractice() {
-    window.location.href = "simulate-mean-calculations.html";
+    window.location.href = "simulate-location-dispersion-measures-calculations.html";
 }
