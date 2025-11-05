@@ -25,10 +25,45 @@
 
     <main>
         <section>
-            <h2>Derivation</h2>
-            <p>The online formula for updating the mean when a new value \( x_n \) arrives:</p>
-            <p><strong>\[ \mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n} \]</strong></p>
-            <p>This formula is derived by rewriting the standard mean as a cumulative sum and updating it incrementally.</p>
+            <p>
+                Starting from the classical definition of the mean after <em>n</em> observations:
+            </p>
+            <p>
+                \[ \mu_n = \frac{1}{n}\sum_{i=1}^n x_i. \]
+            </p>
+
+            <p>
+                We can split the sum into the first <em>n-1</em> observations and the last one:
+            </p>
+            <p>
+                \[ \mu_n = \frac{1}{n}\left(\sum_{i=1}^{n-1} x_i + x_n\right). \]
+            </p>
+
+            <p>
+                Since \[ \mu_{n-1} = \frac{1}{n-1}\sum_{i=1}^{n-1} x_i, \] we can rewrite:
+            </p>
+            <p>
+                \[ \mu_n = \frac{1}{n}\big((n-1)\mu_{n-1} + x_n\big). \]
+            </p>
+
+            <p>
+                Simplifying, we obtain the online mean update:
+            </p>
+            <p>
+                \[ \mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n}. \]
+            </p>
+
+            <p>
+                This formula means that each new observation corrects the previous mean by a small amount proportional to the difference between the new value and the old mean.
+            </p>
+
+            <h3>Computational Advantages</h3>
+            <ul>
+                <li>Each update requires only the previous mean and count \(n\).</li>
+                <li>No need to recompute the sum of all past observations.</li>
+                <li>Memory usage is constant → O(1).</li>
+                <li>Efficient for streaming or continuously arriving data.</li>
+            </ul>
         </section>
 
         <section>

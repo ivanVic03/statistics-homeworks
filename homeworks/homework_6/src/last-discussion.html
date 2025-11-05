@@ -29,35 +29,85 @@
 <main>
     <section>
         <h2>What is an Online Algorithm?</h2>
-        <p>Online algorithms update statistics incrementally as each new observation arrives.
-            Instead of recalculating the mean or variance using all previous data points,
-            they adjust the current result based on the new value.</p>
+        <p>
+            Online algorithms update statistics incrementally as each new observation arrives.
+            Instead of recalculating the mean or variance from scratch, they adjust existing estimates
+            using simple update rules. This allows the algorithm to process data one point at a time,
+            making it ideal for real-time or continuously growing datasets.
+        </p>
     </section>
 
     <section>
-        <h2>Computational Efficiency</h2>
-        <p>With traditional (“batch”) formulas, every update requires scanning all data again,
-            which has a computational cost of \(O(n)\) for each step.
-            Online algorithms reduce this to \(O(1)\), since each update uses only the new value and
-            the previously computed statistics.</p>
-        <p>This makes them particularly useful when data arrive continuously,
-            as in data streams, or when the dataset is too large to fit into memory.</p>
+        <h2>Computational Efficiency and Scalability</h2>
+        <p>
+            Traditional (“batch”) formulas require summing over all data for each update,
+            which implies a computational cost of \(O(n)\) per step.
+            Online algorithms reduce this to \(O(1)\), since each update uses only the new value
+            and the previously computed statistics.
+        </p>
+        <p>
+            This efficiency makes them highly scalable for large datasets or streaming applications,
+            where reprocessing all data would be computationally infeasible.
+            Each update involves only a few arithmetic operations, maintaining constant-time performance
+            regardless of the dataset size.
+        </p>
     </section>
 
     <section>
-        <h2>Memory Efficiency</h2>
-        <p>In batch methods, all observations must be stored to recompute statistics.
-            Online algorithms, instead, store only a few running values (such as count, mean, and M₂ for variance),
-            keeping the memory usage constant regardless of dataset size.</p>
+        <h2>Numerical Stability and Error Propagation</h2>
+        <p>
+            In numerical analysis, repeated summations and subtractions in batch formulas
+            can accumulate rounding errors. This is especially problematic when numbers vary greatly in magnitude.
+            Online algorithms, such as Welford’s method for variance,
+            minimize these issues by updating only small differences
+            between the new observation and the current mean.
+        </p>
+        <p>
+            This approach reduces <em>error propagation</em> and avoids catastrophic cancellation,
+            which occurs when two nearly equal large numbers are subtracted, causing significant loss of precision.
+        </p>
+        <p>
+            Moreover, because only incremental quantities are stored and updated,
+            online methods are less prone to overflow or underflow
+            when handling large datasets or extreme values.
+        </p>
     </section>
 
     <section>
-        <h2>Summary</h2>
-        <p>Online algorithms provide an elegant and efficient way to handle growing or streaming data:
-            they require less memory, are faster to update, and reduce numerical errors caused by repeated summations.
-            These advantages make them essential in real-time analytics and large-scale statistical computation.</p>
+        <h2>Robustness and Memory Efficiency</h2>
+        <p>
+            Online algorithms store only a few running values — for example, the count \(n\),
+            the current mean, and \(M_2\) for variance.
+            As a result, memory usage remains constant, or \(O(1)\),
+            while batch methods must keep the entire dataset in memory.
+        </p>
+        <p>
+            This makes online approaches more robust and adaptable to real-time computation,
+            sensor data, or streaming analytics, where data may be unbounded or incomplete.
+        </p>
     </section>
+
+    <section>
+        <h2>Summary and Comparison</h2>
+        <p>
+            Compared to traditional batch algorithms, online methods offer:
+        </p>
+        <ul>
+            <li>Constant-time updates — \(O(1)\) complexity per sample.</li>
+            <li>Constant memory usage — independent of dataset size.</li>
+            <li>Reduced numerical errors and improved stability.</li>
+            <li>Resistance to overflow and cancellation effects.</li>
+            <li>Scalability and suitability for real-time data streams.</li>
+        </ul>
+        <p>
+            In conclusion, online algorithms combine computational efficiency with numerical robustness,
+            offering a reliable and scalable alternative to batch computations,
+            particularly in modern applications involving continuous or massive data flows.
+        </p>
+    </section>
+
 </main>
+
 
 </body>
 </html>

@@ -25,11 +25,50 @@
 
     <main>
         <section>
-            <h2>Derivation</h2>
-            <p>Using Welford's algorithm, the variance is updated as:</p>
-            <p><strong>\[ M_2 = M_2 + (x_n - \mu_{n-1}) \cdot (x_n - \mu_n) \]</strong></p>
-            <p>\( \text{Variance} \, \sigma^2 = \frac{M_2}{n} \)</p>
-            <p>This approach avoids storing all past data and reduces numerical errors.</p>
+            <p>
+                Starting from the population variance definition after <em>n</em> observations:
+            </p>
+            <p>
+                \[ \sigma_n^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \mu_n)^2, \qquad \text{where } \mu_n = \frac{1}{n}\sum_{i=1}^n x_i. \]
+            </p>
+
+            <p>
+                Define the running sum of squared deviations:
+            </p>
+            <p>
+                \[ M_{2,n} \equiv \sum_{i=1}^n (x_i - \mu_n)^2, \]
+                so that \[ \sigma_n^2 = \frac{M_{2,n}}{n}. \]
+            </p>
+
+            <p>
+                To update incrementally when a new observation \(x_n\) arrives, we write:
+            </p>
+            <p>
+                \[ M_{2,n} = M_{2,n-1} + (x_n - \mu_{n-1})(x_n - \mu_n). \]
+            </p>
+
+            <p>
+                The mean is updated at the same time as:
+            </p>
+            <p>
+                \[ \mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n}. \]
+            </p>
+
+            <p>
+                Finally, the variance can be recovered as:
+            </p>
+            <p>
+                \[ \text{Population variance: } \sigma_n^2 = \frac{M_{2,n}}{n}, \qquad
+                \text{Sample variance: } s_n^2 = \frac{M_{2,n}}{n-1},\ n>1. \]
+            </p>
+
+            <h3>Computational Advantages</h3>
+            <ul>
+                <li>Updates require only three scalars: \(n\), mean, and \(M_2\).</li>
+                <li>Constant-time updates → O(1) per observation.</li>
+                <li>Constant memory — past data are not stored.</li>
+                <li>Numerically stable; reduces round-off errors.</li>
+            </ul>
         </section>
 
         <section>
