@@ -122,10 +122,6 @@
                 <li>If \( n \) is odd, the median is the central value.</li>
                 <li>If \( n \) is even, the median is the mean of the two central values.</li>
             </ul>
-            <div class="example">
-                Example: For {1, 2, 4, 5, 8}, the median is 4.
-                If we replace 8 with 800 → {1, 2, 4, 5, 800}, the median stays 4 — showing its robustness to outliers.
-            </div>
             <p>The median is particularly effective for skewed datasets or when extreme values may distort the mean.</p>
         </section>
 
@@ -138,9 +134,6 @@
                 <li><strong>Bimodal</strong> or <strong>multimodal</strong> — multiple modes.</li>
                 <li><strong>No mode</strong> — if all values occur only once.</li>
             </ul>
-            <div class="example">
-                Example: {0, 1, 1, 1, 2, 2, 2, 3} → both 1 and 2 appear most frequently, so the dataset is bimodal.
-            </div>
         </section>
     </article>
     <article class="card">
@@ -151,10 +144,6 @@
             <p>It is calculated as the average of squared deviations from the mean:</p>
             <p>\[ \sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} \quad \text{(Population)} \]</p>
             <p>\[ s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1} \quad \text{(Sample, with Bessel's correction)} \]</p>
-            <div class="example">
-                Example: For [5, 7, 9, 10, 14, 15], the mean is 10,
-                so variance \( = \frac{(5-10)^2 + \dots + (15-10)^2}{6} = 12.67 \).
-            </div>
             <p>Variance is sensitive to outliers but mathematically fundamental in statistical modeling and probability theory.</p>
         </section>
 
@@ -164,10 +153,6 @@
             <p>\[ \sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{n}} \quad \text{(Population)} \]</p>
             <p>\[ s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}} \quad \text{(Sample)} \]</p>
             <p>A small standard deviation means the data are clustered around the mean; a large one means they are more dispersed.</p>
-            <div class="example">
-                Example: For exam scores with low standard deviation, most students performed similarly;
-                a high one indicates great variation in performance.
-            </div>
         </section>
 
         <section>
@@ -176,10 +161,6 @@
             <p>It is defined as:</p>
             <p>\[ \text{IQR} = Q_3 - Q_1 \]</p>
             <p>where \( Q_1 \) is the 25th percentile and \( Q_3 \) is the 75th percentile.</p>
-            <div class="example">
-                Example: For heights {1, 4, 8, 11, 13, 17, 19, 19, 20, 23, 24, 25, 28, 29, 31, 32},
-                \( Q_1 = 12, \, Q_3 = 26.5 \Rightarrow \text{IQR} = 14.5 \).
-            </div>
             <p>The IQR remains nearly unchanged even if extreme outliers are added, making it an excellent measure of robust spread.</p>
         </section>
     </article>
