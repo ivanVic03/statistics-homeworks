@@ -1,0 +1,4 @@
+Given a server that receives weekly security updates for n weeks and m attackers who can breach the system with probability p,
+generate random trajectories of the servers cumulative scores, assign +1 if the server remains secure in a week and -1 if it is breached,
+draw a parallel with a random walk and count how many trajectories reach each possible total score in your simulation and how those figures
+converge to the binomial distribution as n and m diverge.
