@@ -31,14 +31,24 @@
         <input type="number" id="probability" min="0" max="1" step="0.01">
         <button id="runSimulation" onclick="runSimulation()">Run Simulation</button>
     </div>
+    <div id="chartBlock">
+        <span id="trajectoryInfo"></span>
+        <canvas id="mainChart" width="1000" height="500"></canvas>
 
-    <canvas id="mainChart"></canvas>
-    <div id="controls" style="text-align:center; margin-top: 1em;">
-        <button id="prevBtn" onclick="prevTrajectory()">Previous</button>
-        <button id="nextBtn" onclick="nextTrajectory()">Next</button>
-        <button id="autoBtn" onclick="showTrajectoryCarousel()">Automatic scroll</button>
+        <div id="controls" style="text-align:center; margin-top: 1em;">
+            <button id="prevBtn" onclick="prevTrajectory()">Previous</button>
+            <button id="nextBtn" onclick="nextTrajectory()">Next</button>
+            <button id="autoBtn" onclick="toggleAutoScroll()">Automatic scroll</button>
+            <button id="allTrajectoriesBtn" onclick="drawAllTrajectories()">View all trajectories together</button>
+        </div>
+        <div style="text-align:center; margin-top: 1em;">
+            <button id="histogramBtn" onclick="drawHistogram()">Show Histogram</button>
+        </div>
     </div>
-
+    <div id="histogramBlock">
+        <h2 style="text-align:center; margin-top: 1em;">Distribution of Final Scores</h2>
+        <canvas id="finalScoreChart" width="800" height="500"></canvas>
+    </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

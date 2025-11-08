@@ -2,7 +2,6 @@ let p = 0;
 let attackers = 0;
 let weeks = 0;
 let trajectories = [];
-let finalFreqs = [];
 let trajectoryChart = null;
 let histogramChart = null;
 let currentIndex = 0;
@@ -11,11 +10,10 @@ let autoscroll = false;
 let autoscrollInterval = null;
 
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('p').value = '';
+    document.getElementById('probability').value = '';
     document.getElementById('attackers').value = '';
     document.getElementById('weeks').value = '';
     trajectories = [];
-    finalFreqs = [];
     currentIndex = 0;
     trajectoryChart = null;
     histogramChart = null;
@@ -23,9 +21,8 @@ window.addEventListener('DOMContentLoaded', () => {
     autoscrollInterval = null;
 })
 
-function weeklyStep(p, m) {
-    const pWeek = 1 - Math.pow(1-p, m);
-    return Math.random() < pWeek ? -1: +1;
+function weeklyStep(p) {
+    return Math.random() < p ? -1: +1;
 }
 
 function generateTrajectories(weeks, attackers, p) {
@@ -44,7 +41,8 @@ function generateTrajectories(weeks, attackers, p) {
     return results;
 }
 
-function drawSingleTrajectory(path, index, total) {
+function drawSingleTrajectory(index) {
+    const path = trajectories[index];
     const ctx = document.getElementById('mainChart').getContext('2d');
 
     if (trajectoryChart) {
@@ -57,11 +55,12 @@ function drawSingleTrajectory(path, index, total) {
             labels: Array.from({length: path.length}, (_, i) => i),
             datasets: [
                 {
-                    label: `Trajectory ${index + 1} of ${total}`,
+                    label: `Attack simulation`,
                     data: path,
                     fill: false,
                     borderColor: 'steelblue',
                     tension: 0.2,
+                    pointRadius: 0,
                 },
             ],
         },
@@ -70,26 +69,10 @@ function drawSingleTrajectory(path, index, total) {
                 animation: false,
                 scales: {
                     x: { title: {display: true, text: "Week"}},
-                    y: { title: {display: true, text: "Score"}},
+                    y: { title: {display: true, text: "Score"}, beginAtZero: true},
                 },
             },
     });
-}
-
-function showTrajectoryCarousel() {
-    const total = trajectories.length;
-    drawSingleTrajectory(trajectories[currentIndex], currentIndex, total);
-
-    const interval = setInterval(() => {
-        currentIndex += 1;
-        if (currentIndex >= total) {
-            clearInterval(interval);
-            drawAllTrajectories();
-        }
-        else {
-            drawSingleTrajectory(trajectories[currentIndex], currentIndex, total);
-        }
-    }, 1500)
 }
 
 function drawAllTrajectories() {
@@ -99,7 +82,6 @@ function drawAllTrajectories() {
     }
 
     const datasets = trajectories.map((path, i)=> ({
-        label: `Trajectory ${i + 1}`,
         data: path,
         fill: false,
         borderColor: 'lightgray',
@@ -107,20 +89,26 @@ function drawAllTrajectories() {
         borderWidth: 1,
     }));
 
-    if (datasets[0]) {
-        datasets[0].borderColor = "steelblue";
+    for (let i = 0; i < datasets.length; i++) {
+        if (i % 2 === 0) {
+            datasets[i].borderColor = 'red';
+        }
+        else {
+            datasets[i].borderColor = 'black';
+        }
     }
 
     trajectoryChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: Array.from({length: trajectories.length}, (_, i) => i),
+            labels: Array.from({length: trajectories[0].length}, (_, i) => i),
             datasets,
         },
         options: {
             responsive: true,
             animation: false,
             plugins: {
+                legend: {display: false},
                 title: {
                     display: true,
                     text: "All Trajectories - Random Walk of Server Security",
@@ -134,17 +122,129 @@ function drawAllTrajectories() {
     });
 }
 
-function prevTrajectory() {
+function nextTrajectory() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
+    currentIndex = (currentIndex + 1 + trajectories.length) % trajectories.length;
+    const total = trajectories.length;
+    if (currentIndex > total) {
+        drawAllTrajectories()
+    }
+    else {
+        drawSingleTrajectory(currentIndex);
+        document.getElementById('trajectoryInfo').textContent = `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
+    }
+}
 
+function prevTrajectory() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
+    currentIndex = (currentIndex - 1 + trajectories.length) % trajectories.length;
+    const total = trajectories.length;
+    if (currentIndex > total) {
+        drawAllTrajectories()
+    }
+    else {
+        drawSingleTrajectory(currentIndex);
+        document.getElementById('trajectoryInfo').textContent = `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
+    }
+}
+
+function toggleAutoScroll() {
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
+    const btn = document.getElementById('autoBtn');
+    if (!autoscroll) {
+        autoscroll = true;
+        btn.textContent = "Stop scrolling";
+        autoscrollInterval = setInterval(() => {
+            nextTrajectory();
+        }, 1500)
+    }
+    else {
+        autoscroll = false;
+        btn.textContent = "Automatic scroll";
+        clearInterval(autoscrollInterval);
+    }
+}
+
+function drawHistogram() {
+    document.getElementById('histogramBlock').classList.add('visible');
+    const ctx = document.getElementById('finalScoreChart').getContext('2d');
+    if (histogramChart) {
+        histogramChart.destroy()
+    }
+    if (!trajectories || trajectories.length === 0) {
+        alert('No trajectories found. Please run the simulation first!');
+        return;
+    }
+    const finalScores = trajectories.map(path => path[path.length - 1]);
+    const counts = {}
+    finalScores.forEach(score => {
+        counts[score] = (counts[score] || 0) + 1;
+    });
+    const sortedScores = Object.keys(counts).map(k => parseInt(k)).sort((a, b) => a - b);
+    const data = sortedScores.map(k => counts[k]);
+
+    if (histogramChart) {
+        histogramChart.destroy()
+    }
+    histogramChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sortedScores,
+            datasets: [{
+                label: 'Score frequency',
+                data: data,
+                backgroundColor: 'steelblue',
+                borderColor: 'navy',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Final Scores histogram'
+                }
+            }
+        },
+        scales: {
+            x: {
+                title: {display: true, text: "Score"}
+            },
+            y: {
+                title: {display: true, text: "Frequency"},
+                beginAtZero: true,
+            }
+        }
+    });
 }
 
 function runSimulation() {
-    p = document.getElementById("p").value;
-    attackers = document.getElementById("attackers").value;
-    weeks = document.getElementById("weeks").value;
+    p = parseFloat(document.getElementById("probability").value);
+    attackers = parseInt(document.getElementById("attackers").value);
+    weeks = parseInt(document.getElementById("weeks").value);
+
+    if (!p || !attackers || !weeks) {
+        alert("Please fill in all fields before running the simulation!");
+        return;
+    }
 
     trajectories = generateTrajectories(weeks, attackers, p);
     currentIndex = 0;
 
-    showTrajectoryCarousel();
+    document.getElementById('chartBlock').classList.add('visible');
+    document.getElementById('histogramBlock').classList.remove('visible');
+    document.getElementById('histogramBtn').classList.add('visible');
+
+    drawSingleTrajectory(currentIndex);
+    document.getElementById('trajectoryInfo').textContent = `Trajectory ${currentIndex + 1} of ${trajectories.length}`;
 }
