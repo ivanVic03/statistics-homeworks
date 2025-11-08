@@ -1,0 +1,67 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, Verdana, sans-serif;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: navy;
+    color: white;
+    text-align: center;
+    padding: 1.5em 1em;
+}
+
+h1 {
+    margin-bottom: 0.2em;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+main {
+    background-color: aliceblue;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-bottom: 2em;
+    box-shadow: 0 0 6px lightgray;
+}
+
+h2 {
+    font-weight: normal;
+    color: lightgray;
+    margin-top: 0;
+    font-size: 1.1em;
+}
+
+button {
+    background-color: steelblue;
+    color: white;
+    border: none;
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: red;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8em;
+    margin-bottom: 1.5em;
+    margin-top: 30px;
+}
+

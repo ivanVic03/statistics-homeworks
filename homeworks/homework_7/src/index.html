@@ -2,9 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Walk and Binomial Convergence</title>
+    <link rel="stylesheet" href="homework7.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+
+<header>
+    <h1>Random Walk Simulation of Server Security</h1>
+</header>
+
+<main>
+   <h2>Introduction</h2>
+   <p>
+       This simulation models a server that receives weekly security updates over
+       <strong>n weeks</strong>, while facing <strong>m attackers</strong> capable of breaching it
+       with probability \( p \).
+   </p>
+   <p>
+        Each week, a weekly score \( X_i \) is assigned. Its values are:
+   </p>
+
+   <p style="text-align: center">
+       \[
+       X_i =
+       \begin{cases}
+       +1, & \text{if the server remains secure in week i} \\
+       -1, & \text{if the server is breached in week i}
+       \end{cases}
+       \]
+   </p>
+
+   <p>
+       The cumulative score after \( n \) weeks is given by:
+   </p>
+   <p>
+       \[ S_n = \sum_{i=1}^{n} X_i \]
+   </p>
+    <p>
+        To connect this to a binomial variable, let \( B \) denote the number of weeks
+        in which the server remains secure. Since each week is independent and a
+        "secure" week occurs with probability \( 1-p \),
+        \[
+        B \sim \mathrm{Binomial}(n, 1-p).
+        \]
+    </p>
+    <p>
+        There are \(B\) weeks with score \(+1\) and \(n-B\) weeks with score \(-1\).
+        Therefore:
+    </p>
+
+    <p style="text-align:center;">
+        \[
+        S_n = (+1)\cdot B + (-1)\cdot (n - B) = B - (n - B) = 2B - n.
+        \]
+    </p>
+
+    <p>
+        Substituting the distribution of \( B \) gives the relationship
+        \[
+        S_n = 2\,B(n,1-p) - n,
+        \]
+        i.e. the distribution of \(S_n\) is a linear transformation of a binomial
+        random variable (a rescaling by 2 and a shift by \(-n\)).
+    </p>
+    <p>
+        As \( n \) and the number of simulated trajectories \( m \) grow,
+        the empirical frequencies of \( S_n \) approach the theoretical
+        binomial probabilities. This illustrates the convergence of the
+        <em>random walk</em> model to the <strong>binomial distribution</strong>.
+    </p>
+
+    <div style="text-align: center; margin-top: 2em">
+        <a href="simulation.html">
+            <button>Perform a Simulation</button>
+        </a>
+    </div>
+</main>
 
 </body>
 </html>
