@@ -24,12 +24,20 @@
     <h1>Comparison and Mathematical Analysis of Bernoulli Simulations</h1>
 
     <section>
-        This analysis explores the analogies and differences between two simulations based on Bernoulli processes.
-        The previous homework (HW4) illustrated the <strong>Law of Large Numbers (LLN)</strong> through multiple trajectories of success/failure outcomes,
-        tracking how the relative frequency of successes stabilizes around the theoretical probability \( p \) as the number of trials \( n \) increases.
-        The current homework (HW7) models the cumulative score of attackers attempting to breach a server over several weeks,
-        assigning \( +1 \) for a secure week and \( -1 \) for a breach.
-        Here, we study how the distribution of final scores evolves and how the trajectories behave analogously to a random walk.
+        <p>
+            This analysis explores the analogies and differences between two simulations based on Bernoulli processes.
+        </p>
+        <p>
+            HW4 illustrated the <strong>Law of Large Numbers (LLN)</strong> through multiple trajectories of success/failure outcomes,
+            tracking how the relative frequency of successes stabilizes around the theoretical probability \( p \) as the number of trials \( n \) increases.
+        </p>
+        <p>
+            HW7 models the cumulative score of attackers attempting to breach a server over several weeks,
+            assigning \( +1 \) for a secure week and \( -1 \) for a breach.
+        </p>
+        <p>
+            Here, we study how the distribution of final scores evolves and how the trajectories behave analogously to a random walk.
+        </p>
     </section>
 
     <section>
@@ -80,17 +88,26 @@
     </section>
 
     <section>
-        <h2>Combinatorial Connections and Fibonacci Numbers</h2>
+        <h2>Visualizing Pascal’s Triangle and Fibonacci Connections</h2>
         <p>
-            Combinatorial identities arise naturally. For example, the sum of binomial coefficients satisfies:
+            Pascal’s triangle not only encodes binomial coefficients, but also reveals hidden patterns such as Fibonacci numbers.
+            The table below shows the first 7 rows, with the shallow diagonals summing to Fibonacci numbers highlighted in <span class="fib-diagonal">blue</span>.
+        </p>
+
+        <div id="pascalsTriangle" style="display: flex; flex-direction: column; align-items: center; font-family: monospace;">
+            <div style="display: flex; justify-content: center;"><span>1</span></div>
+            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span>1</span></div>
+            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span>2</span>&nbsp;<span>1</span></div>
+            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span>3</span>&nbsp;<span>3</span>&nbsp;<span>1</span></div>
+            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span class="fib-diagonal">4</span>&nbsp;<span class="fib-diagonal">6</span>&nbsp;<span class="fib-diagonal">4</span>&nbsp;<span>1</span></div>
+        </div>
+
+        <p>
+            The sums along these highlighted diagonals correspond to the Fibonacci numbers:
             \[
-            \sum_{k=0}^n \binom{n}{k} = 2^n,
+            F_1 = 1, \quad F_2 = 1, \quad F_3 = 2, \quad F_4 = 3, \quad F_5 = 5, \quad F_6 = 8, \dots
             \]
-            representing all possible sequences of successes and failures. Interestingly, certain diagonals in Pascal’s triangle correspond to Fibonacci numbers:
-            \[
-            F_{n} = \sum_{k=0}^{\lfloor (n-1)/2 \rfloor} \binom{n-1-k}{k}.
-            \]
-            This illustrates deep links between Bernoulli processes, combinatorics, and classical sequences in mathematics, reinforcing the mathematical richness underlying simple random experiments.
+            This visualization shows concretely how combinatorial patterns emerge from sequences of independent trials in Bernoulli processes.
         </p>
     </section>
 
