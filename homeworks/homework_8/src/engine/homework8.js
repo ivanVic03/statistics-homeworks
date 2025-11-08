@@ -1,4 +1,0 @@
-function runSimulation() {
-    startLawOfLargeNumbersSimulation();
-    runServerSecuritySimulation();
-}
