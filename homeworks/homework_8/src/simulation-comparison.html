@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare And Simulate</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="homework8.css">
+</head>
+<body>
+
+<main>
+    <header>
+        <h1>Law of Large Numbers vs Server Security</h1>
+    </header>
+    <div class="controls">
+        <label for="n">Trials or Weeks (\( n \)):</label>
+        <input type="number" id="n" min="1">
+        <label for="m">Trajectories or Attackers (\( m \)):</label>
+        <input type="number" id="m" min="1">
+        <label for="probability">Probability (\( p \)):</label>
+        <input type="number" id="probability" min="0" max="1" step="0.01">
+        <button id="runSimulation" onclick="runSimulation()">Run Simulation</button>
+    </div>
+    <section id="law-of-large-numbers-section">
+        <h2>Law of Large Numbers</h2>
+        <span id="trajectoryInfoHM4"></span>
+        <canvas id="law-of-large-numbers-mainchart" width="1000" height="500"></canvas>
+        <div id="controlsHM4" style="text-align:center; margin-top: 1em;">
+            <button id="prevBtnHM4" onclick="prevTrajectoryHM4()">Previous</button>
+            <button id="nextBtnHM4" onclick="nextTrajectoryHM4()">Next</button>
+            <button id="autoBtnHM4" onclick="toggleAutoScrollHM4()">Automatic scroll</button>
+            <button id="allTrajectoriesBtnHM4" onclick="drawAllTrajectories()">View all trajectories together</button>
+        </div>
+        <div style="text-align:center; margin-top: 1em;">
+            <label for="bins">Bins:</label>
+            <input type="number" id="bins" min="1" max="100">
+            <button id="histogramBtnHM4" onclick="startHistogram()">Show Histogram</button>
+        </div>
+        <canvas id="law-of-large-numbers-histogram" width="800" height="500"></canvas>
+    </section>
+    <section id="server-security-section">
+        <h2>Server Security</h2>
+        <span id="trajectoryInfoHM7"></span>
+        <canvas id="server-security-mainchart" width="1000" height="500"></canvas>
+        <div id="controlsHM7" style="text-align:center; margin-top: 1em;">
+            <button id="prevBtnHM7" onclick="prevTrajectory()">Previous</button>
+            <button id="nextBtnHM7" onclick="nextTrajectory()">Next</button>
+            <button id="autoBtnHM7" onclick="toggleAutoScroll()">Automatic scroll</button>
+            <button id="allTrajectoriesBtnHM7" onclick="drawAllTrajectories()">View all trajectories together</button>
+        </div>
+        <div style="text-align:center; margin-top: 1em;">
+            <button id="histogramBtnHM7" onclick="drawHistogram()">Show Histogram</button>
+        </div>
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="engine/homework8.js"></script>
+<script src="engine/law-of-large-numbers.js"></script>
+<script src="engine/server-security.js"></script>
+
+</body>
+</html>

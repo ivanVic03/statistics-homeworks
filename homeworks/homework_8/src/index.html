@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation Homework Discussion</title>
+    <link rel="stylesheet" href="homework8.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main>
+    <h1>Comparison and Mathematical Analysis of Bernoulli Simulations</h1>
+
+    <section>
+        This analysis explores the analogies and differences between two simulations based on Bernoulli processes.
+        The previous homework (HW4) illustrated the <strong>Law of Large Numbers (LLN)</strong> through multiple trajectories of success/failure outcomes,
+        tracking how the relative frequency of successes stabilizes around the theoretical probability \( p \) as the number of trials \( n \) increases.
+        The current homework (HW7) models the cumulative score of attackers attempting to breach a server over several weeks,
+        assigning \( +1 \) for a secure week and \( -1 \) for a breach.
+        Here, we study how the distribution of final scores evolves and how the trajectories behave analogously to a random walk.
+    </section>
+
+    <section>
+        <h2>Random Walk Analogy and Trajectories</h2>
+        <p>
+            Both simulations can be represented as <em>random walks</em>. In HW4, each trajectory represents a sequence of independent Bernoulli trials:
+            \[
+            X_i =
+            \begin{cases}
+            1, & \text{if the trial is a success} \\
+            0, & \text{if the trial is a failure}
+            \end{cases}
+            \]
+            and the relative frequency after \( n \) trials is
+            \[
+            f_n = \frac{1}{n} \sum_{i=1}^n X_i.
+            \]
+            In HW7, the cumulative score trajectory of an attacker is:
+            \[
+            S_n = \sum_{i=1}^n Y_i, \quad
+            Y_i =
+            \begin{cases}
+            +1, & \text{if the server is secure} \\
+            -1, & \text{if breached}
+            \end{cases}
+            \]
+            where \( n \) is the number of weeks and \( m \) the number of attackers. Despite differences in interpretation, both are discrete-time stochastic processes with independent increments.
+        </p>
+        <p>
+            Graphically, HW4 trajectories converge toward \( p \), illustrating the LLN, whereas HW7 trajectories fluctuate around the expected cumulative score \( \mathbb{E}[S_n] = n(1 - 2p) \), showing how cumulative sums of independent Bernoulli variables tend to approximate a binomial distribution.
+        </p>
+    </section>
+
+    <section>
+        <h2>Binomial Coefficients and Pascal’s Triangle</h2>
+        <p>
+            In both assignments, the underlying probability distributions are described by the <strong>binomial distribution</strong>:
+            \[
+            P(S_n = k) = \binom{n}{k} p^k (1-p)^{n-k}.
+            \]
+            Pascal’s triangle provides an intuitive way to visualize these coefficients. Each row corresponds to the possible outcomes of \( n \) independent Bernoulli trials:
+        <ul>
+            <li>HW4: Counts the number of successes \( k \) across trajectories, forming a histogram approaching the binomial shape.</li>
+            <li>HW7: Counts the final cumulative scores \( S_n \), which can be transformed into equivalent success counts if we map \(-1 \to 0\) and \(+1 \to 1\).</li>
+        </ul>
+        Therefore, both experiments are manifestations of the same combinatorial structure, though interpreted differently.
+        </p>
+    </section>
+
+    <section>
+        <h2>Combinatorial Connections and Fibonacci Numbers</h2>
+        <p>
+            Combinatorial identities arise naturally. For example, the sum of binomial coefficients satisfies:
+            \[
+            \sum_{k=0}^n \binom{n}{k} = 2^n,
+            \]
+            representing all possible sequences of successes and failures. Interestingly, certain diagonals in Pascal’s triangle correspond to Fibonacci numbers:
+            \[
+            F_{n} = \sum_{k=0}^{\lfloor (n-1)/2 \rfloor} \binom{n-1-k}{k}.
+            \]
+            This illustrates deep links between Bernoulli processes, combinatorics, and classical sequences in mathematics, reinforcing the mathematical richness underlying simple random experiments.
+        </p>
+    </section>
+
+    <section>
+        <h2>Comparison of Histogram Behavior</h2>
+        <p>
+            Both HW4 and HW7 produce histograms of final outcomes. In HW4, the histogram shows the distribution of relative frequencies of successes, clustering around \( p \) as \( n \) increases.
+            In HW7, the histogram shows the distribution of cumulative scores. As \( m \) and \( n \) increase, the histogram approximates the binomial shape:
+            \[
+            \text{Number of trajectories with final score } k \approx \binom{n}{k} p^k (1-p)^{n-k}.
+            \]
+            This demonstrates convergence to theoretical probabilities and provides an excellent visual analogy between the two experiments.
+        </p>
+    </section>
+
+    <section>
+        <h2>Conclusion</h2>
+        <p>
+            Both simulations exemplify discrete stochastic processes governed by Bernoulli trials.
+            HW4 emphasizes relative frequencies and the Law of Large Numbers, while HW7 emphasizes cumulative outcomes and random walks.
+            Their mathematical underpinnings — binomial coefficients, Pascal’s triangle, combinatorial identities, and even Fibonacci numbers — are shared, highlighting how fundamental combinatorial structures manifest in probability theory.
+            Comparing both allows a deeper understanding of convergence, randomness, and the combinatorial foundations of stochastic simulations.
+        </p>
+    </section>
+
+    <div style="text-align: center; margin-top: 2em">
+        <a href="simulation-comparison.html">
+            <button>Compare the two approaches through a simulation!</button>
+        </a>
+    </div>
+
+</main>
+
+
+</body>
+</html>
