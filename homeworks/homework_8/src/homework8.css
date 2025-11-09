@@ -1,10 +1,13 @@
-
 body {
     font-family: "Georgia", serif;
     line-height: 1.7;
     color: black;
-    background-color: white;
-    padding: 2rem;
+    background-color: ivory;
+    padding: 2.5rem;
+    max-width: 1200px;
+    margin: auto;
+    box-shadow: 0 0 20px lightgray;
+    border-radius: 10px;
 }
 
 h1 {
@@ -12,58 +15,97 @@ h1 {
     font-size: 2.8rem;
     color: navy;
     margin-bottom: 1rem;
+    letter-spacing: 0.05rem;
 }
 
-h2 {
-    font-size: 1.9rem;
-    color: darkgreen;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+section h2 {
+    width: 100%;
     text-align: center;
 }
 
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: darkgreen;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px solid darkgreen;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
 p {
-    margin-bottom: 1rem;
-    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    text-align: justify;
     color: black;
 }
 
 button {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     margin: 0.3rem;
     border: 1px solid gray;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: white;
     color: black;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s all ease-in-out;
+    transition: 0.3s all ease-in-out;
 }
 
 button:hover {
     background-color: lightgray;
+    transform: scale(1.03);
+}
+
+#pascalsTriangle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: monospace;
+    font-size: 1.5em;
+    background-color: white;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    box-shadow: 0 0 10px lightgray;
+}
+
+#pascalsTriangle div {
+    display: flex;
+    justify-content: center;
+    margin: 0.1rem 0;
 }
 
 #pascalsTriangle span {
-    padding: 0.3em 0.6em;
+    padding: 0.35em 0.7em;
     display: inline-block;
     font-size: 1.5rem;
+    color: black;
 }
-.fib-diagonal {
+
+#pascalsTriangle .fib-diagonal {
     color: steelblue;
     font-weight: bold;
 }
 
+
 @media (max-width: 768px) {
     body {
-        padding: 1rem;
+        padding: 1.2rem;
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+    }
+
+    #pascalsTriangle span {
+        font-size: 1.2rem;
+        padding: 0.2em 0.4em;
     }
 }

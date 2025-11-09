@@ -90,26 +90,70 @@
     <section>
         <h2>Visualizing Pascal’s Triangle and Fibonacci Connections</h2>
         <p>
-            Pascal’s triangle not only encodes binomial coefficients, but also reveals hidden patterns such as Fibonacci numbers.
-            The table below shows the first 7 rows, with the shallow diagonals summing to Fibonacci numbers highlighted in <span class="fib-diagonal">blue</span>.
+            Pascal’s triangle is not merely a table of binomial coefficients; it is a visual map of combinatorial relationships.
+            Each entry \(\binom{n}{k}\) counts the number of ways to achieve \(k\) successes in \(n\) independent Bernoulli trials—precisely the structure underlying the Law of Large Numbers and probabilistic models such as repeated server attacks.
+            Beyond probability, however, the triangle encodes unexpected patterns, one of which is the Fibonacci sequence.
         </p>
 
-        <div id="pascalsTriangle" style="display: flex; flex-direction: column; align-items: center; font-family: monospace;">
-            <div style="display: flex; justify-content: center;"><span>1</span></div>
-            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span>1</span></div>
-            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span>2</span>&nbsp;<span>1</span></div>
-            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span>3</span>&nbsp;<span>3</span>&nbsp;<span>1</span></div>
-            <div style="display: flex; justify-content: center;"><span>1</span>&nbsp;<span class="fib-diagonal">4</span>&nbsp;<span class="fib-diagonal">6</span>&nbsp;<span class="fib-diagonal">4</span>&nbsp;<span>1</span></div>
+        <div id="pascalsTriangle">
+            <div ><span>1</span></div>
+            <div ><span>1</span>&nbsp;<span>1</span></div>
+            <div ><span>1</span>&nbsp;<span>2</span>&nbsp;<span>1</span></div>
+            <div ><span>1</span>&nbsp;<span>3</span>&nbsp;<span>3</span>&nbsp;<span>1</span></div>
+            <div ><span>1</span>&nbsp;<span class="fib-diagonal">4</span>&nbsp;<span class="fib-diagonal">6</span>&nbsp;<span class="fib-diagonal">4</span>&nbsp;<span>1</span></div>
         </div>
 
         <p>
-            The sums along these highlighted diagonals correspond to the Fibonacci numbers:
+            When we trace the shallow diagonals—highlighted in <span class="fib-diagonal">blue</span>—their sums reproduce the Fibonacci numbers:
             \[
             F_1 = 1, \quad F_2 = 1, \quad F_3 = 2, \quad F_4 = 3, \quad F_5 = 5, \quad F_6 = 8, \dots
             \]
-            This visualization shows concretely how combinatorial patterns emerge from sequences of independent trials in Bernoulli processes.
+            This elegant correspondence can be written as:
+            \[
+            F_n = \sum_{k=0}^{\lfloor (n-1)/2 \rfloor} \binom{n-1-k}{k},
+            \]
+            revealing that Fibonacci growth patterns are embedded within the same combinatorial framework used to describe random experiments and convergence phenomena.
+            In other words, the triangle that governs binomial probabilities also conceals recursive dynamics—the same logic that underlies how repeated random trials evolve toward stable proportions in the Law of Large Numbers.
         </p>
     </section>
+
+
+    <section>
+        <h2>Combinatorial Derivation of the Fibonacci Identity</h2>
+        <p>
+            The link between Bernoulli processes, Pascal’s triangle, and Fibonacci numbers can be expressed through
+            a combinatorial identity. Consider the shallow diagonals of Pascal’s triangle, where each term represents
+            the number of ways to choose \( k \) successes in \( n \) independent Bernoulli trials.
+            Summing along these diagonals gives:
+            \[
+            F_n = \sum_{k=0}^{\lfloor (n-1)/2 \rfloor} \binom{n-1-k}{k}.
+            \]
+        </p>
+        <p>
+            This identity can be interpreted combinatorially. The term \( \binom{n-1-k}{k} \) counts the number of binary
+            sequences of length \( n-1-k \) containing \( k \) pairs of consecutive events (for instance, consecutive
+            “successes”), and the sum over \( k \) enumerates all possible configurations compatible with the Fibonacci
+            recurrence. Hence, the Fibonacci number \( F_n \) represents the total number of admissible binary
+            sequences that satisfy the recurrence
+            \[
+            F_n = F_{n-1} + F_{n-2},
+            \]
+            the same recurrence underlying constrained random walks with independent increments.
+        </p>
+        <p>
+            This connection deepens the relationship between the simulations in HW4 and HW7. Both are built upon the
+            combinatorial foundation of Bernoulli trials, represented through binomial coefficients in Pascal’s triangle.
+            The Fibonacci sequence emerges when certain dependencies or sequential constraints are imposed on those
+            trials, showing that even simple stochastic systems can conceal rich mathematical structures.
+        </p>
+        <p>
+            In essence, while HW4 and HW7 simulate random outcomes and observe their convergence (Law of Large Numbers
+            and cumulative security scores), the Fibonacci identity unveils the hidden order within the combinatorial
+            structure of these random processes. It demonstrates how probabilistic and combinatorial models are
+            intimately connected through shared algebraic symmetries.
+        </p>
+    </section>
+
 
     <section>
         <h2>Comparison of Histogram Behavior</h2>
@@ -143,7 +187,6 @@
     </div>
 
 </main>
-
 
 </body>
 </html>
