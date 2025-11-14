@@ -1,0 +1,4 @@
+Simulate a counting process over a time interval T (e.g., T = 1) where events (“successes”) occur independently and
+uniformly in time at a constant average rate λ.
+Approximate this by dividing the interval into n small subintervals (e.g., n = 5000) and generating an event in each one with probability λ/n.
+Analyze the resulting process: identify what stochastic process it approximates, discuss its theoretical properties, and interpret the meaning of the rate parameter λ

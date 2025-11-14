@@ -1,0 +1,4 @@
+Review the main interpretations of probability (classical, frequentist, Bayesian, geometric, etc.) and explain how the
+axiomatic approach resolves conceptual inconsistencies among them.
+Explain the relationship between probability theory and measure theory (sigma-algebras, probability measures, measurable
+functions, random variables). Using the axioms of probability, derive the subadditivity property and the inclusion–exclusion principle.
