@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability as Measure Theory</title>
+    <link rel="stylesheet" href="homework9.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ],
+                displayMath: [
+                    ['$$', '$$'],
+                    ['\\[', '\\]']
+                ]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="homework9.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Mathematical Foundations — Probability as Measure Theory</h1>
+</header>
+
+<main>
+    <article>
+
+        <h4>3.1 Measure-Theoretic Context</h4>
+        <p>
+            A probability space \((\Omega, \mathcal{F}, P)\) is a normalized measure space, where \(P(\Omega)=1\).
+        </p>
+
+        <h4>3.2 The \(\sigma\)-Algebra \(\mathcal{F}\)</h4>
+        <p>
+            A \(\sigma\)-algebra is a family of subsets of \(\Omega\) satisfying:
+        </p>
+        <ul>
+            <li>\(\Omega \in \mathcal{F}\)</li>
+            <li>Closed under complements</li>
+            <li>Closed under countable unions</li>
+        </ul>
+
+        <h4>3.3 The Probability Measure \(P\)</h4>
+        <p>
+            The probability measure is a \(\sigma\)-additive function \(P: \mathcal{F} \to [0,1]\).
+        </p>
+
+        <h4>3.4 Random Variables as Measurable Functions</h4>
+        <p>
+            A random variable is a measurable function:
+        </p>
+        <p class="formula">
+            \[
+            X : \Omega \to \mathbb{R}
+            \]
+        </p>
+
+        <p>
+            Measurability requires:
+        </p>
+        <p class="formula">
+            \[
+            X^{-1}(B) \in \mathcal{F} \quad \text{for all } B \in \mathcal{B}(\mathbb{R}).
+            \]
+        </p>
+    </article>
+</main>
+
+</body>
+</html>

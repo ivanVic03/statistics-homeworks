@@ -1,0 +1,117 @@
+/* ------------------------------------
+   Base layout & typography
+------------------------------------- */
+
+body {
+    font-family: "Georgia", serif;
+    background-color: ivory;
+    color: darkslategray;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+}
+
+/* Centra e limita la larghezza */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ------------------------------------
+   Sections
+------------------------------------- */
+
+section {
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 40px;
+
+    /* Ombra elegante ma minimal */
+    box-shadow: 0 2px 6px gainsboro;
+}
+
+/* ------------------------------------
+   Titles
+------------------------------------- */
+
+h1, h2, h3 {
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------------
+   Navigation bar
+------------------------------------- */
+
+nav {
+    background-color: whitesmoke;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid lightgray;
+}
+
+nav a {
+    margin: 0 18px;
+    text-decoration: none;
+    color: steelblue;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: slategray;
+    text-decoration: underline;
+}
+
+/* ------------------------------------
+   Collapsible modules
+------------------------------------- */
+
+.collapsible {
+    background-color: lightsteelblue;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: black;
+}
+
+.collapsible:hover {
+    background-color: powderblue;
+}
+
+.content {
+    display: none;
+    margin-top: 10px;
+    padding-left: 10px;
+    color: darkslategray;
+}
+
+/* ------------------------------------
+   MathJax tweaks
+------------------------------------- */
+
+.math-display {
+    margin: 25px 0;
+    text-align: center;
+    font-size: 1.1rem;
+}

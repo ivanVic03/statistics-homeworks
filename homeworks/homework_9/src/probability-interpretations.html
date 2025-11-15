@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpretations of Probability and Their Conceptual Inconsistencies</title>
+    <link rel="stylesheet" href="homework9.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ],
+                displayMath: [
+                    ['$$', '$$'],
+                    ['\\[', '\\]']
+                ]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="homework9.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Interpretations of Probability and Their Conceptual Inconsistencies</h1>
+</header>
+
+<main>
+    <article>
+        <p>
+            The notion of <em>probability</em> has historically been subject to multiple interpretations, each grounded
+            in intuitive reasoning yet affected by conceptual and operational limitations. This section analyzes the
+            main schools of thought and the inconsistencies that arise when they are applied.
+        </p>
+
+        <h4>1.1 The Classical Interpretation (A Priori Probability)</h4>
+        <p>
+            The classical interpretation, formalized by Laplace, defines the probability of an event \(E\) as the
+            ratio between the number of favorable outcomes \(m\) and the total number of possible outcomes \(n\):
+        </p>
+        <p class="formula">\[ P(E) = \frac{m}{n} \]</p>
+
+        <p><strong>Fundamental Assumption: The Principle of Indifference</strong></p>
+        <p>
+            This principle states that when no information distinguishes the possible outcomes, they should all be
+            assigned equal probability. For example, each face of a fair die has probability \(1/6\).
+        </p>
+
+        <p><strong>Limitations</strong></p>
+        <ul>
+            <li><strong>Tautology:</strong> It assumes equiprobability in order to define probability.</li>
+            <li><strong>Inapplicability:</strong> It fails for infinite sample spaces or non-uniform scenarios (e.g., a loaded die).</li>
+        </ul>
+
+        <h4>1.2 The Frequentist Interpretation (A Posteriori Probability)</h4>
+        <p>
+            The frequentist approach, associated with von Mises, overcomes classical limitations by linking
+            probability to empirical frequencies. The probability of an event is defined as the limiting value of
+            its relative frequency \(f_n(E)\) as the number of trials grows:
+        </p>
+        <p class="formula">\[ P(E) = \lim_{n\to\infty} f_n(E) = \lim_{n\to\infty} \frac{k}{n} \]</p>
+
+        <p><strong>Limitations</strong></p>
+        <ul>
+            <li>Ambiguity in the notion of “identical conditions”.</li>
+            <li>Inability to assign probabilities to single, non-repeatable events.</li>
+        </ul>
+
+        <h4>1.3 The Subjective (Bayesian) Interpretation</h4>
+        <p>
+            The subjective interpretation views probability as a rational degree of belief assigned by an agent,
+            following authors such as de Finetti and Savage. Probability measures epistemic uncertainty and is
+            updated using Bayes’ rule in light of new evidence.
+        </p>
+
+        <p><strong>Limitation</strong></p>
+        <p>
+            The main criticism concerns the apparent arbitrariness of choosing the prior distribution, although
+            Bayesian theory provides tools for constructing non-informative priors.
+        </p>
+
+        <h4>1.4 Conceptual Incoherence: Bertrand’s Paradox (Geometric Probability)</h4>
+        <p>
+            Applying the Principle of Indifference to continuous spaces leads to contradictions such as Bertrand’s
+            paradox. The probability that a randomly drawn chord in a circle is longer than the side of an inscribed
+            equilateral triangle yields three incompatible answers depending on how “random” is defined:
+            \(1/3\), \(1/2\), and \(1/4\).
+        </p>
+
+        <p><strong>Conclusion of the Module</strong></p>
+        <p>
+            These inconsistencies reveal that intuitive interpretations are insufficient. A rigorous mathematical
+            foundation is required — which is introduced by Kolmogorov’s axiomatic system.
+        </p>
+    </article>
+</main>
+</body>
+</html>

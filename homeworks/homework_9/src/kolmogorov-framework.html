@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolmogorov's Unifying Framework</title>
+    <link rel="stylesheet" href="homework9.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ],
+                displayMath: [
+                    ['$$', '$$'],
+                    ['\\[', '\\]']
+                ]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="homework9.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>The Axiomatic Solution — Kolmogorov's Unifying Framework</h1>
+</header>
+
+<main>
+    <article>
+        <h3>Module 2: The Axiomatic Solution — Kolmogorov's Unifying Framework</h3>
+
+        <h4>2.1 Kolmogorov’s Contribution (1933)</h4>
+        <p>
+            Kolmogorov did not attempt to define what probability <em>is</em>, but rather how it must behave. His
+            axiomatic system separates mathematical structure from philosophical interpretation, giving probability
+            a rigorous foundation within measure theory.
+        </p>
+
+        <h4>2.2 The Probability Space \((\Omega, \mathcal{F}, P)\)</h4>
+        <ul>
+            <li><strong>\(\Omega\):</strong> Sample space (set of all possible outcomes).</li>
+            <li><strong>\(\mathcal{F}\):</strong> A \(\sigma\)-algebra of events (measurable sets).</li>
+            <li><strong>P:</strong> A probability measure defined on \(\mathcal{F}\).</li>
+        </ul>
+
+        <h4>2.3 Kolmogorov’s Axioms</h4>
+
+        <p><strong>Axiom 1 (Non-negativity):</strong> \(P(A) \ge 0\).</p>
+        <p><strong>Axiom 2 (Normalization):</strong> \(P(\Omega) = 1\).</p>
+        <p><strong>Axiom 3 (\(\sigma\)-additivity):</strong></p>
+        <p class="formula">
+            \[
+            P\left(\bigcup_{i=1}^{\infty} A_i\right)
+            = \sum_{i=1}^{\infty} P(A_i)
+            \qquad\text{for disjoint } A_i.
+            \]
+        </p>
+
+        <h4>2.4 Resolving the Inconsistencies</h4>
+        <p>
+            The axiomatic approach forces the analyst to specify the probability measure explicitly. In
+            Bertrand’s paradox, the three answers correspond to three different measures:
+        </p>
+        <ul>
+            <li>Uniform in angle → \(1/3\)</li>
+            <li>Uniform along a radius → \(1/2\)</li>
+            <li>Uniform over the disk area → \(1/4\)</li>
+        </ul>
+    </article>
+</main>
+
+</body>
+</html>
