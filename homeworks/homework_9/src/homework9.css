@@ -102,3 +102,11 @@ nav a:hover {
     background-color: lightgray;
     color: slategray;
 }
+
+.formula-block {
+    display: block;
+    text-align: left;
+    margin: 20px 0;
+    font-size: 1.05rem;
+}
+

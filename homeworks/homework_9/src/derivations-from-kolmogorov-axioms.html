@@ -34,23 +34,235 @@
 <main>
     <article>
         <h2>Preliminary Results</h2>
-
-        <p><strong>Empty Set:</strong> \(P(\emptyset)=0\).</p>
-
-        <p><strong>Complement:</strong> \(P(A^c)=1-P(A)\).</p>
-
-        <p><strong>Monotonicity:</strong> If \(A\subseteq B\) then \(P(A)\le P(B)\).</p>
-
-        <h2>4.2 Subadditivity (Boole’s Inequality)</h2>
-        <p class="formula">
-            \[
-            P\left(\bigcup_{i=1}^{\infty} A_i\right)
-            \le
-            \sum_{i=1}^{\infty} P(A_i)
-            \]
+        <p>
+            To provide the subadditivity and the inclusion-exclusion principle proofs, it's important to
+            keep in mind the following properties:
         </p>
+        <ul>
+            <li><strong>Empty Set:</strong> \(P(\emptyset)=0\).</li>
+            <li><strong>Complement:</strong> \(P(A^c)=1-P(A)\).</li>
+            <li><strong>Monotonicity:</strong> If \(A\subseteq B\) then \(P(A)\le P(B)\).</li>
+        </ul>
 
-        <h2>Inclusion–Exclusion Principle</h2>
+        <section>
+            <h2> Subadditivity Property (Boole’s Inequality)</h2>
+            <p>
+                Because events are sets, we use standard set-theoretic notation to describe their
+                combinations. We write the intersection
+                <span class="formula">\(A \cap B\)</span>
+                to denote the occurrence of both events \(A\) and \(B\), and the union
+                <span class="formula">\(A \cup B\)</span>
+                to denote the occurrence of either event (or both).
+            </p>
+
+            <p>
+                For example, suppose we roll two dice. If \(A\) is the event that the first die
+                shows a 1, and \(B\) is the event that the second die shows a 1, then:
+            </p>
+            <ul>
+                <li>
+                    <span class="formula">\(A \cap B\)</span> is the event that both dice show 1.
+                </li>
+                <li>
+                    <span class="formula">\(A \cup B\)</span> is the event that at least one of the
+                    two dice shows 1.
+                </li>
+            </ul>
+            <p>
+                We write the set difference
+                <span class="formula">\(A - B\)</span>
+                to denote the event that occurs in \(A\) but not in \(B\).
+                In the same dice example,
+                <span class="formula">\(A - B\)</span> consists of all outcomes where the first die
+                is a 1 and the second die is not.
+            </p>
+
+            <p>
+                We denote the complement of an event \(A\) by
+                <span class="formula">\(\overline{A}\)</span> as shorthand for
+                <span class="formula">\(\Omega - A\)</span>.
+                For example, if \(E\) is the event of obtaining an even number when rolling a die,
+                then
+                <span class="formula">\(\overline{A}\)</span>
+                is the event of obtaining an odd number.
+            </p>
+
+            <p><strong>For any two events \(A\) and \(B\):</strong></p>
+
+            <p class="formula">
+                \[
+                P(A \cup B) = P(A) + P(B) - P(A \cap B)
+                \]
+            </p>
+
+            <p><strong>Proof.</strong></p>
+
+            <p>
+                We decompose \(A \cup B\) into three disjoint events:
+            </p>
+
+            <p class="formula">
+                \[
+                A \cup B = (A - (A \cap B)) \;\cup\; (B - (A \cap B)) \;\cup\; (A \cap B).
+                \]
+            </p>
+
+            <p>
+                (This corresponds to the logic of the Venn diagram.)
+            </p>
+
+            <p><strong>A more direct approach:</strong></p>
+
+            <p>
+                We decompose \(A \cup B\) into two disjoint events:
+            </p>
+
+            <p class="formula">
+                \[
+                A \cup B = A \;\cup\; (B - (A \cap B)).
+                \]
+            </p>
+
+            <p>
+                By Axiom 3:
+            </p>
+
+            <p class="formula">
+                \[
+                P(A \cup B) = P(A) + P(B - (A \cap B)).
+                \tag{1}
+                \]
+            </p>
+
+            <p>
+                Now decompose \(B\) into two disjoint events:
+            </p>
+
+            <p class="formula">
+                \[
+                B = (B - (A \cap B)) \;\cup\; (A \cap B).
+                \]
+            </p>
+
+            <p>
+                By Axiom 3 again:
+            </p>
+
+            <p class="formula">
+                \[
+                P(B) = P(B - (A \cap B)) + P(A \cap B).
+                \tag{2}
+                \]
+            </p>
+
+            <p>
+                Solve Equation (2) for \(P(B - (A \cap B))\):
+            </p>
+
+            <p class="formula">
+                \[
+                P(B - (A \cap B)) = P(B) - P(A \cap B).
+                \]
+            </p>
+
+            <p>
+                Substitute this into Equation (1):
+            </p>
+
+            <p class="formula">
+                \[
+                P(A \cup B) = P(A) + P(B) - P(A \cap B).
+                \]
+            </p>
+
+        </section>
+
+        <section>
+            <h2>Inclusion–Exclusion Principle</h2>
+            <p><strong>For any finite collection of events \(A_1, \dots, A_n\):</strong></p>
+
+            <div class="formula-block">
+                \[
+                P\!\left(\bigcup_{i=1}^{n} A_i\right)
+                = \sum_{i} P(A_i)
+                - \sum_{i} P(A_i \cap A_j)
+                + \sum_{i} P(A_i \cap A_j \cap A_k)
+                - \dots
+                + (-1)^{n+1} P(A_1 \cap \dots \cap A_n).
+                \]
+                for \(i\) < \(j\) < \(k\)
+            </div>
+
+            <h4>Proof (by Mathematical Induction)</h4>
+
+            <p><strong>Base Case (\(n=2\)):</strong> See the previous proof.</p>
+
+            <p><strong>Induction Step.</strong></p>
+
+            <p>
+                <em>Inductive Hypothesis:</em> Assume the PIE formula holds for \(n-1\) events.
+            </p>
+
+            <p>
+                <em>Goal:</em> Prove it holds for \(n\) events.
+            </p>
+
+            <p>
+                Define a new event
+                \[
+                B = \bigcup_{i=1}^{n-1} A_i.
+                \]
+                Then the full union can be written as
+                \[
+                \bigcup_{i=1}^n A_i = B \cup A_n.
+                \]
+            </p>
+
+            <p>
+                Apply the \(n=2\) case to \(B \cup A_n\):
+            </p>
+
+            <p class="formula">
+                \[
+                P(B \cup A_n) = P(B) + P(A_n) - P(B \cap A_n).
+                \tag{3}
+                \]
+            </p>
+
+            <p><strong>Analyse the two terms:</strong></p>
+
+            <p>
+                • \(P(B)\):
+                \[
+                P(B) = P\!\left(\bigcup_{i=1}^{n-1} A_i\right),
+                \]
+                and by the inductive hypothesis we may expand this using the PIE formula for \(n-1\) events.
+            </p>
+
+            <p>
+                • \(P(B \cap A_n)\):
+            </p>
+
+            <p class="formula">
+                \[
+                P(B \cap A_n)
+                = P\!\left(\left(\bigcup_{i=1}^{n-1} A_i\right) \cap A_n\right)
+                = P\!\left(\bigcup_{i=1}^{n-1} (A_i \cap A_n)\right)
+                \]
+            </p>
+
+            <p>
+                By distributivity of intersection across unions.
+                Again, this is a union of \(n-1\) events, so by the inductive hypothesis we may expand it using the PIE formula (this time applied to the events \(A_i \cap A_n\)).
+            </p>
+
+            <p>
+                <strong>Conclusion.</strong>
+                Substituting the PIE expansions for \(P(B)\) and \(P(B \cap A_n)\) into Equation (3), all terms combine algebraically to yield exactly the full Inclusion–Exclusion formula for \(n\) events.
+                Every term in \(\sum_{i} \, ... \,\), for \(i\) < \(j\) < \(k\), appears with the correct sign because it arises from either the expansion of \(P(B)\) or the expansion of \(P(B \cap A_n)\).
+            </p>
+        </section>
+
     </article>
 </main>
 
