@@ -29,6 +29,19 @@
     <header>
         <h1>Simulation of a Counting Process</h1>
     </header>
+    <div class="introduction">
+        <p>This page simulates a counting process by approximating a continuous-time phenomenon with a discrete model. The simulation follows a two-stage approach:</p>
+        <ol>
+            <li>
+                <strong>Rate (&lambda;) Calculation:</strong> First, we estimate the average event rate &lambda; based on a related model. Using the parameters <strong>$n$</strong> (steps), <strong>$m$</strong> (trials), and <strong>$p$</strong> (probability), the page runs $m$ simulations of a $Binomial(n, p)$ process. The average number of successes from these trials is used as our calculated rate &lambda;.
+            </li>
+            <li>
+                <strong>Process Simulation:</strong> This calculated &lambda; is then used to run the primary simulation. The time interval $T=1$ is divided into $n$ subintervals, and an event is generated in each with probability $p_{sub} = \lambda/n$. This simulates a $Binomial(n, \lambda/n)$ process, which serves as a discrete-time approximation of a Poisson process.
+            </li>
+        </ol>
+        <p>The simulation displays the key results and visualizes the cumulative event path as a step-chart over the $[0, 1]$ interval.</p>
+    </div>
+
     <div class="controls">
         <h2>Calculate an appropriate \(\lambda\)!</h2>
         <label for="subintervals">Subintervals (\( n \)):</label>
@@ -37,28 +50,32 @@
         <input type="number" id="trials" min="1">
         <label for="probability">Breach probability (\( p \)):</label>
         <input type="number" id="probability" min="0" max="1" step="0.01">
-        <button id="computeLambda" onclick="computeLambda()">Calculate \( \lambda \)</button>
+        <button id="runButton">Run Simulation</button>
     </div>
-    <div id="chartBlock">
-        <span id="trajectoryInfo"></span>
-        <canvas id="mainChart" width="1000" height="500"></canvas>
 
-        <div id="controls" style="text-align:center; margin-top: 1em;">
-            <button id="prevBtn" onclick="prevTrajectory()">Previous</button>
-            <button id="nextBtn" onclick="nextTrajectory()">Next</button>
-            <button id="autoBtn" onclick="toggleAutoScroll()">Automatic scroll</button>
-            <button id="allTrajectoriesBtn" onclick="drawAllTrajectories()">View all trajectories together</button>
-        </div>
-        <div style="text-align:center; margin-top: 1em;">
-            <button id="histogramBtn" onclick="drawHistogram()">Show Histogram</button>
-        </div>
+    <div class="results">
+        <h2>Simulation Results</h2>
+        <p>
+            Calculated Rate (&lambda;):
+            <strong id="lambda_result">--</strong>
+        </p>
+        <p>
+            Total Events Counted (K):
+            <strong id="k_result">--</strong>
+        </p>
+        <p>
+            Simulation probability (p_sub):
+            <strong id="simulation-prob">--</strong>
+        </p>
     </div>
-    <div id="histogramBlock">
-        <h2 style="text-align:center; margin-top: 1em;">Distribution of Final Scores</h2>
-        <canvas id="finalScoreChart" width="800" height="500"></canvas>
+
+    <div class="chart-container">
+        <h2>Distribution of Breaches</h2>
+        <canvas id="breachDistributionChart" width="800" height="400"></canvas>
     </div>
-    <div style="text-align: center; margin-top: 2em">
-        <a href="conclusion.html">Conclusion>
+
+    <div id="final-considerations-block" style="text-align: center; margin-top: 2em">
+        <a href="conclusion.html">
             <button>Final considerations</button>
         </a>
     </div>
