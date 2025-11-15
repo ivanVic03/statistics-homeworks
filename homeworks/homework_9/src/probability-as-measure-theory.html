@@ -33,46 +33,59 @@
 
 <main>
     <article>
-
-        <h4>3.1 Measure-Theoretic Context</h4>
+        <h2>Measure-Theoretic Context: A Normalized Measure Space</h2>
         <p>
-            A probability space \((\Omega, \mathcal{F}, P)\) is a normalized measure space, where \(P(\Omega)=1\).
+            Measure theory concerns the assignment of a "volume" or "size" (a measure) to subsets of a space.
+            A measure space is a triple \((X, \mathcal{A}, \mu)\), where \(X\) is a set, \(\mathcal{A}\) is a
+            \(\sigma\)-algebra on \(X\), and \(\mu: \mathcal{A} \to [0, \infty]\) is a \(\sigma\)-additive measure.
+            A probability space \((\Omega, \mathcal{F}, P)\) is a special case of a measure space where
+            \(\Omega = X\), \(\mathcal{F} = \mathcal{A}\), and the measure \(P = \mu\) is normalized, i.e., \(P(\Omega) = 1\).
         </p>
 
-        <h4>3.2 The \(\sigma\)-Algebra \(\mathcal{F}\)</h4>
+        <h2>The \(\sigma\)-Algebra \(\mathcal{F}\)</h2>
         <p>
-            A \(\sigma\)-algebra is a family of subsets of \(\Omega\) satisfying:
+            In an uncountable space \(\Omega\), the set of <em>all</em> subsets (\(\mathcal{P}(\Omega)\), the power set) is too large.
+            It has been shown (e.g., via the Vitali construction) that no measure (like length or probability) can be \(\sigma\)-additive
+            and consistent on all subsets without leading to paradoxes.
+            The \(\sigma\)-algebra \(\mathcal{F}\) solves this problem. It is a collection of "well-behaved" subsets (measurable events)
+            to which we can legitimately assign probabilities.
+        </p>
+
+        <h3>Formal Definition of a \(\sigma\)-Algebra</h3>
+        <p>
+            A family \(\mathcal{F}\) of subsets of \(\Omega\) is a \(\sigma\)-algebra if it satisfies:
         </p>
         <ul>
-            <li>\(\Omega \in \mathcal{F}\)</li>
-            <li>Closed under complements</li>
-            <li>Closed under countable unions</li>
+            <li>The entire space is included: \(\Omega \in \mathcal{F}\).</li>
+            <li>Closed under complementation: If \(A \in \mathcal{F}\), then \(A^c \in \mathcal{F}\).</li>
+            <li>Closed under countable unions: If \(A_1, A_2, \dots \in \mathcal{F}\), then \(\bigcup_{i=1}^{\infty} A_i \in \mathcal{F}\).</li>
         </ul>
-
-        <h4>3.3 The Probability Measure \(P\)</h4>
         <p>
-            The probability measure is a \(\sigma\)-additive function \(P: \mathcal{F} \to [0,1]\).
-        </p>
-
-        <h4>3.4 Random Variables as Measurable Functions</h4>
-        <p>
-            A random variable is a measurable function:
-        </p>
-        <p class="formula">
-            \[
-            X : \Omega \to \mathbb{R}
-            \]
+            From these properties, it follows that \(\mathcal{F}\) contains the empty set \(\emptyset\) and is also closed under countable intersections.
+            The pair \((\Omega, \mathcal{F})\) is called a measurable space.
         </p>
 
+        <h2>The Probability Measure \(P\)</h2>
         <p>
-            Measurability requires:
+            According to the axioms, \(P\) is a \(\sigma\)-additive function defined on the \(\sigma\)-algebra \(\mathcal{F}\) that assigns
+            a real number (the probability) to each event \(A \in \mathcal{F}\), with \(P(\Omega) = 1\).
         </p>
-        <p class="formula">
-            \[
-            X^{-1}(B) \in \mathcal{F} \quad \text{for all } B \in \mathcal{B}(\mathbb{R}).
-            \]
+
+        <h2>Random Variables as Measurable Functions</h2>
+        <p>
+            Informally, a random variable is a number whose value depends on chance (e.g., the outcome of a die roll).
+            In measure-theoretic terms, this concept is formalized rigorously.
         </p>
+        <p>
+            A random variable \(X\) is a function \(X: \Omega \to \mathbb{R}\) that maps each elementary outcome \(\omega \in \Omega\) to a real number \(X(\omega)\).
+        </p>
+
     </article>
+
+    <div id="nav-content">
+        <p><a href="derivations-from-kolmogorov-axioms.html">See how important formulas came from!</a></p>
+        <p><a href="index.html">Go back to homepage</a></p>
+    </div>
 </main>
 
 </body>

@@ -33,23 +33,27 @@
 
 <main>
     <article>
-        <h3>Module 2: The Axiomatic Solution — Kolmogorov's Unifying Framework</h3>
-
-        <h4>2.1 Kolmogorov’s Contribution (1933)</h4>
+        <h2>Kolmogorov’s Contribution (1933)</h2>
         <p>
             Kolmogorov did not attempt to define what probability <em>is</em>, but rather how it must behave. His
             axiomatic system separates mathematical structure from philosophical interpretation, giving probability
             a rigorous foundation within measure theory.
         </p>
 
-        <h4>2.2 The Probability Space \((\Omega, \mathcal{F}, P)\)</h4>
-        <ul>
-            <li><strong>\(\Omega\):</strong> Sample space (set of all possible outcomes).</li>
-            <li><strong>\(\mathcal{F}\):</strong> A \(\sigma\)-algebra of events (measurable sets).</li>
-            <li><strong>P:</strong> A probability measure defined on \(\mathcal{F}\).</li>
-        </ul>
+        <h2>The Probability Space \((\Omega, \mathcal{F}, P)\)</h2>
+        <p>
+            <strong>$\Omega$ (Omega) – Sample Space:</strong> This is the non-empty set of all possible elementary outcomes ($\omega$) of a random experiment. For example, for a die roll, $\Omega = \{1, 2, 3, 4, 5, 6\}$.
+        </p>
 
-        <h4>2.3 Kolmogorov’s Axioms</h4>
+        <p>
+            <strong>$\mathcal{F}$ (F) – Sigma-Algebra of Events:</strong> This is a family of subsets of $\Omega$ that defines which subsets are considered measurable "events," i.e., sets to which it is meaningful to assign a probability. $\mathcal{F}$ must satisfy specific mathematical properties.
+        </p>
+
+        <p>
+            <strong>$P$ (P) – Probability Measure:</strong> This is a function $P: \mathcal{F} \to [0,1]$ that assigns a real number (the probability) to each event $A$ in the sigma-algebra $\mathcal{F}$.
+        </p>
+
+        <h2>Kolmogorov’s Axioms</h2>
 
         <p><strong>Axiom 1 (Non-negativity):</strong> \(P(A) \ge 0\).</p>
         <p><strong>Axiom 2 (Normalization):</strong> \(P(\Omega) = 1\).</p>
@@ -62,17 +66,43 @@
             \]
         </p>
 
-        <h4>2.4 Resolving the Inconsistencies</h4>
+        <h2>Resolving the Bertrand Paradox with the Axiomatic Approach</h2>
+
         <p>
-            The axiomatic approach forces the analyst to specify the probability measure explicitly. In
-            Bertrand’s paradox, the three answers correspond to three different measures:
+            The axiomatic approach does not "resolve" the philosophical debate between objectivists and subjectivists.
+            A frequentist and a Bayesian will assign $P$ differently (the former via limits of relative frequencies, the latter
+            via subjective beliefs), yet both must adhere to the same axioms to perform consistent calculations.
         </p>
-        <ul>
-            <li>Uniform in angle → \(1/3\)</li>
-            <li>Uniform along a radius → \(1/2\)</li>
-            <li>Uniform over the disk area → \(1/4\)</li>
-        </ul>
+
+        <p>
+            In the case of Bertrand’s Paradox, Kolmogorov’s framework does not provide a single "correct" answer.
+            Instead, it shows that the original problem was ill-posed. The inconsistency arose from the ambiguity of the
+            phrase "at random." By using the axiomatic approach $(\Omega, \mathcal{F}, P)$, the analyst is required
+            to define the probability measure $P$ explicitly.
+        </p>
+
+        <p>
+            The three previously obtained "solutions" ($1/3$, $1/2$, $1/4$) are not contradictory.
+            They are simply the correct results of three different experiments, i.e., three different choices of
+            the probability measure $P$, each formalizing a distinct mechanism for generating the chord:
+        </p>
+
+        <p><strong>$P = 1/3$:</strong> Corresponds to a uniform measure $P_1$ over the angles (or arc lengths).</p>
+        <p><strong>$P = 1/2$:</strong> Corresponds to a uniform measure $P_2$ over the radial distance from the center.</p>
+        <p><strong>$P = 1/4$:</strong> Corresponds to a uniform measure $P_3$ over the area of the circle.</p>
+
+        <p>
+            The axiomatization shifts the problem from an ambiguous philosophical question ("what is random?")
+            to rigorous mathematical modeling ("which probability measure $P$ are we using?").
+        </p>
+
     </article>
+
+    <div id="nav-content">
+        <p><a href="probability-as-measure-theory.html">Probability as measure theory</a></p>
+        <p><a href="index.html">Go back to homepage</a></p>
+    </div>
+
 </main>
 
 </body>
