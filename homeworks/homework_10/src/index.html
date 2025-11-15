@@ -4,9 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ],
+                displayMath: [
+                    ['\\[', '\\]']
+                ]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="homework10.css">
 </head>
 <body>
+
+<main>
+    <header>
+        <h1>Simulation of a Counting Process</h1>
+    </header>
+    <div class="controls">
+        <h2>Calculate an appropriate \(\lambda\)!</h2>
+        <label for="subintervals">Subintervals (\( n \)):</label>
+        <input type="number" id="subintervals" min="1">
+        <label for="trials">Trials (\( m \)):</label>
+        <input type="number" id="trials" min="1">
+        <label for="probability">Breach probability (\( p \)):</label>
+        <input type="number" id="probability" min="0" max="1" step="0.01">
+        <button id="computeLambda" onclick="computeLambda()">Calculate \( \lambda \)</button>
+    </div>
+    <div id="chartBlock">
+        <span id="trajectoryInfo"></span>
+        <canvas id="mainChart" width="1000" height="500"></canvas>
+
+        <div id="controls" style="text-align:center; margin-top: 1em;">
+            <button id="prevBtn" onclick="prevTrajectory()">Previous</button>
+            <button id="nextBtn" onclick="nextTrajectory()">Next</button>
+            <button id="autoBtn" onclick="toggleAutoScroll()">Automatic scroll</button>
+            <button id="allTrajectoriesBtn" onclick="drawAllTrajectories()">View all trajectories together</button>
+        </div>
+        <div style="text-align:center; margin-top: 1em;">
+            <button id="histogramBtn" onclick="drawHistogram()">Show Histogram</button>
+        </div>
+    </div>
+    <div id="histogramBlock">
+        <h2 style="text-align:center; margin-top: 1em;">Distribution of Final Scores</h2>
+        <canvas id="finalScoreChart" width="800" height="500"></canvas>
+    </div>
+    <div style="text-align: center; margin-top: 2em">
+        <a href="conclusion.html">Conclusion>
+            <button>Final considerations</button>
+        </a>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="homework10.js"></script>
 
 </body>
 </html>
