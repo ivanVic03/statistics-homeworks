@@ -1,4 +1,3 @@
-
 let processChart = null;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -40,12 +39,16 @@ function runSimulation() {
         return;
     }
 
-    const lambdaData = calculateLambda(n, m, p);
-    const lambda = lambdaData.lambda;
+    const lambdaData = calculateLambda(n,m,p)
+    const lambda = lambdaData.lambda
 
     const p_sub = lambda / n;
 
     const processPath = simulateCountingProcess(n, lambda);
+    if (processPath.length === 0) {
+        alert("Simulation failed, processPath is empty.");
+        return;
+    }
 
     const K_final = processPath[processPath.length - 1];
 
@@ -85,7 +88,8 @@ function simulateCountingProcess(n, lambda) {
     const p_sub = lambda / n;
 
     if (p_sub > 1) {
-        console.warn(`Warning: Calculated probability p_sub = ${p_sub.toFixed(4)} is > 1. ...`);
+        alert(`Warning: Calculated probability p_sub = ${p_sub.toFixed(4)} is > 1. ...`);
+        return []
     }
 
     let eventCount = 0;

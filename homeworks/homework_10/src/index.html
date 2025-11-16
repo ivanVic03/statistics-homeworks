@@ -30,16 +30,41 @@
         <h1>Simulation of a Counting Process</h1>
     </header>
     <div class="introduction">
-        <p>This page simulates a counting process by approximating a continuous-time phenomenon with a discrete model. The simulation follows a two-stage approach:</p>
+        <p>This page demonstrates the approximation of a continuous-time stochastic process using a discrete-time simulation. The simulation employs a two-stage logical process:</p>
+
         <ol>
             <li>
-                <strong>Rate (&lambda;) Calculation:</strong> First, we estimate the average event rate &lambda; based on a related model. Using the parameters <strong>$n$</strong> (steps), <strong>$m$</strong> (trials), and <strong>$p$</strong> (probability), the page runs $m$ simulations of a $Binomial(n, p)$ process. The average number of successes from these trials is used as our calculated rate &lambda;.
+                <strong>1. Rate (&lambda;) Calculation (Monte Carlo Method):</strong>
+                <p>
+                    First, we establish an underlying average event rate, &lambda;. Instead of assuming this rate, we derive it from a base model defined by three parameters: <strong>$n$</strong> (steps), <strong>$p$</strong> (probability), and <strong>$m$</strong> (trials).
+                </p>
+                <p>
+                    This base model is a <strong>$Binomial(n, p)$</strong> process, representing a sequence of $n$ independent Bernoulli trials, each with a success probability $p$. The theoretical expected number of successes for any single simulation is $E[K] = n \times p$.
+                </p>
+                <p>
+                    To estimate this expected value experimentally, the page runs <strong>$m$</strong> independent simulations (trials) of this $Binomial(n, p)$ process. By the <strong>Law of Large Numbers (LLN)</strong>, as $m \to \infty$, the sample mean of these $m$ results will converge to the true expected value. We use this sample mean as our calculated rate:
+                </p>
+                \( \lambda = \frac{1}{m} \sum_{i=1}^{m} K_i \approx E[K] = n \times p \)
             </li>
+
             <li>
-                <strong>Process Simulation:</strong> This calculated &lambda; is then used to run the primary simulation. The time interval $T=1$ is divided into $n$ subintervals, and an event is generated in each with probability $p_{sub} = \lambda/n$. This simulates a $Binomial(n, \lambda/n)$ process, which serves as a discrete-time approximation of a Poisson process.
+                <strong>2. Process Simulation (Poisson Approximation):</strong>
+                <p>
+                    This calculated rate &lambda; is then used to parameterize the final simulation. The time interval $T=1$ is divided into $n$ subintervals.
+                </p>
+                <p>
+                    We simulate a new counting process by generating an event in each subinterval with probability <strong>$p_{sub} = \lambda/n$</strong>. As demonstrated by our calculation in step 1, this $p_{sub}$ will be numerically very close to the original $p$, since:
+                    \( p_{sub} = \frac{\lambda}{n} \approx \frac{n \times p}{n} = p \)
+                    This confirms the coherence of the estimation model.
+                </p>
+                <p>
+                    This second simulation is a $Binomial(n, \lambda/n)$ process. For large $n$ and small $p_{sub}$ (conditions which our model satisfies), the <strong>Poisson Limit Theorem</strong> states that this Binomial distribution converges to a <strong>Poisson distribution</strong> with parameter &lambda;:
+                </p>
+                \( \lim_{n \to \infty} Bin(n, \lambda/n) \to Poisson(\lambda) \)
             </li>
         </ol>
-        <p>The simulation displays the key results and visualizes the cumulative event path as a step-chart over the $[0, 1]$ interval.</p>
+
+        <p>The simulation displays the key parameters of this approximation (&lambda;, $K$, and $p_{sub}$) and visualizes a single <strong>realization</strong> of the cumulative event path as a step-chart over the $[0, 1]$ interval.</p>
     </div>
 
     <div class="controls">
@@ -56,7 +81,7 @@
     <div class="results">
         <h2>Simulation Results</h2>
         <p>
-            Calculated Rate (&lambda;):
+            Calculated Rate (\( \lambda \)):
             <strong id="lambda_result">--</strong>
         </p>
         <p>
@@ -64,7 +89,7 @@
             <strong id="k_result">--</strong>
         </p>
         <p>
-            Simulation probability (p_sub):
+            Simulation probability (\( p_{sub} \)):
             <strong id="simulation-prob">--</strong>
         </p>
     </div>
