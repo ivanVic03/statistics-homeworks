@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('probability').value = '';
     document.querySelector('.results').classList.remove('visible');
     document.querySelector('.chart-container').classList.remove('visible');
-    document.getElementById('final-considerations-block').classList.remove('visible');
+    document.querySelector('.conclusion').classList.remove('visible');
     const runBtn = document.getElementById('runButton');
     if (runBtn) {
         runBtn.addEventListener('click', runSimulation);
@@ -54,7 +54,7 @@ function runSimulation() {
 
     document.querySelector('.results').classList.add('visible');
     document.querySelector('.chart-container').classList.add('visible');
-    document.getElementById('final-considerations-block').classList.add('visible');
+    document.querySelector('.conclusion').classList.add('visible');
 
     document.getElementById('lambda_result').textContent = lambda.toFixed(5);
     document.getElementById('k_result').textContent = K_final.toString();
