@@ -1,7 +1,9 @@
 let processChart = null;
+let histogramChart = null;
 
 window.addEventListener('DOMContentLoaded', () => {
     processChart = null;
+    histogramChart = null;
     document.getElementById('subintervals').value = '';
     document.getElementById('trials').value = '';
     document.getElementById('probability').value = '';
@@ -41,6 +43,7 @@ function runSimulation() {
 
     const lambdaData = calculateLambda(n,m,p)
     const lambda = lambdaData.lambda
+    const breachCounts = lambdaData.counts;
 
     const p_sub = lambda / n;
 
@@ -52,9 +55,8 @@ function runSimulation() {
 
     const K_final = processPath[processPath.length - 1];
 
-    document.querySelector('.results').classList.add('visible');
-    document.querySelector('.chart-container').classList.add('visible');
-    document.querySelector('.conclusion').classList.add('visible');
+    const elementsToShow = document.querySelectorAll('.results, .chart-container, .conclusion');
+    elementsToShow.forEach(element => element.classList.add('visible'));
 
     document.getElementById('lambda_result').textContent = lambda.toFixed(5);
     document.getElementById('k_result').textContent = K_final.toString();
@@ -62,6 +64,7 @@ function runSimulation() {
     document.getElementById('simulation-prob').textContent = p_sub.toFixed(3)
 
     drawCountingProcessChart(processPath, 'breachDistributionChart');
+    drawTrialsHistogram(breachCounts, 'trialsHistogramChart');
 }
 
 function calculateLambda(n, m, p) {
@@ -158,6 +161,44 @@ function drawCountingProcessChart(path, canvasId) {
                     display: true,
                     position: 'top',
                 }
+            }
+        }
+    });
+}
+
+function drawTrialsHistogram(counts, canvasId) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    if (histogramChart) {
+        histogramChart.destroy();
+    }
+    const frequencies = {}
+    counts.forEach(c => {frequencies[c] = (frequencies[c] || 0) + 1});
+    const sortedLabels = Object.keys(frequencies).map(Number).sort((a, b) => a - b);
+    const data = sortedLabels.map(label => frequencies[label]);
+    histogramChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sortedLabels,
+            datasets: [{
+                label: 'Frequency of counts',
+                data: data,
+                backgroundColor: 'firebrick',
+                borderColor: 'darkred',
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Distribution of breaches in Lambda Calculation',
+                },
+                legend: {display: false}
+            },
+            scales: {
+                x: {title: {display: true, text: 'Number of Breaches'} },
+                y: {title: {display: true, text: 'Frequency'} },
             }
         }
     });

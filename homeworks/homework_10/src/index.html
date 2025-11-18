@@ -34,7 +34,7 @@
 
         <ol>
             <li>
-                <strong>1. Rate (&lambda;) Calculation (Monte Carlo Method):</strong>
+                <strong> Rate (&lambda;) Calculation (Monte Carlo Method):</strong>
                 <p>
                     First, we establish an underlying average event rate, &lambda;. Instead of assuming this rate, we derive it from a base model defined by three parameters: <strong>$n$</strong> (steps), <strong>$p$</strong> (probability), and <strong>$m$</strong> (trials).
                 </p>
@@ -48,7 +48,7 @@
             </li>
 
             <li>
-                <strong>2. Process Simulation (Poisson Approximation):</strong>
+                <strong>Process Simulation (Poisson Approximation):</strong>
                 <p>
                     This calculated rate &lambda; is then used to parameterize the final simulation. The time interval $T=1$ is divided into $n$ subintervals.
                 </p>
@@ -97,6 +97,11 @@
     <div class="chart-container">
         <h2>Distribution of Breaches</h2>
         <canvas id="breachDistributionChart" width="800" height="400"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h2>Distribution of Trials (Lambda Estimation)</h2>
+        <canvas id="trialsHistogramChart" width="800" height="400"></canvas>
     </div>
 
     <div class="conclusion" style="text-align: center; margin-top: 2em">
