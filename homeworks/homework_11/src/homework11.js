@@ -1,7 +1,13 @@
 let simulationChart = null;
 let histogramChart = null;
 
-window.addEventListener("DOMContentLoaded", function() {})
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('time').value = ''
+    document.getElementById('steps').value = ''
+    document.getElementById('sigma').value = ''
+    simulationChart = null
+    histogramChart = null
+});
 
 function standardNormal() {
     let u1 = Math.random()
@@ -37,7 +43,11 @@ function drawChart(data, T, n) {
     if (simulationChart) {
         simulationChart.destroy();
     }
-    const labels = data[0].map((_, i) => i*(T/n)).toFixed(2);
+    const labels = [];
+    const dt = T / n;
+    for (let i = 0; i <= n; i++) {
+        labels.push((i * dt).toFixed(2));
+    }
     const datasets = data.map((path, index) => ({
         label: `Simulation ${index}`,
         data: path,
@@ -56,7 +66,7 @@ function drawChart(data, T, n) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             animation: false,
             interaction: {mode: 'nearest', axis: 'x', intersect: false},
             plugins: {
@@ -126,7 +136,7 @@ function drawHistogram(finalPositions, T, sigma) {
                 {
                     type: 'bar',
                     data: emphricalData,
-                    labels: 'Observed Points',
+                    label: 'Observed Points',
                     backgroundColor: 'midnightblue',
                     barPercentage: 1.0,
                     categoryPercentage: 1.0
@@ -135,7 +145,7 @@ function drawHistogram(finalPositions, T, sigma) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             animation: false,
             scales: {
                 x: {
