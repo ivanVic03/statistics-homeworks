@@ -48,25 +48,27 @@
             \[ Y_{t+dt} = Y_t + \sigma \cdot Z \cdot \sqrt{dt} \]
         </p>
     </div>
+    <div id="result-section" style="display: none">
+        <div class="chart-container">
+            <h2>Brownian Motion Simulation</h2>
+            <p>This chart shows the random path of a single particle over time \( T \).</p>
+            <canvas id="brownianMotionSim" width="800" height="400"></canvas>
+        </div>
 
-    <div class="chart-container">
-        <h2>Brownian Motion Simulation</h2>
-        <p>This chart shows the random path of a single particle over time \( T \).</p>
-        <canvas id="brownianMotionSim" width="800" height="400"></canvas>
+        <div class="chart-container">
+            <h2>Distribution of Final Positions</h2>
+            <p>Histogram of final positions after many simulations. Notice the Bell Curve shape (Central Limit Theorem).</p>
+            <canvas id="histogramCanvas" width="800" height="300"></canvas>
+        </div>
+        <div class="explanation">
+            <h3>Continuous States & Time</h3>
+            <p>
+                Unlike a simple discrete Random Walk (where steps are fixed +1/-1), here we have <strong>Continuous States</strong> on the Y-axis
+                and <strong>Continuous Time</strong> on the X-axis. As \( n \to \infty \), the discrete steps become infinitesimal, defining the Wiener Process.
+            </p>
+        </div>
     </div>
 
-    <div class="chart-container">
-        <h2>Distribution of Final Positions</h2>
-        <p>Histogram of final positions after many simulations. Notice the Bell Curve shape (Central Limit Theorem).</p>
-        <canvas id="histogramCanvas" width="800" height="300"></canvas>
-    </div>
-    <div class="explanation">
-        <h3>Continuous States & Time</h3>
-        <p>
-            Unlike a simple discrete Random Walk (where steps are fixed +1/-1), here we have <strong>Continuous States</strong> on the Y-axis
-            and <strong>Continuous Time</strong> on the X-axis. As \( n \to \infty \), the discrete steps become infinitesimal, defining the Wiener Process.
-        </p>
-    </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

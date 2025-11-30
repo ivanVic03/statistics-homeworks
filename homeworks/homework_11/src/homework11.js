@@ -1,6 +1,8 @@
 let simulationChart = null;
 let histogramChart = null;
 
+window.addEventListener("DOMContentLoaded", function() {})
+
 function standardNormal() {
     let u1 = Math.random()
     let u2 = Math.random()
@@ -158,6 +160,8 @@ function runSimulation() {
         alert("Please enter valid parameters.");
         return;
     }
+
+    document.getElementById('result-section').style.display = 'block';
 
     const numTrajectories = 50;
     const data = [];
