@@ -37,22 +37,42 @@
     </div>
 
     <div class="explanation">
-        <h3>Theoretical Background: Generating the "Normal Jump"</h3>
+        <h3>The Mathematical Engine: Box-Muller & Scaling</h3>
         <p>
-            To simulate the Brownian Motion, we consider the limit of a Random Walk where the jump size is normally distributed.
-            Since computers generate Uniform random numbers \( U \sim (0,1) \), we use the <strong>Box-Muller Transform</strong> to generate Normal samples:
+            To simulate Brownian Motion, we need to generate random "jumps" at each time step \( dt \).
+            However, computers natively generate pseudo-random numbers from a <strong>Uniform Distribution</strong> \( U \sim (0,1) \).
         </p>
-        \[ Z = \sqrt{-2 \ln(U_1)} \cos(2\pi U_2) \quad \text{where} \quad Z \sim N(0,1) \]
         <p>
-            The fundamental relation for the process update, ensuring stable variance over time (scaling), is:
+            To transform these "flat" numbers into a Bell Curve (Normal Distribution), we use the <strong>Box-Muller Transform</strong>:
+            \[ Z = \sqrt{-2 \ln(U_1)} \cos(2\pi U_2) \]
+            This formula takes two uniform variables \( U_1, U_2 \) and returns \( Z \sim N(0,1) \).
+        </p>
+        <p>
+            <strong>The Scaling Rule (\( \sqrt{dt} \)):</strong><br>
+            For the variance of the process to grow linearly with time (and not explode or vanish), the standard deviation of a single jump must be proportional to the square root of the time step. The update formula is:
             \[ Y_{t+dt} = Y_t + \sigma \cdot Z \cdot \sqrt{dt} \]
         </p>
+
     </div>
     <div id="result-section" style="display: none">
         <div class="chart-container">
             <h2>Brownian Motion Simulation</h2>
             <p>This chart shows the random path of a single particle over time \( T \).</p>
             <canvas id="brownianMotionSim" width="800" height="400"></canvas>
+        </div>
+        <div class="explanation">
+            <h3>From Random Walk to Wiener Process</h3>
+            <p>
+                The chart above displays 50 realizations of the process. Unlike a classic discrete "Random Walk" on a grid (where steps are fixed \( \pm 1 \)), here we observe:
+            </p>
+            <ul>
+                <li><strong>Continuous States (Y-axis):</strong> The particle can take any real value.</li>
+                <li><strong>Continuous Time (X-axis):</strong> Although the simulation uses discrete steps \( dt \), we are mathematically approximating a process where \( dt \to 0 \).</li>
+            </ul>
+            <p>
+                This limit defines the <strong>Standard Wiener Process</strong> \( W_t \), a mathematical fractal that is continuous everywhere but differentiable nowhere (the path is infinitely "jagged").
+            </p>
+
         </div>
 
         <div class="chart-container">
@@ -61,10 +81,17 @@
             <canvas id="histogramCanvas" width="800" height="300"></canvas>
         </div>
         <div class="explanation">
-            <h3>Continuous States & Time</h3>
+            <h3>Convergence & Central Limit Theorem (CLT)</h3>
             <p>
-                Unlike a simple discrete Random Walk (where steps are fixed +1/-1), here we have <strong>Continuous States</strong> on the Y-axis
-                and <strong>Continuous Time</strong> on the X-axis. As \( n \to \infty \), the discrete steps become infinitesimal, defining the Wiener Process.
+                The histogram above collects the final positions \( Y_T \) of thousands of simulated particles.
+                Since the final position is the sum of many independent small jumps (\( Y_T = \sum dY_t \)), according to the <strong>Central Limit Theorem</strong>, the final distribution must converge to a Normal Distribution.
+            </p>
+            <p>
+                The <span>Red Curve</span> represents the theoretical <strong>Probability Density Function (PDF)</strong> at time \( T \):
+                \[ f(x, T) = \frac{1}{\sqrt{2\pi \sigma^2 T}} e^{-\frac{x^2}{2\sigma^2 T}} \]
+            </p>
+            <p>
+                The perfect overlap between the blue bars (empirical data) and the red curve (theoretical model) validates the correctness of our simulation.
             </p>
         </div>
     </div>

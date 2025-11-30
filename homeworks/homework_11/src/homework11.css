@@ -112,6 +112,11 @@ h2 {
     padding: 20px;
 }
 
+span {
+    color: crimson;
+    font-weight: bold;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
