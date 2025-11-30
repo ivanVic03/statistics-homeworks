@@ -34,6 +34,18 @@ main {
     padding: 0 20px;
 }
 
+h2 {
+    color: midnightblue;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid whitesmoke;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
 .controls {
     background-color: white;
     border-radius: 12px;

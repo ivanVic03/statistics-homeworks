@@ -22,7 +22,7 @@ function simulateBrownianMotion(T, n, sigma) {
     return y_array
 }
 
-function drawChart(data) {
+function drawChart(data, T, n) {
     const canvas = document.getElementById('brownianMotionSim');
     if (!canvas) {
         alert("No canvas found.");
@@ -172,6 +172,6 @@ function runSimulation() {
         data.push(path);
         finalPositions.push(path[path.length - 1]);
     }
-    drawChart(data);
+    drawChart(data, T, n);
     drawHistogram(finalPositions, T, sigma);
 }
