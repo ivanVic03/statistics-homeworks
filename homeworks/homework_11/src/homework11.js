@@ -97,8 +97,8 @@ function drawHistogram(finalPositions, T, sigma) {
     }
     const numSims = finalPositions.length;
     const theoreticalStdDev = sigma*Math.sqrt(T)
-    const limit = 4*theoreticalStdDev;
-    const binCount = 50;
+    const limit = 4.5*theoreticalStdDev;
+    const binCount = 100;
     const min = -limit
     const max = limit
     const binWidth = (max - min) / binCount;
@@ -107,7 +107,9 @@ function drawHistogram(finalPositions, T, sigma) {
     const emphricalData = new Array(binCount).fill(0);
     for (let i = 0; i < binCount; i++) {
         const center = min + (i + 0.5)*binWidth;
-        labels.push(center.toFixed(2));
+        if (i % 10 === 0)
+            labels.push(center.toFixed(2));
+        else labels.push("");
         const variance = theoreticalStdDev ** 2;
         const pdf = (1 / Math.sqrt(2*Math.PI*variance))* Math.exp(-(center**2) / (2*variance));
         theoryData.push(pdf*binWidth*numSims);
@@ -173,7 +175,7 @@ function runSimulation() {
 
     document.getElementById('result-section').style.display = 'block';
 
-    const numTrajectories = 50;
+    const numTrajectories = 2000;
     const data = [];
     const finalPositions = [];
 
