@@ -33,14 +33,44 @@
         <input type="number" id="steps" min="1">
         <label for="sigma">Volatility (\( \sigma \)):</label>
         <input type="number" id="sigma">
-        <button id="runButton">Run Simulation</button>
+        <button id="runButton" onclick="runSimulation()">Run Simulation</button>
+    </div>
+
+    <div class="explanation">
+        <h3>Theoretical Background: Generating the "Normal Jump"</h3>
+        <p>
+            To simulate the Brownian Motion, we consider the limit of a Random Walk where the jump size is normally distributed.
+            Since computers generate Uniform random numbers \( U \sim (0,1) \), we use the <strong>Box-Muller Transform</strong> to generate Normal samples:
+        </p>
+        \[ Z = \sqrt{-2 \ln(U_1)} \cos(2\pi U_2) \quad \text{where} \quad Z \sim N(0,1) \]
+        <p>
+            The fundamental relation for the process update, ensuring stable variance over time (scaling), is:
+            \[ Y_{t+dt} = Y_t + \sigma \cdot Z \cdot \sqrt{dt} \]
+        </p>
     </div>
 
     <div class="chart-container">
         <h2>Brownian Motion Simulation</h2>
+        <p>This chart shows the random path of a single particle over time \( T \).</p>
         <canvas id="brownianMotionSim" width="800" height="400"></canvas>
     </div>
+
+    <div class="chart-container">
+        <h2>Distribution of Final Positions</h2>
+        <p>Histogram of final positions after many simulations. Notice the Bell Curve shape (Central Limit Theorem).</p>
+        <canvas id="histogramCanvas" width="800" height="300"></canvas>
+    </div>
+    <div class="explanation">
+        <h3>Continuous States & Time</h3>
+        <p>
+            Unlike a simple discrete Random Walk (where steps are fixed +1/-1), here we have <strong>Continuous States</strong> on the Y-axis
+            and <strong>Continuous Time</strong> on the X-axis. As \( n \to \infty \), the discrete steps become infinitesimal, defining the Wiener Process.
+        </p>
+    </div>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="homework11.js"></script>
 
 </body>
 </html>
