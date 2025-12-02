@@ -112,6 +112,13 @@ h2 {
     padding: 20px;
 }
 
+.math-block {
+    background-color: white;
+    padding: 10px;
+    border-left: 4px solid blue;
+    margin: 10px 0;
+}
+
 span {
     color: crimson;
     font-weight: bold;

@@ -26,33 +26,42 @@
 
 <main>
     <div class="controls">
-        <h2>Insert the parameters!</h2>
+        <h2>Simulation parameters!</h2>
+        <label for="modelType">Model Type:</label>
+        <select id="modelType" onchange="updateUIForModel()">
+            <option value="BR">Standard Wiener Process (Brownian Motion)</option>
+            <option value="GBM">Generalized SDE</option>
+        </select>
         <label for="time">Time (\( T \)):</label>
         <input type="number" id="time" min="1">
         <label for="steps">Steps (\( n \)):</label>
         <input type="number" id="steps" min="1">
+        <label for="mu">Drift (\( \mu \)):</label>
+        <input type="number" id="mu" value="0" step="0.1">
         <label for="sigma">Volatility (\( \sigma \)):</label>
+        <label for="y0">Start Value (\( Y_0 \))</label>
+        <input type="number" id="y0" value="0" step="1">
         <input type="number" id="sigma">
         <button id="runButton" onclick="runSimulation()">Run Simulation</button>
     </div>
 
     <div class="explanation">
-        <h3>The Mathematical Engine: Box-Muller & Scaling</h3>
+        <h3>The General Euler-Maruyama Method</h3>
         <p>
-            To simulate Brownian Motion, we need to generate random "jumps" at each time step \( dt \).
-            However, computers natively generate pseudo-random numbers from a <strong>Uniform Distribution</strong> \( U \sim (0,1) \).
+            This simulator generalizes the homework requirement. We solve Stochastic Differential Equations (SDE) of the form:
+            \[ dY_t = \underbrace{\mu(Y_t, t)}_{\text{Drift}} dt + \underbrace{\sigma(Y_t, t)}_{\text{Diffusion}} dW_t \]
         </p>
+        <div class="math-block">
+            <strong>Discretization used (Euler-Maruyama):</strong>
+            \[ Y_{t+dt} = Y_t + \mu(Y_t) \cdot dt + \sigma(Y_t) \cdot Z \cdot \sqrt{dt} \]
+        </div>
         <p>
-            To transform these "flat" numbers into a Bell Curve (Normal Distribution), we use the <strong>Box-Muller Transform</strong>:
-            \[ Z = \sqrt{-2 \ln(U_1)} \cos(2\pi U_2) \]
-            This formula takes two uniform variables \( U_1, U_2 \) and returns \( Z \sim N(0,1) \).
+            Where \( Z \sim N(0,1) \) is generated via Box-Muller.
         </p>
-        <p>
-            <strong>The Scaling Rule (\( \sqrt{dt} \)):</strong><br>
-            For the variance of the process to grow linearly with time (and not explode or vanish), the standard deviation of a single jump must be proportional to the square root of the time step. The update formula is:
-            \[ Y_{t+dt} = Y_t + \sigma \cdot Z \cdot \sqrt{dt} \]
-        </p>
-
+        <ul>
+            <li><strong>Standard Wiener:</strong> \( \mu(Y)=0, \sigma(Y)=\sigma \). (Additive noise)</li>
+            <li><strong>Geometric Brownian (GBM):</strong> \( \mu(Y)=\mu Y, \sigma(Y)=\sigma Y \). (Multiplicative noise, used for Stocks).</li>
+        </ul>
     </div>
     <div id="result-section" style="display: none">
         <div class="chart-container">
