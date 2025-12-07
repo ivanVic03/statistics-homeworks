@@ -7,50 +7,122 @@ body {
 }
 
 header {
+    background: linear-gradient(135deg, #005bea, #00c6fb);
     color: white;
+    padding: 3rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1.5rem;
     padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     text-align: center;
 }
 
-main {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 
+
+.card h3 {
+    margin-top: 0;
+    color: #333333;
+    font-size: 1.3rem;
+}
+
+.card p {
+    color: #666666;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+}
+
+.card a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #00c6fb, #005bea);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: opacity 0.2s ease;
+}
+
+.card a:hover {
+    opacity: 0.85;
+}
+
+
 h1 {
-    margin-bottom: 0.3em;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+ul.homework-list {
+    list-style-type: none;
+    padding: 0;
+    max-width: 900px;
+    margin: 2rem auto;
 }
 
 ul.homework-list li {
-    margin-bottom: 1rem;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 10px;
+    background: white;
+    border: 1px solid white;
     padding: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 5px solid #005bea;
+    margin-bottom: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-left-color 0.25s ease;
 }
 
 ul.homework-list li:hover {
-    color: white;
-    font-weight: bold;
-    font-size: 1.05em;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+    border-left-color: #00c6fb;
+    background: white;
 }
 
 ul.homework-list a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.05em;
+    font-size: 1.1em;
+}
+
+ul.homework-list a:hover {
+    background: #003aaa;
 }
 
 footer {
     text-align: center;
     color: white;
     font-size: 0.9em;
-    margin-top: 2rem;
-    padding: 1rem 0;
-    border-top: 1px solid lightgray;
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    background: black;
+}
+
+footer p {
+    margin: 0;
 }
 
 footer a {
