@@ -17,8 +17,8 @@ function updateUIForModel() {
 
     if (type == 'GBM') {
         y0.value = 100;
-        mu.value = 0.05;
-        sigma.value = 0.2;
+        mu.value = 0.1;
+        sigma.value = 0.3;
     }
     else {
         y0.value = 0;
@@ -129,7 +129,7 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
     const minVal = Math.min(...finalPositions);
     const maxVal = Math.max(...finalPositions);
     const range = maxVal - minVal;
-    const binCount = 50;
+    const binCount = 60;
     const binWidth = range / binCount;
 
     const bins = new Array(binCount).fill(0);
@@ -156,48 +156,47 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
         order: 2
     }];
 
-    if (type === 'BM') {
-        const theoryData = [];
-        const theoreticalStdDev = sigma * Math.sqrt(T);
-        const variance = theoreticalStdDev ** 2;
+    const theoryData = [];
+    const theoreticalVariance = (sigma**2)*T
 
-        const theoreticalMean = y0 + (mu*T);
-        for (let i = 0; i < binCount; i++) {
-            let x = parseFloat(labels[i]);
-            let pdf = (1 / Math.sqrt(2 * Math.PI * variance)) * Math.exp(-Math.pow(x - theoreticalMean, 2)/(2*variance));
-            theoryData.push(pdf * binWidth * numSims);
-        }
-
-        datasets.push({
-            type: 'line',
-            label: 'Theoretical Normal',
-            data: theoryData,
-            borderColor: 'crimson',
-            borderWidth: 2,
-            pointRadius: 0,
-            tension: 0.4,
-            order: 1
-        });
+    const theoreticalMean = y0 + (mu*T);
+    for (let i = 0; i < binCount; i++) {
+        let x = parseFloat(labels[i]);
+        let pdf = (1 / Math.sqrt(2 * Math.PI * theoreticalVariance)) * Math.exp(-Math.pow(x - theoreticalMean, 2)/(2*theoreticalVariance));
+        theoryData.push(pdf * binWidth * numSims);
     }
 
+    datasets.push({
+        type: 'line',
+        label: 'Theoretical Normal (Gaussian)',
+        data: theoryData,
+        borderColor: 'crimson',
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.4,
+        order: 1
+    });
+
     histogramChart = new Chart(ctx, {
+        type: 'bar',
         data: { labels: labels, datasets: datasets },
         options: {
             responsive: true,
             plugins: {
                 legend: {display: true},
+                tooltip: {mode: 'index', intersect: false},
             },
             scales: {
                 x: { title: {display: true, text: 'Final Position'}, ticks: {maxTicksLimit: 10} },
-                y: { title: {display: true, text: 'Frequency'} }
+                y: { title: {display: true, text: 'Frequency'}, beginAtZero: true },
             }
         }
     });
 }
 
 function runSimulation() {
-    const T = parseFloat(document.getElementById('time').value) || 1;
-    const n = parseFloat(document.getElementById('steps').value) || 100;
+    const T = parseFloat(document.getElementById('time').value) || 0;
+    const n = parseFloat(document.getElementById('steps').value) || 0;
     const sigma = parseFloat(document.getElementById('sigma').value) || 0;
     const mu = parseFloat(document.getElementById('mu').value) || 0;
     const y0 = parseFloat(document.getElementById('y0').value) || 0;
