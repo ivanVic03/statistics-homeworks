@@ -167,13 +167,15 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
             theoryData.push(pdf * binWidth * numSims);
         }
 
-        datasets.unshift({
+        datasets.push({
             type: 'line',
             label: 'Theoretical Normal',
             data: theoryData,
-            borderColor: 'red',
+            borderColor: 'crimson',
             borderWidth: 2,
-            pointRadius: 0
+            pointRadius: 0,
+            tension: 0.4,
+            order: 1
         });
     }
 
@@ -193,14 +195,14 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
 }
 
 function runSimulation() {
-    const T = parseFloat(document.getElementById('time').value);
-    const n = parseFloat(document.getElementById('steps').value);
-    const sigma = parseFloat(document.getElementById('sigma').value);
-    const mu = parseFloat(document.getElementById('mu').value);
-    const y0 = parseFloat(document.getElementById('y0').value);
+    const T = parseFloat(document.getElementById('time').value) || 1;
+    const n = parseFloat(document.getElementById('steps').value) || 100;
+    const sigma = parseFloat(document.getElementById('sigma').value) || 0;
+    const mu = parseFloat(document.getElementById('mu').value) || 0;
+    const y0 = parseFloat(document.getElementById('y0').value) || 0;
     const type = document.getElementById('modelType').value;
 
-    if (!T || !n || !sigma) {
+    if (n <= 0 || T <= 0) {
         alert("Please enter valid parameters.");
         return;
     }
