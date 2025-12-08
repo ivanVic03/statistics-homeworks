@@ -152,7 +152,8 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
         label: 'Observed Frequency',
         backgroundColor: 'midnightblue',
         barPercentage: 1.0,
-        categoryPercentage: 1.0
+        categoryPercentage: 1.0,
+        order: 2
     }];
 
     if (type === 'BM') {
