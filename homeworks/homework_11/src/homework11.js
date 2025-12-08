@@ -171,7 +171,7 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
             type: 'line',
             label: 'Theoretical Normal',
             data: theoryData,
-            borderColor: 'crimson',
+            borderColor: 'red',
             borderWidth: 2,
             pointRadius: 0
         });
