@@ -42,7 +42,7 @@ function simulateSDE(type, T, n, mu, sigma, y0) {
 
     for (let i = 0; i < n; i++) {
         let z = standardNormal();
-        let dW = Z*sqrtDt
+        let dW = z*sqrtDt
         let drift, diffusion;
 
         if (type =='GBM') {
@@ -59,20 +59,13 @@ function simulateSDE(type, T, n, mu, sigma, y0) {
     return y_array;
 }
 
-function simulateBrownianMotion(T, n, sigma) {
-    const sqrtDt = Math.sqrt(T/n);
-    const y_array = [0]
-    let Yt = 0;
-    for (let i = 0; i < n; i++) {
-        let Z = standardNormal()
-        Yt = Yt + (sigma*Z*sqrtDt)
-        y_array.push(Yt)
-    }
-    return y_array
-}
-
 function drawChart(data, T, n) {
-    const ctx = document.getElementById('brownianMotionSim').getContext("2d");
+    const canvas = document.getElementById('brownianMotionSim');
+    if (!canvas) {
+        alert('No canvas loaded');
+        return;
+    }
+    const ctx = canvas.getContext("2d");
     if (!ctx) {
         alert("No ctx found.");
         return;
@@ -162,16 +155,15 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
         categoryPercentage: 1.0
     }];
 
-    if (type === 'BM' && mu === 0) {
+    if (type === 'BM') {
         const theoryData = [];
         const theoreticalStdDev = sigma * Math.sqrt(T);
         const variance = theoreticalStdDev ** 2;
 
+        const theoreticalMean = y0 + (mu*T);
         for (let i = 0; i < binCount; i++) {
             let x = parseFloat(labels[i]);
-            // PDF formula
-            let pdf = (1 / Math.sqrt(2 * Math.PI * variance)) * Math.exp(-(x ** 2) / (2 * variance));
-            // Scale PDF to match histogram counts: pdf * binWidth * totalSamples
+            let pdf = (1 / Math.sqrt(2 * Math.PI * variance)) * Math.exp(-Math.pow(x - theoreticalMean, 2)/(2*variance));
             theoryData.push(pdf * binWidth * numSims);
         }
 
@@ -189,8 +181,11 @@ function drawHistogram(finalPositions, T, mu, sigma, y0, type) {
         data: { labels: labels, datasets: datasets },
         options: {
             responsive: true,
+            plugins: {
+                legend: {display: true},
+            },
             scales: {
-                x: { title: {display: true, text: 'Final Value'}, ticks: {maxTicksLimit: 10} },
+                x: { title: {display: true, text: 'Final Position'}, ticks: {maxTicksLimit: 10} },
                 y: { title: {display: true, text: 'Frequency'} }
             }
         }
